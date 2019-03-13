@@ -2,7 +2,7 @@ package ar.edu.itba.ati;
 
 import static ar.edu.itba.ati.Utitlites.RGBtoHSV;
 
-public class ImageRGB extends Image{
+public class ImageRGB extends Image {
 
     public ImageRGB(int widht, int lenght, PixelRGB[][] pixels) {
         this.width = widht;

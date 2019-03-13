@@ -1,5 +1,6 @@
 package ar.edu.itba.ati;
 
+import ar.edu.itba.ati.model.Image;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -7,15 +8,17 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.sanselan.ImageReadException;
 
 
 import java.io.File;
+import java.io.IOException;
 
 public class Application extends javafx.application.Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception, IOException, ImageReadException {
 
 
 
@@ -30,7 +33,12 @@ public class Application extends javafx.application.Application {
         openImage.setOnAction(e -> {
            File image =  chooser.showOpenDialog(stage);
            if(image != null){
-
+               try {
+                   Image readImage = ImageLoader.loadImage(image);
+                   System.out.println(readImage);
+               } catch (Exception exeption) {
+                   System.out.println("Unable to read image");
+               }
            }
 
         });
