@@ -44,11 +44,11 @@ public class MainWindow {
 
         Menu file = new Menu("File");
 
-        MenuItem openImage= new MenuItem("Open Image");
+        MenuItem openImage= new MenuItem("Open ImageMolesta");
         openImage.setOnAction(e->loadImage());
 
-        MenuItem openImageRAW = new MenuItem("Open RAW Image");
-        MenuItem saveImage = new MenuItem("Save Image");
+        MenuItem openImageRAW = new MenuItem("Open RAW ImageMolesta");
+        MenuItem saveImage = new MenuItem("Save ImageMolesta");
         saveImage.setOnAction(e-> saveFile());
 
         file.getItems().addAll(openImage,saveImage);

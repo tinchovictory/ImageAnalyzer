@@ -29,9 +29,7 @@ public class Image {
         for(int height = 0; height < bufferedImage.getHeight(); height++) {
             for(int width = 0; width < bufferedImage.getWidth(); width++) {
                 Color color = new Color(bufferedImage.getRGB(width, height));
-                redChannel.setPixel(width, height, color.getRed());
-                greenChannel.setPixel(width, height, color.getGreen());
-                blueChannel.setPixel(width, height, color.getBlue());
+                setPixelColor(width, height, color);
             }
         }
     }
@@ -41,7 +39,7 @@ public class Image {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                Color color = new Color((int) redChannel.getPixel(x, y), (int) greenChannel.getPixel(x, y), (int) blueChannel.getPixel(x, y));
+                Color color = getPixelColor(x, y);
                 bufferedImage.setRGB(x, y, color.getRGB());
             }
         }
@@ -62,6 +60,16 @@ public class Image {
             return BufferedImage.TYPE_BYTE_GRAY;
         }
         return BufferedImage.TYPE_INT_RGB;
+    }
+
+    public Color getPixelColor(int x, int y) {
+        return new Color(redChannel.getPixel(x, y), greenChannel.getPixel(x, y), blueChannel.getPixel(x, y));
+    }
+
+    public void setPixelColor(int x, int y, Color color) {
+        redChannel.setPixel(x, y, color.getRed());
+        greenChannel.setPixel(x, y, color.getGreen());
+        blueChannel.setPixel(x, y, color.getBlue());
     }
 
     @Override

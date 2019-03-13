@@ -1,6 +1,6 @@
 package ar.edu.itba.ati;
 
-public abstract class Image {
+public abstract class ImageMolesta {
 
      Pixel[][] pixels;
      int width;
