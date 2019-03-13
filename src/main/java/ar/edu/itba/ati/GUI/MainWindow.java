@@ -41,10 +41,11 @@ public class MainWindow {
         Menu file = new Menu("File");
 
         MenuItem openImage= new MenuItem("Open Image");
-        openImage.setOnAction(e-> loadImage());
+        openImage.setOnAction(e->loadImage());
 
         MenuItem openImageRAW = new MenuItem("Open RAW Image");
         MenuItem saveImage = new MenuItem("Save Image");
+        saveImage.setOnAction(e-> saveFile());
 
         file.getItems().addAll(openImage,saveImage);
 
@@ -65,10 +66,9 @@ public class MainWindow {
 
     }
 
-    public void loadImage(){
+    private void loadImage(){
         FileChooser chooser = new FileChooser();
 
-        chooser.showOpenDialog(stage);
         File image =  chooser.showOpenDialog(stage);
         ar.edu.itba.ati.model.Image image1 = null;
         if(image != null){
@@ -82,6 +82,14 @@ public class MainWindow {
             Image img = SwingFXUtils.toFXImage(image1.getBufferdImage(), null);
             imageView.setImage(img);
         }
+
+
+    }
+
+    public void saveFile(){
+        FileChooser chooser = new FileChooser();
+
+        File file = chooser.showSaveDialog(stage);
 
 
     }
