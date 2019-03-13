@@ -12,16 +12,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.sanselan.ImageReadException;
 import javafx.scene.image.Image;
 
 
 import java.io.File;
+import java.io.IOException;
 
 public class Application extends javafx.application.Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception, IOException, ImageReadException {
 
 //        Button openImage =  new Button("Abrir una Imagen");
 //        Button grey = new Button("Mostrar degradee de grises");
