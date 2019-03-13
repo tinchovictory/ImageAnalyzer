@@ -68,7 +68,7 @@ public class MainWindow {
 
     private void loadImage(){
         FileChooser chooser = new FileChooser();
-        
+
         File image =  chooser.showOpenDialog(stage);
         ar.edu.itba.ati.model.Image image1 = null;
         if(image != null){
