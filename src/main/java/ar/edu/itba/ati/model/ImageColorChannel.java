@@ -5,19 +5,19 @@ import java.util.Arrays;
 public class ImageColorChannel {
     private int width;
     private int height;
-    private byte[][] pixels;
+    private int[][] pixels;
 
     public ImageColorChannel(int width, int height) {
         this.width = width;
         this.height = height;
-        this.pixels = new byte[height][width];
+        this.pixels = new int[height][width];
     }
 
     public void setPixel(int x, int y, int color) {
-        pixels[y][x] = (byte) color;
+        pixels[y][x] =  color;
     }
 
-    public byte getPixel(int x, int y) {
+    public int getPixel(int x, int y) {
         return pixels[x][y];
     }
 

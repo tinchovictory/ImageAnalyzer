@@ -1,5 +1,6 @@
 package ar.edu.itba.ati.GUI;
 
+import ar.edu.itba.ati.ImageLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -69,8 +70,16 @@ public class MainWindow {
 
         chooser.showOpenDialog(stage);
         File image =  chooser.showOpenDialog(stage);
+        ar.edu.itba.ati.model.Image image1 = null;
         if(image != null){
-            Image img = new Image(image.toURI().toString());
+            try {
+                image1 = ImageLoader.loadImage(image);
+            }catch (Exception e){
+
+            }
+
+            image1.getBufferdImage();
+            Image img = SwingFXUtils.toFXImage(image1.getBufferdImage(), null);
             imageView.setImage(img);
         }
 
