@@ -2,9 +2,9 @@ package ar.edu.itba.ati;
 
 import static ar.edu.itba.ati.Utitlites.RGBtoHSV;
 
-public class ImageRGB extends Image {
+public class ImageMolestaRGB extends ImageMolesta {
 
-    public ImageRGB(int widht, int lenght, PixelRGB[][] pixels) {
+    public ImageMolestaRGB(int widht, int lenght, PixelRGB[][] pixels) {
         this.width = widht;
         this.length = lenght;
         this.pixels = pixels;
@@ -12,7 +12,7 @@ public class ImageRGB extends Image {
 
 
 
-    public ImageHSV getAsHSV(){
+    public ImageMolestaHSV getAsHSV(){
         PixelHSV[][] pixels= new PixelHSV[width][length];
 
         for (int i =0 ; i< width ; i++){
@@ -20,7 +20,7 @@ public class ImageRGB extends Image {
                 pixels[i][j] = RGBtoHSV((PixelRGB) this.pixels[width][length]);
             }
         }
-        return new ImageHSV(width,length,pixels);
+        return new ImageMolestaHSV(width,length,pixels);
     }
 
 }
