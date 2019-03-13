@@ -14,7 +14,7 @@ public class ImageColorChannel {
     }
 
     public void setPixel(int x, int y, int color) {
-        pixels[y][x] =  color;
+        pixels[x][y] =  color;
     }
 
     public int getPixel(int x, int y) {
