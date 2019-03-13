@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.GUI;
 
 import ar.edu.itba.ati.ImageManager;
+import ar.edu.itba.ati.Interface.Controller;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.embed.swing.SwingFXUtils;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class MainWindow {
@@ -22,7 +24,9 @@ public class MainWindow {
 
     private ImageView imageView;
 
-    public MainWindow(Stage stage) {
+     private Controller controller;
+
+    public MainWindow(Stage stage, Controller controller) {
         this.stage = stage;
         imageView = new ImageView();
         BorderPane container = new BorderPane();
@@ -53,10 +57,10 @@ public class MainWindow {
         Menu tools = new Menu("Tools");
 
         MenuItem getPixel = new MenuItem("Get Pixel value");
-        getPixel.setOnAction(e->showEditPixelModal());
+        getPixel.setOnAction(e->showGetPixelModal());
 
-        MenuItem modifyPixel= new MenuItem("Edit pixel value");
-
+        MenuItem modifyPixel= new MenuItem("Modify pixel value");
+        modifyPixel.setOnAction(e-> showEditPixelModal());
         tools.getItems().addAll(getPixel,modifyPixel);
 
 
@@ -70,16 +74,15 @@ public class MainWindow {
         FileChooser chooser = new FileChooser();
 
         File image =  chooser.showOpenDialog(stage);
-        ar.edu.itba.ati.model.Image image1 = null;
+        BufferedImage image1 = null;
         if(image != null){
             try {
-                image1 = ImageManager.loadImage(image);
+                image1 = controller.loadImage(image));
             }catch (Exception e){
 
             }
 
-            image1.getBufferdImage();
-            Image img = SwingFXUtils.toFXImage(image1.getBufferdImage(), null);
+            Image img = SwingFXUtils.toFXImage(image1, null);
             imageView.setImage(img);
         }
 
@@ -91,6 +94,8 @@ public class MainWindow {
 
         File file = chooser.showSaveDialog(stage);
 
+
+        controller.saveImage(file);
 
     }
 
@@ -107,6 +112,47 @@ public class MainWindow {
 
         first.getChildren().addAll(xBox,yBox);
         first.setAlignment(Pos.CENTER);
+
+
+        HBox second = new HBox(10);
+        Label label = new Label("New Value");
+        TextField field = new TextField();
+        field.setPrefWidth(60);
+
+
+        second.getChildren().addAll(label,field);
+        second.setAlignment(Pos.CENTER);
+
+        Button modifyButton = new Button("Modify");
+
+        //modifyButton.setOnAction();
+
+        VBox container = new VBox(10);
+        container.setAlignment(Pos.CENTER);
+        container.getChildren().addAll(first,second,modifyButton);
+        stage.setScene(new Scene(container,400,120));
+
+        stage.show();
+
+
+    }
+
+    public void showGetPixelModal(){
+        Stage stage = new Stage();
+
+        HBox first = new HBox(20);
+
+        HBox xBox = getCoordenateBox("X: ");
+
+
+
+        HBox yBox = getCoordenateBox("Y: ");
+
+        first.getChildren().addAll(xBox,yBox);
+        first.setAlignment(Pos.CENTER);
+
+
+
 
         VBox container = new VBox();
         container.setAlignment(Pos.CENTER);
