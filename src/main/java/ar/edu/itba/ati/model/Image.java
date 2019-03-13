@@ -37,7 +37,7 @@ public class Image {
     }
 
     public BufferedImage getBufferdImage() {
-        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
@@ -47,6 +47,21 @@ public class Image {
         }
 
         return bufferedImage;
+    }
+
+    public ImageType getImageType() {
+        return imageType;
+    }
+
+    public ImageExtension getImageExtension() {
+        return imageExtension;
+    }
+
+    private int getBufferedImageType() {
+        if(imageType == ImageType.GRAY_SCALE) {
+            return BufferedImage.TYPE_BYTE_GRAY;
+        }
+        return BufferedImage.TYPE_INT_RGB;
     }
 
     @Override

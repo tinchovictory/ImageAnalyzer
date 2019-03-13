@@ -3,16 +3,13 @@ package ar.edu.itba.ati;
 import ar.edu.itba.ati.model.ImageExtension;
 import ar.edu.itba.ati.model.ImageType;
 import ar.edu.itba.ati.model.Image;
-import org.apache.sanselan.ImageFormat;
-import org.apache.sanselan.ImageInfo;
-import org.apache.sanselan.ImageReadException;
-import org.apache.sanselan.Sanselan;
+import org.apache.sanselan.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageLoader {
+public class ImageManager {
 
     public static Image loadImage(File image) throws ImageReadException, IOException {
         BufferedImage bufferedImage = Sanselan.getBufferedImage(image);
@@ -37,6 +34,22 @@ public class ImageLoader {
             throw new IllegalStateException("Image wasn't RGB nor Grayscale");
         }
 
+    }
+
+    public static void saveImage(File imagePath, Image image) throws ImageWriteException, IOException {
+        BufferedImage bufferedImage = image.getBufferdImage();
+        ImageFormat imageFormat = getImageFormat(image);
+
+        Sanselan.writeImage(bufferedImage, imagePath, imageFormat, null);
+    }
+
+    private static ImageFormat getImageFormat(Image image) {
+        if(image.getImageExtension() == ImageExtension.PGM) {
+            return ImageFormat.IMAGE_FORMAT_PGM;
+        } else if(image.getImageExtension() == ImageExtension.PPM) {
+            return ImageFormat.IMAGE_FORMAT_PPM;
+        }
+        throw new IllegalArgumentException();
     }
 
 }

@@ -1,6 +1,6 @@
 package ar.edu.itba.ati.GUI;
 
-import ar.edu.itba.ati.ImageLoader;
+import ar.edu.itba.ati.ImageManager;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -73,7 +73,7 @@ public class MainWindow {
         ar.edu.itba.ati.model.Image image1 = null;
         if(image != null){
             try {
-                image1 = ImageLoader.loadImage(image);
+                image1 = ImageManager.loadImage(image);
             }catch (Exception e){
 
             }
