@@ -15,10 +15,14 @@ public interface Controller {
      BufferedImage getImage();
 
      void saveImage(File image);
-     
+
      BufferedImage createSquare();
 
      BufferedImage createCircle();
+
+     BufferedImage createColorGradient();
+
+     BufferedImage createGreyGradient();
 
      Color getPixelsMean(Point p1, Point p2);
 

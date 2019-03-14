@@ -83,7 +83,20 @@ public class MainWindow {
             refreshImage();
         });
 
-        create.getItems().addAll(circle,square);
+        MenuItem colorGradient = new MenuItem("Color gradient");
+        colorGradient.setOnAction(e-> {
+            controller.createColorGradient();
+            refreshImage();
+        });
+        MenuItem greyGradient = new MenuItem("Grey gradient");
+        greyGradient.setOnAction(e ->{
+            controller.createGreyGradient();
+            refreshImage();
+        });
+
+
+
+        create.getItems().addAll(circle,square,colorGradient,greyGradient);
 
 
         MenuBar menuBar = new MenuBar();
