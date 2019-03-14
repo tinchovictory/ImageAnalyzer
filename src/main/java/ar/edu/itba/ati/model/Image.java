@@ -101,6 +101,10 @@ public class Image {
         return height;
     }
 
+    public HSVImage toHSV() {
+        return new HSVImage(this);
+    }
+
     @Override
     public String toString() {
         return redChannel.toString();
