@@ -21,8 +21,8 @@ public class ImageCreator {
     private static void setCircleInImageOfRadius(int radius, Image image) {
         for(int x = 0; x < image.getWidth(); x++) {
             for(int y = 0; y < image.getHeight(); y++) {
-                int x2 = x * x - (IMAGE_SIZE / 2) * (IMAGE_SIZE / 2);
-                int y2 = y * y - (IMAGE_SIZE / 2) * (IMAGE_SIZE / 2);
+                int x2 = (x - (IMAGE_SIZE / 2)) * (x - (IMAGE_SIZE / 2));
+                int y2 = (y  - (IMAGE_SIZE / 2)) * (y  - (IMAGE_SIZE / 2));
                 int r2 = radius * radius;
                 if( x2 + y2 <= r2) {
                     image.setPixelColor(x, y, Color.white);

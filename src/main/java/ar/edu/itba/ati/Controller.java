@@ -49,4 +49,9 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
             System.out.println("Unable to save image");
         }
     }
+
+    @Override
+    public Color getPixelsMean(Point p1, Point p2) {
+        return image.getPixelsMean(p1, p2);
+    }
 }

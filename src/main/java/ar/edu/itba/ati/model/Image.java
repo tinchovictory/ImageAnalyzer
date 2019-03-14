@@ -2,7 +2,6 @@ package ar.edu.itba.ati.model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
 
 public class Image {
     private ImageType imageType;
@@ -70,6 +69,28 @@ public class Image {
         redChannel.setPixel(x, y, color.getRed());
         greenChannel.setPixel(x, y, color.getGreen());
         blueChannel.setPixel(x, y, color.getBlue());
+    }
+
+    public Color getPixelsMean(Point p1, Point p2) { // p1.x < p2.x
+        double red = 0, green = 0, blue = 0;
+
+        if(p2.getY() < p1.getY()) {
+            return getPixelsMean(p2, p1);
+        }
+
+        /* p1.x < p2.x && p1.y < p2.y */
+
+        for(int x = (int) p1.getX(); x < (int) p2.getX(); x++) {
+            for(int y = (int) p1.getY(); y < (int) p2.getY(); y++) {
+                red +=  redChannel.getPixel(x, y);
+                green += greenChannel.getPixel(x, y);
+                blue += blueChannel.getPixel(x, y);
+            }
+        }
+
+        int pixelsAmount = (int) ((p2.getX() - p1.getX()) * (p2.getY() - p1.getY()));
+
+        return new Color((int)(red/pixelsAmount), (int)(green/pixelsAmount), (int)(blue/pixelsAmount));
     }
 
     public int getWidth() {

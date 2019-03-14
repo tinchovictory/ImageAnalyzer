@@ -14,4 +14,6 @@ public interface Controller {
 
      void saveImage(File image);
 
+     Color getPixelsMean(Point p1, Point p2);
+
 }
