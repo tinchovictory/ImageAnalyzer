@@ -38,6 +38,11 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
+    public BufferedImage getImage() {
+        return image.getBufferdImage();
+    }
+
+    @Override
     public void saveImage(File imagePath) {
         try {
             ImageManager.saveImage(imagePath, image);

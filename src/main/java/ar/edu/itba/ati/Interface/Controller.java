@@ -12,6 +12,8 @@ public interface Controller {
 
      BufferedImage loadImage(File image);
 
+     BufferedImage getImage();
+
      void saveImage(File image);
 
 }
