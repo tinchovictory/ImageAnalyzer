@@ -24,6 +24,18 @@ public interface Controller {
 
      BufferedImage createGreyGradient();
 
-     Color getPixelsMean(Point p1, Point p2);
+     Color getPixelsMean(Point p1, Point p2); // p1.x < p2.x
+
+    BufferedImage getRedImage();
+
+    BufferedImage getGreenImage();
+
+    BufferedImage getBlueImage();
+
+    BufferedImage getHueImage();
+
+    BufferedImage getSaturationImage();
+
+    BufferedImage getValueImage();
 
 }

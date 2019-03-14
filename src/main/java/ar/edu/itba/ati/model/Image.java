@@ -105,6 +105,46 @@ public class Image {
         return new HSVImage(this);
     }
 
+    public BufferedImage getRedImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                Color color = getPixelColor(x, y);
+                bufferedImage.setRGB(x, y, color.getRed());
+            }
+        }
+
+        return bufferedImage;
+    }
+
+    public BufferedImage getGreenImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                Color color = getPixelColor(x, y);
+                bufferedImage.setRGB(x, y, color.getGreen());
+            }
+        }
+
+        return bufferedImage;
+    }
+
+
+    public BufferedImage getBlueImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                Color color = getPixelColor(x, y);
+                bufferedImage.setRGB(x, y, color.getBlue());
+            }
+        }
+
+        return bufferedImage;
+    }
+
     @Override
     public String toString() {
         return redChannel.toString();

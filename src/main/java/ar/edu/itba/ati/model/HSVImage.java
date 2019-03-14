@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class HSVImage {
     private ImageType imageType;
@@ -42,5 +43,49 @@ public class HSVImage {
                 value[x][y] = hsv[2];
             }
         }
+    }
+
+    private int getBufferedImageType() {
+        if(imageType == ImageType.GRAY_SCALE) {
+            return BufferedImage.TYPE_BYTE_GRAY;
+        }
+        return BufferedImage.TYPE_INT_RGB;
+    }
+
+    public BufferedImage getHueImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, (int) hue[x][y]);
+            }
+        }
+
+        return bufferedImage;
+    }
+
+    public BufferedImage getSaturationImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, (int) saturation[x][y]);
+            }
+        }
+
+        return bufferedImage;
+    }
+
+
+    public BufferedImage getValueImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, (int) value[x][y]);
+            }
+        }
+
+        return bufferedImage;
     }
 }

@@ -1,5 +1,6 @@
 package ar.edu.itba.ati;
 
+import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
@@ -81,5 +82,38 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
 
     public Color getPixelsMean(Point p1, Point p2) {
         return image.getPixelsMean(p1, p2);
+    }
+
+    @Override
+    public BufferedImage getRedImage() {
+        return image.getRedImage();
+    }
+
+    @Override
+    public BufferedImage getGreenImage() {
+        return image.getGreenImage();
+    }
+
+    @Override
+    public BufferedImage getBlueImage() {
+        return image.getBlueImage();
+    }
+
+    @Override
+    public BufferedImage getHueImage() {
+        HSVImage hsvImage = image.toHSV();
+        return hsvImage.getHueImage();
+    }
+
+    @Override
+    public BufferedImage getSaturationImage() {
+        HSVImage hsvImage = image.toHSV();
+        return hsvImage.getSaturationImage();
+    }
+
+    @Override
+    public BufferedImage getValueImage() {
+        HSVImage hsvImage = image.toHSV();
+        return hsvImage.getValueImage();
     }
 }
