@@ -48,4 +48,52 @@ public class ImageCreator {
             }
         }
     }
+
+    public static Image buildGreyGradient() {
+        Image image = new Image(256, 256, ImageType.GRAY_SCALE, ImageExtension.PGM);
+        setGreyGradientToImage(image);
+        return image;
+    }
+
+    private static void setGreyGradientToImage(Image image) {
+        for(int y = 0; y < image.getHeight(); y++) {
+            for(int x = 0; x < image.getWidth(); x++) {
+                image.setPixelColor(x, y, new Color(y, y, y));
+            }
+        }
+    }
+
+    public static Image buildColorGradient() {
+        Image image = new Image(IMAGE_SIZE, IMAGE_SIZE, ImageType.RGB, ImageExtension.PPM);
+        return image;
+    }
+
+    private static void setColorGradienttoImage(Image image) {
+        int changingPos = image.getHeight() / 6;
+        int m = (int) (255.0 / changingPos);
+
+        for(int y = 0; y < image.getHeight(); y++) {
+            for(int x = 0; x < image.getWidth(); x++) {
+                if(y < changingPos) {
+                    int blue = m * y;
+                    image.setPixelColor(x, y, new Color(255, 0, blue));
+                } else if(y < 2 * changingPos) {
+                    int red = -m * (y - changingPos) + 255;
+                    image.setPixelColor(x, y, new Color(red, 0, 255));
+                } else if(y < 3 * changingPos) {
+                    int green = m * (y - 2 * changingPos);
+                    image.setPixelColor(x, y, new Color(0, green, 255));
+                } else if(y < 4 * changingPos) {
+                    int blue = -m * (y - 3 * changingPos) + 255;
+                    image.setPixelColor(x, y, new Color(0, 255, blue));
+                } else if(y < 5 * changingPos) {
+                    int red = m * (y - 4 * changingPos);
+                    image.setPixelColor(x, y, new Color(red, 255, 0));
+                } else {
+                    int green = -m * (y - 5 * changingPos) + 255;
+                    image.setPixelColor(x, y, new Color(255, green, 0));
+                }
+            }
+        }
+    }
 }
