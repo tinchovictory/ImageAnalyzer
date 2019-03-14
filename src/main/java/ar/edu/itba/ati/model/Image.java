@@ -72,6 +72,14 @@ public class Image {
         blueChannel.setPixel(x, y, color.getBlue());
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     @Override
     public String toString() {
         return redChannel.toString();
