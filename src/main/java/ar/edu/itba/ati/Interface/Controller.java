@@ -15,9 +15,11 @@ public interface Controller {
      BufferedImage getImage();
 
      void saveImage(File image);
-
+     
      BufferedImage createSquare();
 
      BufferedImage createCircle();
+
+     Color getPixelsMean(Point p1, Point p2);
 
 }

@@ -66,4 +66,8 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
         image = ImageCreator.buildCircle();
         return image.getBufferdImage();
     }
+
+    public Color getPixelsMean(Point p1, Point p2) {
+        return image.getPixelsMean(p1, p2);
+    }
 }
