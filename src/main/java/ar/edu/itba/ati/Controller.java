@@ -54,4 +54,16 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
             System.out.println("Unable to save image");
         }
     }
+
+    @Override
+    public BufferedImage createSquare() {
+         image = ImageCreator.buildSquare();
+         return image.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage createCircle() {
+        image = ImageCreator.buildCircle();
+        return image.getBufferdImage();
+    }
 }

@@ -60,6 +60,7 @@ public class MainWindow {
         file.getItems().addAll(openImage,saveImage);
 
 
+
         Menu tools = new Menu("Tools");
 
         MenuItem getPixel = new MenuItem("Get Pixel value");
@@ -70,8 +71,23 @@ public class MainWindow {
         tools.getItems().addAll(getPixel,modifyPixel);
 
 
+        Menu create = new Menu("Create");
+        MenuItem circle = new MenuItem("Circle");
+        circle.setOnAction(e-> {
+            controller.createCircle();
+            refreshImage();
+        });
+        MenuItem square = new MenuItem("Square");
+        square.setOnAction(e->{
+            controller.createSquare();
+            refreshImage();
+        });
+
+        create.getItems().addAll(circle,square);
+
+
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(file,tools);
+        menuBar.getMenus().addAll(file,create,tools);
         return menuBar;
 
     }
@@ -91,8 +107,7 @@ public class MainWindow {
             }
 
 
-            Image img = SwingFXUtils.toFXImage(image1, null);
-            imageView.setImage(img);
+            refreshImage();
         }
 
 
@@ -198,7 +213,7 @@ public class MainWindow {
         VBox container = new VBox(20);
         container.setAlignment(Pos.CENTER);
         container.getChildren().addAll(first,getValue,colors);
-        stage.setScene(new Scene(container,400,400));
+        stage.setScene(new Scene(container,400,200));
 
         stage.show();
 

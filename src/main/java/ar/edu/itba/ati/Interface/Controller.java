@@ -16,4 +16,8 @@ public interface Controller {
 
      void saveImage(File image);
 
+     BufferedImage createSquare();
+
+     BufferedImage createCircle();
+
 }
