@@ -64,7 +64,8 @@ public class ImageCreator {
     }
 
     public static Image buildColorGradient() {
-        Image image = new Image(IMAGE_SIZE, IMAGE_SIZE, ImageType.RGB, ImageExtension.PPM);
+        Image image = new Image(300, 300, ImageType.RGB, ImageExtension.PPM);
+        setColorGradienttoImage(image);
         return image;
     }
 
