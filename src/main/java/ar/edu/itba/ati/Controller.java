@@ -39,6 +39,17 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
+    public BufferedImage loadRawImage(File imagePath, int width, int height) {
+        try {
+            image = ImageManager.loadRawImage(imagePath, width, height);
+        } catch(IOException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load image");
+        }
+        return image.getBufferdImage();
+    }
+
+    @Override
     public BufferedImage getImage() {
         return image.getBufferdImage();
     }
