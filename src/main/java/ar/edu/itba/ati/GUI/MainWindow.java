@@ -1,7 +1,11 @@
 package ar.edu.itba.ati.GUI;
 
 import ar.edu.itba.ati.Interface.Controller;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +13,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -21,6 +24,7 @@ import javafx.embed.swing.SwingFXUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class MainWindow {
 
@@ -68,10 +72,17 @@ public class MainWindow {
 
         MenuItem modifyPixel= new MenuItem("Modify pixel value");
         modifyPixel.setOnAction(e-> showEditPixelModal());
-        tools.getItems().addAll(getPixel,modifyPixel);
+
+        MenuItem getMean = new MenuItem("Get mean");
+        getMean.setOnAction(e-> showMeanModal());
+
+        MenuItem channelBands = new MenuItem("Show channel bands");
+        channelBands.setOnAction(e-> showChannelBands());
+
+        tools.getItems().addAll(getPixel,modifyPixel,getMean,channelBands);
 
 
-        Menu create = new Menu("Create");
+        Menu create = new Menu("Generate");
         MenuItem circle = new MenuItem("Circle");
         circle.setOnAction(e-> {
             controller.createCircle();
@@ -118,22 +129,14 @@ public class MainWindow {
                 System.out.println("Load Image failed");
                 return;
             }
-
-
             refreshImage();
         }
-
-
     }
 
     public void saveFile(){
         FileChooser chooser = new FileChooser();
-
         File file = chooser.showSaveDialog(stage);
-
-
         controller.saveImage(file);
-
     }
 
     public void showEditPixelModal(){
@@ -180,6 +183,66 @@ public class MainWindow {
 
         stage.show();
 
+    }
+
+    public void showChannelBands(){
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("ImageBands.fxml"));
+        Stage stage = new Stage();
+        try {
+            Parent root1 = (Parent) fxmlLoader.load();
+            ChannelBandsWindow cb =  fxmlLoader.getController();
+            cb.setController(controller);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            cb.setImages();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+        //new ChannelBandsWindow(controller,stage);
+
+    }
+
+    public ImageView getImage(BufferedImage bufferedImage){
+        ImageView iv = new ImageView();
+         iv.setImage(SwingFXUtils.toFXImage(bufferedImage,null));
+         return iv;
+    }
+
+    public void showMeanModal(){
+        Stage stage = new Stage();
+        stage.setTitle("Get mean");
+
+        CoordenateBox p1x = new CoordenateBox("X: ");
+        CoordenateBox p1y = new CoordenateBox("Y: ");
+        HBox p1 = new HBox(20);
+        p1.getChildren().addAll(p1x.getBox(),p1y.getBox());
+        p1.setAlignment(Pos.CENTER);
+
+        CoordenateBox p2x = new CoordenateBox("X: ");
+        CoordenateBox p2y = new CoordenateBox("Y: ");
+        HBox p2 = new HBox(20);
+        p2.getChildren().addAll(p2x.getBox(),p2y.getBox());
+        p2.setAlignment(Pos.CENTER);
+
+        Button getMean = new Button("Get mean");
+
+        Label colorsLabel = new Label("");
+
+        getMean.setOnAction(e-> {
+           Color colors =  controller.getPixelsMean(new Point(p1x.parseInt(),p1y.parseInt()), new Point(p2x.parseInt(),p2y.parseInt()));
+           colorsLabel.setText("R: "+colors.getRed()+" G: "+colors.getGreen()+" B: "+colors.getBlue());
+        });
+
+        VBox container = new VBox(20);
+        container.getChildren().addAll(p1,p2,getMean,colorsLabel);
+        container.setAlignment(Pos.CENTER);
+        container.setPadding(new Insets(20));
+
+        stage.setScene(new Scene(container));
+        stage.show();
 
     }
 
@@ -262,6 +325,10 @@ public class MainWindow {
 
         public HBox getBox() {
             return yBox;
+        }
+
+        public int parseInt(){
+           return Integer.parseInt(getField().getCharacters().toString());
         }
     }
 

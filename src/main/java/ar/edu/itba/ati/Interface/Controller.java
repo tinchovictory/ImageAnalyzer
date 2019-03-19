@@ -10,21 +10,21 @@ public interface Controller {
 
     void editPixelValue(int x, int y, Color newValue);
 
-     BufferedImage loadImage(File image);
+    BufferedImage loadImage(File image);
 
-     BufferedImage getImage();
+    BufferedImage getImage();
 
-     void saveImage(File image);
+    void saveImage(File image);
 
-     BufferedImage createSquare();
+    BufferedImage createSquare();
 
-     BufferedImage createCircle();
+    BufferedImage createCircle();
 
-     BufferedImage createColorGradient();
+    BufferedImage createColorGradient();
 
-     BufferedImage createGreyGradient();
+    BufferedImage createGreyGradient();
 
-     Color getPixelsMean(Point p1, Point p2); // p1.x < p2.x
+    Color getPixelsMean(Point p1, Point p2); // p1.x < p2.x
 
     BufferedImage getRedImage();
 
