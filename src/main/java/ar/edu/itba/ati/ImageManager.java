@@ -6,8 +6,11 @@ import ar.edu.itba.ati.model.Image;
 import org.apache.sanselan.*;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ImageManager {
 
@@ -43,6 +46,22 @@ public class ImageManager {
         Sanselan.writeImage(bufferedImage, imagePath, imageFormat, null);
     }
 
+    public static Image loadRawImage(File image, int width, int height) throws IOException {
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        WritableRaster raster = bufferedImage.getRaster();
+
+        byte[] imageData = loadBytesFromFile(image);
+
+        int i = 0;
+        for(int x = 0; x < width; x++) {
+            for(int y = 0; y < height; y++) {
+                raster.setSample(x, y, 0, imageData[i++]);
+            }
+        }
+
+        return new Image(bufferedImage, ImageType.GRAY_SCALE, ImageExtension.RAW);
+    }
+
     private static ImageFormat getImageFormat(Image image) {
         if(image.getImageExtension() == ImageExtension.PGM) {
             return ImageFormat.IMAGE_FORMAT_PGM;
@@ -50,6 +69,23 @@ public class ImageManager {
             return ImageFormat.IMAGE_FORMAT_PPM;
         }
         throw new IllegalArgumentException();
+    }
+
+    private static byte[] loadBytesFromFile(File image) throws IOException {
+        InputStream inputStream = new FileInputStream(image);
+        byte[] imageBytes = new byte[(int) image.length()];
+
+        int pos = 0, reading = 0;
+        while(pos < imageBytes.length && (reading = inputStream.read(imageBytes, pos, imageBytes.length - pos)) >= 0) {
+            pos += reading;
+        }
+
+        if(pos < imageBytes.length) {
+            throw new IOException();
+        }
+
+        inputStream.close();
+        return imageBytes;
     }
 
 }
