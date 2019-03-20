@@ -43,6 +43,7 @@ public class HSVImage {
                 value[x][y] = hsv[2];
             }
         }
+
     }
 
     private int getBufferedImageType() {
@@ -57,7 +58,9 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                bufferedImage.setRGB(x, y, (int) hue[x][y]);
+                int hueColor = (int) (hue[x][y] * 255);
+                Color color = new Color(hueColor, hueColor, hueColor);
+                bufferedImage.setRGB(x, y, color.getRGB());
             }
         }
 
@@ -69,7 +72,9 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                bufferedImage.setRGB(x, y, (int) saturation[x][y]);
+                int saturationColor = (int) (saturation[x][y] * 255);
+                Color color = new Color(saturationColor, saturationColor, saturationColor);
+                bufferedImage.setRGB(x, y, color.getRGB());
             }
         }
 
@@ -82,7 +87,9 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                bufferedImage.setRGB(x, y, (int) value[x][y]);
+                int valueColor = (int) (value[x][y] * 255);
+                Color color = new Color(valueColor, valueColor, valueColor);
+                bufferedImage.setRGB(x, y, color.getRGB());
             }
         }
 
