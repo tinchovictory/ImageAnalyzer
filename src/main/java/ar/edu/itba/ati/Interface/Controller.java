@@ -12,11 +12,13 @@ public interface Controller {
 
     BufferedImage loadImage(File image);
     
-     BufferedImage loadRawImage(File image, int width, int height);
+    BufferedImage loadRawImage(File image, int width, int height);
 
-     BufferedImage getImage();
+    BufferedImage getImage();
 
     void saveImage(File image);
+
+    void cropImage(File image, Point p1, Point p2); // p1.x < p2.x
 
     BufferedImage createSquare();
 

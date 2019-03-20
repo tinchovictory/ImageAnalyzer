@@ -56,6 +56,10 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
 
     @Override
     public void saveImage(File imagePath) {
+       saveImage(imagePath, image);
+    }
+
+    private void saveImage(File imagePath, Image image) {
         try {
             ImageManager.saveImage(imagePath, image);
         } catch (IOException e) {
@@ -65,6 +69,12 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
             //TODO: Show msg to user
             System.out.println("Unable to save image");
         }
+    }
+
+    @Override
+    public void cropImage(File imagePath, Point p1, Point p2) {
+        Image croppedImage = image.cropImage(p1, p2);
+        saveImage(imagePath, croppedImage);
     }
 
     @Override

@@ -148,6 +148,26 @@ public class Image {
         return bufferedImage;
     }
 
+    public Image cropImage(Point p1, Point p2) {
+        int ymin = (int) p1.getY();
+        int ymax = (int) p2.getY();
+        if(ymax < ymin) {
+            int aux = ymax;
+            ymax = ymin;
+            ymin = aux;
+        }
+
+        Image newImage = new Image((int) (p2.getX() - p1.getX()), ymax - ymin, imageType, imageExtension);
+
+        for(int x = (int) p1.getX(); x < (int) p2.getX(); x++) {
+            for(int y = ymin; y < ymax; y++) {
+                newImage.setPixelColor(x, y, getPixelColor(x, y));
+            }
+        }
+
+        return newImage;
+    }
+
     @Override
     public String toString() {
         return redChannel.toString();
