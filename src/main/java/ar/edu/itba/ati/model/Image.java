@@ -111,7 +111,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getRed());
+                Color redColor = new Color(color.getRed(), 0, 0);
+                bufferedImage.setRGB(x, y, redColor.getRGB());
             }
         }
 
@@ -124,7 +125,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getGreen());
+                Color greenColor = new Color(0, color.getGreen(), 0);
+                bufferedImage.setRGB(x, y, greenColor.getRGB());
             }
         }
 
@@ -138,11 +140,32 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getBlue());
+                Color blueColor = new Color(0, 0, color.getBlue());
+                bufferedImage.setRGB(x, y, blueColor.getRGB());
             }
         }
 
         return bufferedImage;
+    }
+
+    public Image cropImage(Point p1, Point p2) {
+        int ymin = (int) p1.getY();
+        int ymax = (int) p2.getY();
+        if(ymax < ymin) {
+            int aux = ymax;
+            ymax = ymin;
+            ymin = aux;
+        }
+
+        Image newImage = new Image((int) (p2.getX() - p1.getX()), ymax - ymin, imageType, imageExtension);
+
+        for(int x = (int) p1.getX(); x < (int) p2.getX(); x++) {
+            for(int y = ymin; y < ymax; y++) {
+                newImage.setPixelColor(x, y, getPixelColor(x, y));
+            }
+        }
+
+        return newImage;
     }
 
     @Override
