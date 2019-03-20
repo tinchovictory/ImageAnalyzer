@@ -38,8 +38,14 @@ public class MainWindow {
     public MainWindow(Stage stage, Controller controller) {
         this.stage = stage;
         imageView = new ImageView();
+        imageView.setPreserveRatio(true);
         BorderPane container = new BorderPane();
 
+        container.setPrefHeight(600);
+        container.setPrefWidth(800);
+
+        imageView.fitHeightProperty().bind(container.heightProperty());
+        imageView.fitWidthProperty().bind(container.widthProperty());
         MenuBar menuBar=  getMenuBar();
         container.setTop(menuBar);
         container.setCenter(imageView);
@@ -216,6 +222,7 @@ public class MainWindow {
             Parent root1 = (Parent) fxmlLoader.load();
             ChannelBandsWindow cb =  fxmlLoader.getController();
             cb.setController(controller);
+            cb.setStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             cb.setImages();
