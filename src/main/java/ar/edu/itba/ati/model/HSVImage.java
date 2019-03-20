@@ -24,9 +24,9 @@ public class HSVImage {
 //        this.hue = new ImageColorChannel(width, height);
 //        this.saturation = new ImageColorChannel(width, height);
 //        this.value = new ImageColorChannel(width, height);
-        this.hue = new float[height][width];
-        this.saturation = new float[height][width];
-        this.value = new float[height][width];
+        this.hue = new float[width][height];
+        this.saturation = new float[width][height];
+        this.value = new float[width][height];
 
         fillColorChannelsFrom(image);
     }

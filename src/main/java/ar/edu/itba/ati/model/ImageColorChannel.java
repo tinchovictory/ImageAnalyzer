@@ -10,7 +10,7 @@ public class ImageColorChannel {
     public ImageColorChannel(int width, int height) {
         this.width = width;
         this.height = height;
-        this.pixels = new int[height][width];
+        this.pixels = new int[width][height];
     }
 
     public void setPixel(int x, int y, int color) {
