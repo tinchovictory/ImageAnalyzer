@@ -111,7 +111,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getRed());
+                Color redColor = new Color(color.getRed(), 0, 0);
+                bufferedImage.setRGB(x, y, redColor.getRGB());
             }
         }
 
@@ -124,7 +125,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getGreen());
+                Color greenColor = new Color(0, color.getGreen(), 0);
+                bufferedImage.setRGB(x, y, greenColor.getRGB());
             }
         }
 
@@ -138,7 +140,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getBlue());
+                Color blueColor = new Color(0, 0, color.getBlue());
+                bufferedImage.setRGB(x, y, blueColor.getRGB());
             }
         }
 
