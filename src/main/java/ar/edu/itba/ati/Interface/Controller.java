@@ -11,7 +11,7 @@ public interface Controller {
     void editPixelValue(int x, int y, Color newValue);
 
     BufferedImage loadImage(File image);
-    
+
      BufferedImage loadRawImage(File image, int width, int height);
 
      BufferedImage getImage();

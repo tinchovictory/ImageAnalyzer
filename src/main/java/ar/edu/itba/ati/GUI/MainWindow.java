@@ -58,10 +58,11 @@ public class MainWindow {
         openImage.setOnAction(e->loadImage());
 
         MenuItem openImageRAW = new MenuItem("Open RAW Image");
+        openImageRAW.setOnAction(e-> openRawImage());
         MenuItem saveImage = new MenuItem("Save Image");
         saveImage.setOnAction(e-> saveFile());
 
-        file.getItems().addAll(openImage,saveImage);
+        file.getItems().addAll(openImage,openImageRAW,saveImage);
 
 
 
@@ -116,6 +117,28 @@ public class MainWindow {
 
     }
 
+    private void openRawImage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("OpenRawImage.fxml"));
+        Stage rawStage = new Stage();
+        Parent root = null;
+        try {
+            root = loader.load();
+            rawStage.setScene(new Scene(root));
+        }catch (IOException e ){
+            System.out.println("Failed to load FXML");
+            e.printStackTrace();
+        }
+
+        OpenRawImage rawImageController = loader.getController();
+        rawImageController.initData(this,rawStage);
+
+
+    }
+
+    public void openRawImage(int width, int height,File image){
+        controller.loadRawImage(image,height,width);
+        refreshImage();
+    }
     private void loadImage(){
         FileChooser chooser = new FileChooser();
 

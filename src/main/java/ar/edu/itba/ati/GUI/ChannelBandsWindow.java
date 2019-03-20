@@ -77,7 +77,6 @@ public class ChannelBandsWindow implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Initializing... ");
         //stage.show();
     }
 
