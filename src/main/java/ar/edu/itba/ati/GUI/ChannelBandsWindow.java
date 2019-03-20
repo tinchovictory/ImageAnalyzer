@@ -1,13 +1,9 @@
 package ar.edu.itba.ati.GUI;
 
 import ar.edu.itba.ati.Interface.Controller;
-import ar.edu.itba.ati.model.Image;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -77,7 +73,6 @@ public class ChannelBandsWindow implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Initializing... ");
         //stage.show();
     }
 

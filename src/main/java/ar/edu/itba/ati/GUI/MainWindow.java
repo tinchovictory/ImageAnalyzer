@@ -38,8 +38,14 @@ public class MainWindow {
     public MainWindow(Stage stage, Controller controller) {
         this.stage = stage;
         imageView = new ImageView();
+        imageView.setPreserveRatio(true);
         BorderPane container = new BorderPane();
 
+        container.setPrefHeight(600);
+        container.setPrefWidth(800);
+
+        imageView.fitHeightProperty().bind(container.heightProperty());
+        imageView.fitWidthProperty().bind(container.widthProperty());
         MenuBar menuBar=  getMenuBar();
         container.setTop(menuBar);
         container.setCenter(imageView);
@@ -58,10 +64,11 @@ public class MainWindow {
         openImage.setOnAction(e->loadImage());
 
         MenuItem openImageRAW = new MenuItem("Open RAW Image");
+        openImageRAW.setOnAction(e-> openRawImage());
         MenuItem saveImage = new MenuItem("Save Image");
         saveImage.setOnAction(e-> saveFile());
 
-        file.getItems().addAll(openImage,saveImage);
+        file.getItems().addAll(openImage,openImageRAW,saveImage);
 
 
 
@@ -116,6 +123,28 @@ public class MainWindow {
 
     }
 
+    private void openRawImage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("OpenRawImage.fxml"));
+        Stage rawStage = new Stage();
+        Parent root = null;
+        try {
+            root = loader.load();
+            rawStage.setScene(new Scene(root));
+        }catch (IOException e ){
+            System.out.println("Failed to load FXML");
+            e.printStackTrace();
+        }
+
+        OpenRawImage rawImageController = loader.getController();
+        rawImageController.initData(this,rawStage);
+
+
+    }
+
+    public void openRawImage(int width, int height,File image){
+        controller.loadRawImage(image,height,width);
+        refreshImage();
+    }
     private void loadImage(){
         FileChooser chooser = new FileChooser();
 
@@ -193,6 +222,7 @@ public class MainWindow {
             Parent root1 = (Parent) fxmlLoader.load();
             ChannelBandsWindow cb =  fxmlLoader.getController();
             cb.setController(controller);
+            cb.setStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             cb.setImages();
