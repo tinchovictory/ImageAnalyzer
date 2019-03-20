@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 
 public class OpenRawImage {
@@ -23,6 +22,8 @@ public class OpenRawImage {
     File image;
 
     public OpenRawImage() {
+
+        
     }
 
     public void initData(MainWindow mainWindow, Stage stage){
