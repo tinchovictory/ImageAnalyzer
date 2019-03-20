@@ -6,9 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.w3c.dom.events.Event;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class OpenRawImage {
