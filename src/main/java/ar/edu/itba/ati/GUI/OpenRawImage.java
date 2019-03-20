@@ -22,8 +22,6 @@ public class OpenRawImage {
     File image;
 
     public OpenRawImage() {
-
-        
     }
 
     public void initData(MainWindow mainWindow, Stage stage){
