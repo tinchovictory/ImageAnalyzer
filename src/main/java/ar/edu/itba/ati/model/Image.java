@@ -159,9 +159,9 @@ public class Image {
 
         Image newImage = new Image((int) (p2.getX() - p1.getX()), ymax - ymin, imageType, imageExtension);
 
-        for(int x = (int) p1.getX(); x < (int) p2.getX(); x++) {
-            for(int y = ymin; y < ymax; y++) {
-                newImage.setPixelColor(x, y, getPixelColor(x, y));
+        for(int height = 0; height < newImage.getHeight(); height++) {
+            for(int width = 0; width < newImage.getWidth(); width++) {
+                setPixelColor(width, height, getPixelColor(width, height));
             }
         }
 
