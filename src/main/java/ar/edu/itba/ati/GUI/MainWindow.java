@@ -241,6 +241,9 @@ public class MainWindow {
 
         Point p1 = new Point((int)bounds.getMinX(),(int)bounds.getMinY());
         Point p2 = new Point((int)bounds.getMinX()+width, (int)bounds.getMinY()+height);
+
+        System.out.println("P1"+p1);
+        System.out.println("P2"+p2);
         controller.cropImage(p1,p2);
         refreshImage();
 
