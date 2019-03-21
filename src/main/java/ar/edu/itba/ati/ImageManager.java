@@ -53,8 +53,8 @@ public class ImageManager {
         byte[] imageData = loadBytesFromFile(image);
 
         int i = 0;
-        for(int x = 0; x < width; x++) {
-            for(int y = 0; y < height; y++) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
                 raster.setSample(x, y, 0, imageData[i++]);
             }
         }

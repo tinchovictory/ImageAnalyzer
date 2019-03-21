@@ -272,7 +272,7 @@ public class MainWindow {
     }
 
     public void openRawImage(int width, int height,File image){
-        controller.loadRawImage(image,height,width);
+        controller.loadRawImage(image,width,height);
         refreshImage();
     }
     private void loadImage(){
