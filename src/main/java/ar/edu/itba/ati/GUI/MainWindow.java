@@ -1,18 +1,16 @@
 package ar.edu.itba.ati.GUI;
 
 import ar.edu.itba.ati.Interface.Controller;
+import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -20,10 +18,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
@@ -214,6 +209,7 @@ public class MainWindow {
         clear.setOnAction(event -> {
             clearSelection(selectionGroup);
         });
+        clear.disableProperty().bind(Bindings.createBooleanBinding(()->isAreaSelected));
 
 
         MenuItem crop = new MenuItem("Crop image");
@@ -221,6 +217,7 @@ public class MainWindow {
             if (isAreaSelected)
                 cropImage();
         });
+        crop.disableProperty().bind(Bindings.createBooleanBinding(()->isAreaSelected));
         selection.getItems().addAll(select,clear,crop);
 
 
@@ -249,26 +246,11 @@ public class MainWindow {
 
     }
 
-//    private void selectionHandler() {
-//
-//        Rectangle rectangle = new Rectangle(40,40);
-//        rectangle.setStroke( javafx.scene.paint.Color.GRAY);
-//        rectangle.setStrokeWidth(2.0);
-//        rectangle.setFill(javafx.scene.paint.Color.TRANSPARENT);
-//        rectangle.setBlendMode(BlendMode.DARKEN);
-//        DragResizeMod.makeResizable(rectangle);
-//        stackPane.getChildren().add(rectangle);
-//
-//
-//
-//
-//
-//    }
 
     private void openRawImage(){
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("OpenRawImage.fxml"));
         Stage rawStage = new Stage();
-        Parent root = null;
+        Parent root;
         try {
             root = loader.load();
             rawStage.setScene(new Scene(root));
@@ -291,10 +273,9 @@ public class MainWindow {
         FileChooser chooser = new FileChooser();
 
         File image =  chooser.showOpenDialog(stage);
-        BufferedImage image1 = null;
         if(image != null){
             try {
-                image1 = controller.loadImage(image);
+              controller.loadImage(image);
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Load Image failed");
@@ -549,8 +530,8 @@ public class MainWindow {
             double offsetY = event.getY() - rectangleStartY;
 
             if (offsetX > 0) {
-                if (event.getX() > mainImage.getWidth())
-                    selectionRectangle.setWidth(mainImage.getWidth() - rectangleStartX);
+                if (event.getX() > imageView.getFitWidth())
+                    selectionRectangle.setWidth(imageView.getFitWidth() - rectangleStartX);
                 else
                     selectionRectangle.setWidth(offsetX);
             } else {
@@ -562,8 +543,8 @@ public class MainWindow {
             }
 
             if (offsetY > 0) {
-                if (event.getY() > mainImage.getHeight())
-                    selectionRectangle.setHeight(mainImage.getHeight() - rectangleStartY);
+                if (event.getY() > imageView.getFitHeight())
+                    selectionRectangle.setHeight(imageView.getFitHeight() - rectangleStartY);
                 else
                     selectionRectangle.setHeight(offsetY);
             } else {
