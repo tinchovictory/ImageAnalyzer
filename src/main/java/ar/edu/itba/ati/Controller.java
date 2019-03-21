@@ -72,9 +72,9 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
-    public void cropImage(File imagePath, Point p1, Point p2) {
+    public void cropImage( Point p1, Point p2) {
         Image croppedImage = image.cropImage(p1, p2);
-        saveImage(imagePath, croppedImage);
+
     }
 
     @Override

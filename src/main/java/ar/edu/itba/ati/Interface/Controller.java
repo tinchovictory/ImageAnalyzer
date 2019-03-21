@@ -18,7 +18,7 @@ public interface Controller {
 
     void saveImage(File image);
 
-    void cropImage(File image, Point p1, Point p2); // p1.x < p2.x
+    void cropImage( Point p1, Point p2); // p1.x < p2.x
 
     BufferedImage createSquare();
 

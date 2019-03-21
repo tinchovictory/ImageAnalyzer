@@ -1,22 +1,33 @@
 package ar.edu.itba.ati.GUI;
 
 import ar.edu.itba.ati.Interface.Controller;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.embed.swing.SwingFXUtils;
@@ -33,26 +44,104 @@ public class MainWindow {
 
     private ImageView imageView;
 
-     private Controller controller;
+    private Controller controller;
+
+    private BorderPane container;
+
+    private ScrollPane stackPane;
+
+    private boolean isAreaSelected;
+
+    private BufferedImage mainImage;
+
+    final AreaSelection areaSelection;
+
+    final Group selectionGroup;
+
+
 
     public MainWindow(Stage stage, Controller controller) {
         this.stage = stage;
         imageView = new ImageView();
         imageView.setPreserveRatio(true);
-        BorderPane container = new BorderPane();
+        container = new BorderPane();
+        this.isAreaSelected = false;
+
 
         container.setPrefHeight(600);
         container.setPrefWidth(800);
 
         imageView.fitHeightProperty().bind(container.heightProperty());
         imageView.fitWidthProperty().bind(container.widthProperty());
+
+        areaSelection = new AreaSelection();
+        selectionGroup = new Group();
+
+//        imageView.setOnMouseClicked(e -> {
+//
+//
+//            double x = e.getX();
+//            double y = e.getY();
+//
+//            ImageView view = (ImageView) e.getSource();
+//            Bounds bounds = view.getLayoutBounds();
+//            double xScale = bounds.getWidth() / view.getImage().getWidth();
+//            double yScale = bounds.getHeight() / view.getImage().getHeight();
+//
+//            x /= xScale;
+//            y /= yScale;
+//
+//            int xCord = (int) x;
+//            int yCord = (int) y;
+//            System.out.println("------------------------------------");
+//            System.out.println("["+e.getX()+", "+e.getY()+"]");
+//            System.out.println("["+xCord+", "+yCord+"]");
+//
+//            if(selectionInProgress && !draggin){
+//                draggin = true;
+//            }
+//
+//
+//
+//        });
+//
+//        imageView.setOnMouseDragged(e-> {
+//            double x = e.getX();
+//            double y = e.getY();
+//
+//            ImageView view = (ImageView) e.getSource();
+//            Bounds bounds = view.getLayoutBounds();
+//            double xScale = bounds.getWidth() / view.getImage().getWidth();
+//            double yScale = bounds.getHeight() / view.getImage().getHeight();
+//
+//            x /= xScale;
+//            y /= yScale;
+//
+//            int xCord = (int) x;
+//            int yCord = (int) y;
+//
+//
+//        });
+
+        stackPane = new ScrollPane();
+
+        selectionGroup.getChildren().add(imageView);
+        stackPane.setContent(selectionGroup);
+
         MenuBar menuBar=  getMenuBar();
         container.setTop(menuBar);
-        container.setCenter(imageView);
+        container.setCenter(stackPane);
         this.controller = controller;
 
 
         stage.setScene(new Scene(container,800,600));
+
+    }
+
+    private void clearSelection(Group group) {
+        //deletes everything except for base container layer
+        isAreaSelected = false;
+        group.getChildren().remove(1,group.getChildren().size());
 
     }
 
@@ -85,6 +174,8 @@ public class MainWindow {
 
         MenuItem channelBands = new MenuItem("Show channel bands");
         channelBands.setOnAction(e-> showChannelBands());
+        
+
 
         tools.getItems().addAll(getPixel,modifyPixel,getMean,channelBands);
 
@@ -113,15 +204,63 @@ public class MainWindow {
         });
 
 
-
         create.getItems().addAll(circle,square,colorGradient,greyGradient);
+
+        Menu selection = new Menu("Selection");
+        MenuItem select = new MenuItem("Select area");
+        select.setOnAction(event -> areaSelection.selectArea(selectionGroup));
+
+        MenuItem clear = new MenuItem("Clear selection");
+        clear.setOnAction(event -> {
+            clearSelection(selectionGroup);
+        });
+
+
+        MenuItem crop = new MenuItem("Crop image");
+        crop.setOnAction(e-> {
+            if (isAreaSelected)
+                cropImage();
+        });
+        selection.getItems().addAll(select,clear,crop);
+
+
+
 
 
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(file,create,tools);
+        menuBar.getMenus().addAll(file,create,tools,selection);
         return menuBar;
 
     }
+
+    private void cropImage() {
+
+        Bounds bounds =areaSelection.selectArea(selectionGroup).getBoundsInParent();
+        int width = (int) bounds.getWidth();
+        int height = (int) bounds.getHeight();
+
+        Point p1 = new Point((int)bounds.getMinX(),(int)bounds.getMinY());
+        Point p2 = new Point((int)bounds.getMinX()+width, (int)bounds.getMinY()+height);
+        controller.cropImage(p1,p2);
+        refreshImage();
+
+    }
+
+//    private void selectionHandler() {
+//
+//        Rectangle rectangle = new Rectangle(40,40);
+//        rectangle.setStroke( javafx.scene.paint.Color.GRAY);
+//        rectangle.setStrokeWidth(2.0);
+//        rectangle.setFill(javafx.scene.paint.Color.TRANSPARENT);
+//        rectangle.setBlendMode(BlendMode.DARKEN);
+//        DragResizeMod.makeResizable(rectangle);
+//        stackPane.getChildren().add(rectangle);
+//
+//
+//
+//
+//
+//    }
 
     private void openRawImage(){
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("OpenRawImage.fxml"));
@@ -230,9 +369,6 @@ public class MainWindow {
             e.printStackTrace();
         }
 
-
-        //new ChannelBandsWindow(controller,stage);
-
     }
 
     public ImageView getImage(BufferedImage bufferedImage){
@@ -327,7 +463,8 @@ public class MainWindow {
     }
 
     public void refreshImage(){
-        imageView.setImage(SwingFXUtils.toFXImage(controller.getImage(),null));
+        mainImage = controller.getImage();
+        imageView.setImage(SwingFXUtils.toFXImage(mainImage,null));
     }
 
     private class CoordenateBox{
@@ -363,4 +500,131 @@ public class MainWindow {
     }
 
 
+
+    private class AreaSelection {
+
+        private Group group;
+
+        private ResizableRectangle selectionRectangle = null;
+        private double rectangleStartX;
+        private double rectangleStartY;
+        private javafx.scene.paint.Paint darkAreaColor = javafx.scene.paint.Color.color(0,0,0,0.5);
+
+        private ResizableRectangle selectArea(Group group) {
+            this.group = group;
+
+            // group.getChildren().get(0) == mainImageView. We assume image view as base container layer
+            if (imageView != null && mainImage != null) {
+                this.group.getChildren().get(0).addEventHandler(MouseEvent.MOUSE_PRESSED, onMousePressedEventHandler);
+                this.group.getChildren().get(0).addEventHandler(MouseEvent.MOUSE_DRAGGED, onMouseDraggedEventHandler);
+                this.group.getChildren().get(0).addEventHandler(MouseEvent.MOUSE_RELEASED, onMouseReleasedEventHandler);
+            }
+
+            return selectionRectangle;
+        }
+
+        EventHandler<MouseEvent> onMousePressedEventHandler = event -> {
+            if (event.isSecondaryButtonDown())
+                return;
+
+            rectangleStartX = event.getX();
+            rectangleStartY = event.getY();
+
+            clearSelection(group);
+
+            selectionRectangle = new ResizableRectangle(rectangleStartX, rectangleStartY, 0, 0, group);
+
+            darkenOutsideRectangle(selectionRectangle);
+
+        };
+
+        EventHandler<MouseEvent> onMouseDraggedEventHandler = event -> {
+            if (event.isSecondaryButtonDown())
+                return;
+
+            double offsetX = event.getX() - rectangleStartX;
+            double offsetY = event.getY() - rectangleStartY;
+
+            if (offsetX > 0) {
+                if (event.getX() > mainImage.getWidth())
+                    selectionRectangle.setWidth(mainImage.getWidth() - rectangleStartX);
+                else
+                    selectionRectangle.setWidth(offsetX);
+            } else {
+                if (event.getX() < 0)
+                    selectionRectangle.setX(0);
+                else
+                    selectionRectangle.setX(event.getX());
+                selectionRectangle.setWidth(rectangleStartX - selectionRectangle.getX());
+            }
+
+            if (offsetY > 0) {
+                if (event.getY() > mainImage.getHeight())
+                    selectionRectangle.setHeight(mainImage.getHeight() - rectangleStartY);
+                else
+                    selectionRectangle.setHeight(offsetY);
+            } else {
+                if (event.getY() < 0)
+                    selectionRectangle.setY(0);
+                else
+                    selectionRectangle.setY(event.getY());
+                selectionRectangle.setHeight(rectangleStartY - selectionRectangle.getY());
+            }
+
+        };
+
+        EventHandler<MouseEvent> onMouseReleasedEventHandler = event -> {
+            if (selectionRectangle != null)
+                isAreaSelected = true;
+        };
+
+
+        private void darkenOutsideRectangle(Rectangle rectangle) {
+            Rectangle darkAreaTop = new Rectangle(0,0,darkAreaColor);
+            Rectangle darkAreaLeft = new Rectangle(0,0,darkAreaColor);
+            Rectangle darkAreaRight = new Rectangle(0,0,darkAreaColor);
+            Rectangle darkAreaBottom = new Rectangle(0,0,darkAreaColor);
+
+            darkAreaTop.widthProperty().bind(container.widthProperty());
+            darkAreaTop.heightProperty().bind(rectangle.yProperty());
+
+            darkAreaLeft.yProperty().bind(rectangle.yProperty());
+            darkAreaLeft.widthProperty().bind(rectangle.xProperty());
+            darkAreaLeft.heightProperty().bind(rectangle.heightProperty());
+
+            darkAreaRight.xProperty().bind(rectangle.xProperty().add(rectangle.widthProperty()));
+            darkAreaRight.yProperty().bind(rectangle.yProperty());
+            darkAreaRight.widthProperty().bind(container.widthProperty().subtract(
+                    rectangle.xProperty().add(rectangle.widthProperty())));
+            darkAreaRight.heightProperty().bind(rectangle.heightProperty());
+
+            darkAreaBottom.yProperty().bind(rectangle.yProperty().add(rectangle.heightProperty()));
+            darkAreaBottom.widthProperty().bind(container.widthProperty());
+            darkAreaBottom.heightProperty().bind(container.heightProperty().subtract(
+                    rectangle.yProperty().add(rectangle.heightProperty())));
+
+            // adding dark area rectangles before the selectionRectangle. So it can't overlap rectangle
+            group.getChildren().add(1,darkAreaTop);
+            group.getChildren().add(1,darkAreaLeft);
+            group.getChildren().add(1,darkAreaBottom);
+            group.getChildren().add(1,darkAreaRight);
+
+            // make dark area container layer as well
+            darkAreaTop.addEventHandler(MouseEvent.MOUSE_PRESSED, onMousePressedEventHandler);
+            darkAreaTop.addEventHandler(MouseEvent.MOUSE_DRAGGED, onMouseDraggedEventHandler);
+            darkAreaTop.addEventHandler(MouseEvent.MOUSE_RELEASED, onMouseReleasedEventHandler);
+
+            darkAreaLeft.addEventHandler(MouseEvent.MOUSE_PRESSED, onMousePressedEventHandler);
+            darkAreaLeft.addEventHandler(MouseEvent.MOUSE_DRAGGED, onMouseDraggedEventHandler);
+            darkAreaLeft.addEventHandler(MouseEvent.MOUSE_RELEASED, onMouseReleasedEventHandler);
+
+            darkAreaRight.addEventHandler(MouseEvent.MOUSE_PRESSED, onMousePressedEventHandler);
+            darkAreaRight.addEventHandler(MouseEvent.MOUSE_DRAGGED, onMouseDraggedEventHandler);
+            darkAreaRight.addEventHandler(MouseEvent.MOUSE_RELEASED, onMouseReleasedEventHandler);
+
+            darkAreaBottom.addEventHandler(MouseEvent.MOUSE_PRESSED, onMousePressedEventHandler);
+            darkAreaBottom.addEventHandler(MouseEvent.MOUSE_DRAGGED, onMouseDraggedEventHandler);
+            darkAreaBottom.addEventHandler(MouseEvent.MOUSE_RELEASED, onMouseReleasedEventHandler);
+        }
+    }
 }
