@@ -236,13 +236,19 @@ public class MainWindow {
         int width = (int) bounds.getWidth();
         int height = (int) bounds.getHeight();
 
-        Point p1 = new Point((int)bounds.getMinX(),(int)bounds.getMinY());
-        Point p2 = new Point((int)bounds.getMinX()+width, (int)bounds.getMinY()+height);
+        double xScale = imageView.getLayoutBounds().getWidth() / imageView.getImage().getWidth();
+        double yScale = imageView.getLayoutBounds().getHeight() / imageView.getImage().getHeight();
+
+        Point p1 = new Point((int)(bounds.getMinX()/xScale),(int)(bounds.getMinY()/yScale));
+        Point p2 = new Point((int)((bounds.getMinX()+width)/xScale), (int)((bounds.getMinY()+height)/yScale));
 
         System.out.println("P1"+p1);
         System.out.println("P2"+p2);
         controller.cropImage(p1,p2);
         refreshImage();
+
+
+        
 
     }
 
