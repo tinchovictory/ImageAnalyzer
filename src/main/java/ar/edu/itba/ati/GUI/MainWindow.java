@@ -199,7 +199,7 @@ public class MainWindow {
         System.out.println("P2"+p2);
         controller.cropImage(p1,p2);
         refreshImage();
-        
+
 
 
     }
@@ -227,6 +227,7 @@ public class MainWindow {
         controller.loadRawImage(image,height,width);
         refreshImage();
     }
+
     private void loadImage(){
         FileChooser chooser = new FileChooser();
 
