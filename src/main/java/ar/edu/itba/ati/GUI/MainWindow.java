@@ -72,51 +72,6 @@ public class MainWindow {
         areaSelection = new AreaSelection();
         selectionGroup = new Group();
 
-//        imageView.setOnMouseClicked(e -> {
-//
-//
-//            double x = e.getX();
-//            double y = e.getY();
-//
-//            ImageView view = (ImageView) e.getSource();
-//            Bounds bounds = view.getLayoutBounds();
-//            double xScale = bounds.getWidth() / view.getImage().getWidth();
-//            double yScale = bounds.getHeight() / view.getImage().getHeight();
-//
-//            x /= xScale;
-//            y /= yScale;
-//
-//            int xCord = (int) x;
-//            int yCord = (int) y;
-//            System.out.println("------------------------------------");
-//            System.out.println("["+e.getX()+", "+e.getY()+"]");
-//            System.out.println("["+xCord+", "+yCord+"]");
-//
-//            if(selectionInProgress && !draggin){
-//                draggin = true;
-//            }
-//
-//
-//
-//        });
-//
-//        imageView.setOnMouseDragged(e-> {
-//            double x = e.getX();
-//            double y = e.getY();
-//
-//            ImageView view = (ImageView) e.getSource();
-//            Bounds bounds = view.getLayoutBounds();
-//            double xScale = bounds.getWidth() / view.getImage().getWidth();
-//            double yScale = bounds.getHeight() / view.getImage().getHeight();
-//
-//            x /= xScale;
-//            y /= yScale;
-//
-//            int xCord = (int) x;
-//            int yCord = (int) y;
-//
-//
-//        });
 
         stackPane = new ScrollPane();
 
@@ -222,8 +177,6 @@ public class MainWindow {
 
 
 
-
-
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(file,create,tools,selection);
         return menuBar;
@@ -248,7 +201,6 @@ public class MainWindow {
         refreshImage();
 
 
-        
 
     }
 
@@ -275,6 +227,7 @@ public class MainWindow {
         controller.loadRawImage(image,width,height);
         refreshImage();
     }
+
     private void loadImage(){
         FileChooser chooser = new FileChooser();
 
