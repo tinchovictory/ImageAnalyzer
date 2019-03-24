@@ -34,7 +34,7 @@ public class ImageManager {
         } else if(bufferedImage.getType() == BufferedImage.TYPE_BYTE_GRAY){
             return new Image(bufferedImage, ImageType.GRAY_SCALE, extension);
         } else {
-            throw new IllegalStateException("ImageMolesta wasn't RGB nor Grayscale");
+            throw new IllegalStateException("Image wasn't RGB nor Grayscale");
         }
 
     }

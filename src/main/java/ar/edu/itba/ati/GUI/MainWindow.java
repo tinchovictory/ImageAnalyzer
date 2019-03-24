@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -43,15 +42,15 @@ public class MainWindow {
 
     private BorderPane container;
 
-    private ScrollPane stackPane;
+    private StackPane stackPane;
 
     private boolean isAreaSelected;
 
     private BufferedImage mainImage;
 
-    final AreaSelection areaSelection;
+    private final AreaSelection areaSelection;
 
-    final Group selectionGroup;
+    private final Group selectionGroup;
 
 
 
@@ -73,10 +72,10 @@ public class MainWindow {
         selectionGroup = new Group();
 
 
-        stackPane = new ScrollPane();
+        stackPane = new StackPane();
 
         selectionGroup.getChildren().add(imageView);
-        stackPane.setContent(selectionGroup);
+        stackPane.getChildren().addAll(selectionGroup);
 
         MenuBar menuBar=  getMenuBar();
         container.setTop(menuBar);

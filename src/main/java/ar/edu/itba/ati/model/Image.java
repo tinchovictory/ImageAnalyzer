@@ -169,6 +169,39 @@ public class Image {
         return newImage;
     }
 
+    public void add(Image other){
+        if(other.getWidth() != this.getWidth() || other.getHeight() != this.getHeight()){
+            throw new IllegalArgumentException("Images must be of the same size");
+        }
+        this.redChannel.add(other.redChannel);
+        this.greenChannel.add(other.greenChannel);
+        this.blueChannel.add(other.blueChannel);
+
+    }
+
+    public void substract(Image other){
+        if(other.getWidth() != this.getWidth() || other.getHeight() != this.getHeight()){
+            throw new IllegalArgumentException("Images must be of the same size");
+        }
+        this.redChannel.substract(other.redChannel);
+        this.greenChannel.substract(other.greenChannel);
+        this.blueChannel.substract(other.blueChannel);
+    }
+
+    public void compressDynamicRange(){
+        this.redChannel.compressDynamicRange();
+        this.greenChannel.compressDynamicRange();
+        this.blueChannel.compressDynamicRange();
+    }
+
+    public void setNegative(){
+        this.redChannel.setNegative();
+        this.greenChannel.setNegative();
+        this.blueChannel.setNegative();
+    }
+
+
+
     @Override
     public String toString() {
         return redChannel.toString();

@@ -137,4 +137,44 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
         HSVImage hsvImage = image.toHSV();
         return hsvImage.getValueImage();
     }
+
+    @Override
+    public void addImage(File imageFile) {
+        Image image2;
+        try{
+            image2 = ImageManager.loadImage(imageFile);
+        }catch (ImageReadException e){
+            e.printStackTrace();
+            return;//TODO manage errors
+        }catch (IOException e){
+            e.printStackTrace();
+            return;
+        }
+        image.add(image2);
+    }
+
+    @Override
+    public void substractImage(File imageFile) {
+        Image image2;
+        try{
+            image2 = ImageManager.loadImage(imageFile);
+        }catch (ImageReadException e){
+            e.printStackTrace();
+            return;//TODO manage errors
+        }catch (IOException e){
+            e.printStackTrace();
+            return;
+        }
+        image.substract(image2);
+    }
+
+    @Override
+    public void compressDynamicRange() {
+        image.compressDynamicRange();
+    }
+
+    @Override
+    public void getNegative() {
+         image.setNegative();
+    }
 }

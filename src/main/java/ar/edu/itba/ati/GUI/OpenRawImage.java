@@ -9,17 +9,18 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class OpenRawImage {
+
     @FXML
     Button openImage;
 
     @FXML
     TextField widthField,heightField;
 
-    MainWindow mainWindow;
+    private MainWindow mainWindow;
 
-    Stage stage;
+    private Stage stage;
 
-    File image;
+    private File image;
 
     public OpenRawImage() {
     }

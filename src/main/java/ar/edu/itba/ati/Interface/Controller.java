@@ -3,6 +3,7 @@ package ar.edu.itba.ati.Interface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.Buffer;
 
 public interface Controller {
 
@@ -41,5 +42,15 @@ public interface Controller {
     BufferedImage getSaturationImage();
 
     BufferedImage getValueImage();
+
+    void addImage(File image);
+
+    void substractImage(File image);
+
+    void compressDynamicRange();
+
+    void getNegative();
+
+
 
 }
