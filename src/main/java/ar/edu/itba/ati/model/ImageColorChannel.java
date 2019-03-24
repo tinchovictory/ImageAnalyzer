@@ -90,4 +90,28 @@ public class ImageColorChannel {
         }
         return imageColorChannel;
     }
+
+    public void applyContrast(int minContrast, int maxContrast) {
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                if(this.pixels[i][j] <= minContrast) {
+                    this.pixels[i][j] *= 0.3; // TODO: Check function
+                } else if(this.pixels[i][j] >= maxContrast) {
+                    this.pixels[i][j] *= 0.7; // TODO; Check function
+                }
+            }
+        }
+    }
+
+    public void applyThreshold(int threshold) {
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                if(this.pixels[i][j] <= threshold) {
+                    this.pixels[i][j] = 0;
+                } else {
+                    this.pixels[i][j] = 255;
+                }
+            }
+        }
+    }
 }

@@ -200,6 +200,18 @@ public class Image {
         this.blueChannel.setNegative();
     }
 
+    public void applyContrast(int minContrast, int maxContrast) { // TODO: Get r1, r2 from image
+        this.redChannel.applyContrast(minContrast, maxContrast);
+        this.greenChannel.applyContrast(minContrast, maxContrast);
+        this.blueChannel.applyContrast(minContrast, maxContrast);
+    }
+
+    public void applyThreshold(int threshold) {
+        this.redChannel.applyThreshold(threshold);
+        this.greenChannel.applyThreshold(threshold);
+        this.blueChannel.applyThreshold(threshold);
+    }
+
 
 
     @Override
