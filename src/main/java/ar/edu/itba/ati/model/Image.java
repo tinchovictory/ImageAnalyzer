@@ -212,6 +212,69 @@ public class Image {
         this.blueChannel.applyThreshold(threshold);
     }
 
+    public int[] getGreyFrequency() {
+        return this.redChannel.getFrequency();
+    }
+
+    public void equalizeFrequencies() {
+        equalizeColor(redChannel);
+        equalizeColor(greenChannel);
+        equalizeColor(blueChannel);
+    }
+
+    private void equalizeColor(ImageColorChannel colorChannel) {
+        int[] equalizedColors = getEqualizedColors(colorChannel);
+        colorChannel.updateWith(equalizedColors);
+    }
+
+    private int[] getEqualizedColors(ImageColorChannel colorChannel) {
+        int[] equalizedColors = new int[256];
+
+        int[] accumFrequency = getAccumFrequecies(colorChannel);
+        int minFreq = min(accumFrequency);
+        for(int i = 0; i < equalizedColors.length; i++) {
+            equalizedColors[i] = (int) Math.floor( (accumFrequency[i] - minFreq) / (1.0 - minFreq) * 255 + 0.5 );
+        }
+
+        return equalizedColors;
+    }
+
+    private int[] getAccumFrequecies(ImageColorChannel colorChannel) {
+        int[] accumFrequency = new int[256];
+        int[] relativeFrequency = colorChannel.getFrequency();
+        int accum = 0;
+
+        for(int i = 0; i < accumFrequency.length; i++) {
+            accum += relativeFrequency[i];
+            accumFrequency[i] = accum;
+        }
+
+        return  accumFrequency;
+    }
+
+    private int min(int[] array) {
+        int min = 255;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
+    }
+
+
+    private Image cloneImage() {
+        Image image = new Image(width, height, imageType, imageExtension);
+
+        for(int height = 0; height < this.height; height++) {
+            for(int width = 0; width < this.width; width++) {
+                image.setPixelColor(width, height, this.getPixelColor(width, height));
+            }
+        }
+
+        return image;
+    }
+
 
 
     @Override
