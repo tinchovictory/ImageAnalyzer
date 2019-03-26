@@ -123,10 +123,13 @@ public class MainWindow {
 
         MenuItem channelBands = new MenuItem("Show channel bands");
         channelBands.setOnAction(e-> showChannelBands());
+
+        MenuItem histogram = new MenuItem("Show histogram");
+        histogram.setOnAction(e-> showHistogram());
         
 
 
-        tools.getItems().addAll(getPixel,modifyPixel,getMean,channelBands);
+        tools.getItems().addAll(getPixel,modifyPixel,getMean,channelBands,histogram);
 
 
         Menu create = new Menu("Generate");
@@ -247,6 +250,15 @@ public class MainWindow {
         FileChooser chooser = new FileChooser();
         File file = chooser.showSaveDialog(stage);
         controller.saveImage(file);
+    }
+
+    private void showHistogram(){
+
+       Stage newStage =  new Stage();
+       newStage.setScene(new Scene(new HistogramWindow(controller.get)));
+
+       newStage.show();
+
     }
 
     public void showEditPixelModal(){

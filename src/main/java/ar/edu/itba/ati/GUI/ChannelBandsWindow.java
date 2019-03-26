@@ -79,4 +79,7 @@ public class ChannelBandsWindow implements Initializable {
     public void setController(Controller controller) {
         this.controller = controller;
     }
+
+    public static class HistogramWindow extends Stage {
+    }
 }
