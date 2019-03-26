@@ -23,6 +23,10 @@ public class ImageColorChannel {
 
     public void addToPixel(int x, int y, double value) {
         pixels[x][y] += value;
+
+        if(pixels[x][y] > 255) {
+            pixels[x][y] = 255;
+        }
     }
 
     public void multiplyToPixel(int x, int y, double value) {

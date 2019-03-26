@@ -3,12 +3,12 @@ package ar.edu.itba.ati;
 public class Utils {
     public static double randomExponentialNumber(double lambda) {
         double x = Math.random();
-        return - (1.0 / lambda) * Math.log(x);
+        return lambda * Math.exp(- lambda * x);
     }
 
     public static double randomRayeighNumber(double epsilon) {
         double x = Math.random();
-        return epsilon * Math.sqrt( - 2 * Math.log(1 - x) );
+        return ( x / (epsilon * epsilon) ) * Math.exp( - x * x / ( 2 * epsilon *  epsilon ) );
     }
 
     public static double randomGaussNumber(double phi, double mu) {
