@@ -18,6 +18,8 @@
     <MenuItem text="Show histogram" onAction="#showHistogram"/>
     <MenuItem text="Compress Dynamic Range" onAction="#compressDynamicRange"/>
     <MenuItem text="Turn negative" onAction="#turnNegative"/>
+    <MenuItem text="Modify Contrast" onAction="#modifyContrast"/>
+    <MenuItem text="Equalize Image" onAction="#equalizeImage"/>
 
 
 </fx:root>

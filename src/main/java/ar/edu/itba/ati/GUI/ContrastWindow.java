@@ -1,6 +1,6 @@
 package ar.edu.itba.ati.GUI;
 
-import ar.edu.itba.ati.Controller;
+import ar.edu.itba.ati.Interface.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;

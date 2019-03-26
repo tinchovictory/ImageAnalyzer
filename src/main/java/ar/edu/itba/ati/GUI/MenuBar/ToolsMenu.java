@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.GUI.ChannelBandsWindow;
+import ar.edu.itba.ati.GUI.ContrastWindow;
 import ar.edu.itba.ati.GUI.HistogramWindow;
 import ar.edu.itba.ati.GUI.MainWindow;
 import ar.edu.itba.ati.Interface.Controller;
@@ -213,6 +214,19 @@ public class ToolsMenu extends Menu {
         controller.getMainWindow().refreshImage();
     }
 
+    @FXML
+    private void modifyContrast(){
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene( new ContrastWindow(controller)));
+        newStage.show();
+
+    }
+
+    @FXML
+    private void equalizeImage(){
+        controller.equalizeImage();
+        controller.getMainWindow().refreshImage();
+    }
 
 
     private class CoordenateBox{
