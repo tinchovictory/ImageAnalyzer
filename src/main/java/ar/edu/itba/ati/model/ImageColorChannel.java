@@ -114,4 +114,32 @@ public class ImageColorChannel {
             }
         }
     }
+
+    public double[] getFrequency() {
+        double[] frequency = new double[256];
+
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                int colorValue = pixels[i][j];
+                frequency[colorValue]++;
+            }
+        }
+
+        for(int i = 0; i < frequency.length; i++) {
+            frequency[i] = frequency[i] / (width * height);
+        }
+
+        return frequency;
+    }
+
+    public void updateWith(int[] colors) {
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                int originalColor = pixels[i][j];
+                int newColor = colors[originalColor];
+                setPixel(i, j, newColor);
+            }
+        }
+    }
+
 }

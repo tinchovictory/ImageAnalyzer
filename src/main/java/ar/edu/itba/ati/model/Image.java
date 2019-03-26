@@ -212,6 +212,69 @@ public class Image {
         this.blueChannel.applyThreshold(threshold);
     }
 
+    public double[] getGreyFrequency() {
+        return this.redChannel.getFrequency();
+    }
+
+    public void equalizeFrequencies() {
+        equalizeColor(redChannel);
+        equalizeColor(greenChannel);
+        equalizeColor(blueChannel);
+    }
+
+    private void equalizeColor(ImageColorChannel colorChannel) {
+        int[] equalizedColors = getEqualizedColors(colorChannel);
+        colorChannel.updateWith(equalizedColors);
+    }
+
+    private int[] getEqualizedColors(ImageColorChannel colorChannel) {
+        int[] equalizedColors = new int[256];
+
+        double[] accumFrequency = getAccumFrequencies(colorChannel);
+        double minFreq = min(accumFrequency);
+        for(int i = 0; i < equalizedColors.length; i++) {
+            equalizedColors[i] = (int) Math.floor( (accumFrequency[i] - minFreq) / (1.0 - minFreq) * 255 + 0.5 );
+        }
+
+        return equalizedColors;
+    }
+
+    private double[] getAccumFrequencies(ImageColorChannel colorChannel) {
+        double[] accumFrequency = new double[256];
+        double[] relativeFrequency = colorChannel.getFrequency();
+        double accum = 0;
+
+        for(int i = 0; i < accumFrequency.length; i++) {
+            accum += relativeFrequency[i];
+            accumFrequency[i] = accum;
+        }
+
+        return accumFrequency;
+    }
+
+    private double min(double[] array) {
+        double min = Double.MAX_VALUE;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
+    }
+
+
+    public Image cloneImage() {
+        Image image = new Image(width, height, imageType, imageExtension);
+
+        for(int height = 0; height < this.height; height++) {
+            for(int width = 0; width < this.width; width++) {
+                image.setPixelColor(width, height, this.getPixelColor(width, height));
+            }
+        }
+
+        return image;
+    }
+
 
 
     @Override
