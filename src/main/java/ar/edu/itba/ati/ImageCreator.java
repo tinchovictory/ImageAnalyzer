@@ -97,4 +97,14 @@ public class ImageCreator {
             }
         }
     }
+
+    public static Image buildSolidColor(int r, int g, int b) {
+        Image image = new Image(100, 100, ImageType.RGB, ImageExtension.RAW);
+        for(int i = 0; i < 100; i++) {
+            for(int j = 0; j < 100; j++) {
+                image.setPixelColor(i, j, new Color(r, g, b));
+            }
+        }
+        return image;
+    }
 }

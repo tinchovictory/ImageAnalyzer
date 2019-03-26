@@ -104,6 +104,12 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
         return image.getBufferdImage();
     }
 
+    @Override
+    public BufferedImage createSolidImage(int r, int g, int b) {
+        image = ImageCreator.buildSolidColor(r, g, b);
+        return image.getBufferdImage();
+    }
+
     public Color getPixelsMean(Point p1, Point p2) {
         return image.getPixelsMean(p1, p2);
     }

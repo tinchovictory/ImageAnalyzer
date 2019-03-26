@@ -30,6 +30,8 @@ public interface Controller {
 
     BufferedImage createGreyGradient();
 
+    BufferedImage createSolidImage(int r, int g, int b);
+
     Color getPixelsMean(Point p1, Point p2); // p1.x < p2.x
 
     BufferedImage getRedImage();
