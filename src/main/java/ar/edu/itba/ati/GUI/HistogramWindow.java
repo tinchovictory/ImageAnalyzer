@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class HistogramWindow extends VBox {
 
-    public HistogramWindow() {
+    public HistogramWindow(double [] values) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HistogramWindow.fxml"));
         loader.setRoot(this);
@@ -19,6 +19,6 @@ public class HistogramWindow extends VBox {
             System.out.println("Error opening HistogramWindow.fmxl");
             e.printStackTrace();
         }
-        this.getChildren().addAll(new Histogram());
+        this.getChildren().addAll(new Histogram(values));
     }
 }

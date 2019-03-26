@@ -177,4 +177,11 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     public void getNegative() {
          image.setNegative();
     }
+
+    @Override
+    public double[] getHisotgram() {
+        return image.getGreyFrequency();
+    }
+
+
 }

@@ -255,7 +255,7 @@ public class MainWindow {
     private void showHistogram(){
 
        Stage newStage =  new Stage();
-       newStage.setScene(new Scene(new HistogramWindow(controller.get)));
+       newStage.setScene(new Scene(new HistogramWindow(controller.getHisotgram())));
 
        newStage.show();
 

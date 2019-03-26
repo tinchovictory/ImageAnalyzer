@@ -1,8 +1,6 @@
 package ar.edu.itba.ati.GUI;
 
 import javafx.scene.chart.*;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class Histogram extends BarChart {
@@ -34,7 +32,7 @@ public class Histogram extends BarChart {
             while(counter++ < intervalSize && i < values.length){
                 accumulated += values[i++];
             }
-            series.getData().add(new XYChart.Data<String,Double>("",accumulated));
+            series.getData().add(new XYChart.Data<String,Double>(i+"",accumulated));
         }
 
         this.getData().add(series);
