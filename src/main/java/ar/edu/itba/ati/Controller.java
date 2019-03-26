@@ -188,6 +188,13 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
+    public BufferedImage applyContrast(int minContrast, int maxContrast) {
+        Image copy = image.cloneImage();
+        copy.applyContrast(minContrast, maxContrast);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public double[] getHisotgram() {
         return image.getGreyFrequency();
     }

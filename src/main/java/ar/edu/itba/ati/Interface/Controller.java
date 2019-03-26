@@ -54,6 +54,8 @@ public interface Controller {
 
     void getNegative();
 
+    BufferedImage applyContrast(int minContrast, int maxContrast);
+
     double[] getHisotgram();
 
     void setMainWindow(MainWindow mainWindow);
