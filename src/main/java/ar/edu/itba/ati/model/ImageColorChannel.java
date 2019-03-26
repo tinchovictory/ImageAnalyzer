@@ -115,8 +115,8 @@ public class ImageColorChannel {
         }
     }
 
-    public int[] getFrequency() {
-        int[] frequency = new int[256];
+    public double[] getFrequency() {
+        double[] frequency = new double[256];
 
         for(int i = 0; i < pixels.length; i++) {
             for(int j = 0; j < pixels[0].length; j++) {
@@ -126,7 +126,7 @@ public class ImageColorChannel {
         }
 
         for(int i = 0; i < frequency.length; i++) {
-            frequency[i] = (int) ((double) frequency[i] / (width * height));
+            frequency[i] = frequency[i] / (width * height);
         }
 
         return frequency;

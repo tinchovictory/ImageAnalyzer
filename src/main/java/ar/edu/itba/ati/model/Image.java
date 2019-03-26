@@ -212,7 +212,7 @@ public class Image {
         this.blueChannel.applyThreshold(threshold);
     }
 
-    public int[] getGreyFrequency() {
+    public double[] getGreyFrequency() {
         return this.redChannel.getFrequency();
     }
 
@@ -230,8 +230,8 @@ public class Image {
     private int[] getEqualizedColors(ImageColorChannel colorChannel) {
         int[] equalizedColors = new int[256];
 
-        int[] accumFrequency = getAccumFrequecies(colorChannel);
-        int minFreq = min(accumFrequency);
+        double[] accumFrequency = getAccumFrequencies(colorChannel);
+        double minFreq = min(accumFrequency);
         for(int i = 0; i < equalizedColors.length; i++) {
             equalizedColors[i] = (int) Math.floor( (accumFrequency[i] - minFreq) / (1.0 - minFreq) * 255 + 0.5 );
         }
@@ -239,21 +239,21 @@ public class Image {
         return equalizedColors;
     }
 
-    private int[] getAccumFrequecies(ImageColorChannel colorChannel) {
-        int[] accumFrequency = new int[256];
-        int[] relativeFrequency = colorChannel.getFrequency();
-        int accum = 0;
+    private double[] getAccumFrequencies(ImageColorChannel colorChannel) {
+        double[] accumFrequency = new double[256];
+        double[] relativeFrequency = colorChannel.getFrequency();
+        double accum = 0;
 
         for(int i = 0; i < accumFrequency.length; i++) {
             accum += relativeFrequency[i];
             accumFrequency[i] = accum;
         }
 
-        return  accumFrequency;
+        return accumFrequency;
     }
 
-    private int min(int[] array) {
-        int min = 255;
+    private double min(double[] array) {
+        double min = Double.MAX_VALUE;
         for(int i = 0; i < array.length; i++) {
             if(array[i] < min) {
                 min = array[i];
@@ -263,7 +263,7 @@ public class Image {
     }
 
 
-    private Image cloneImage() {
+    public Image cloneImage() {
         Image image = new Image(width, height, imageType, imageExtension);
 
         for(int height = 0; height < this.height; height++) {
