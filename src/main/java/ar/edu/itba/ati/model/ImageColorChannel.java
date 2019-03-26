@@ -21,6 +21,14 @@ public class ImageColorChannel {
         return pixels[x][y];
     }
 
+    public void addToPixel(int x, int y, double value) {
+        pixels[x][y] += value;
+    }
+
+    public void multiplyToPixel(int x, int y, double value) {
+        pixels[x][y] *= value;
+    }
+
     public int getWidth() {
         return width;
     }

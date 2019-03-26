@@ -1,5 +1,7 @@
 package ar.edu.itba.ati.model;
 
+import ar.edu.itba.ati.Utils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -273,6 +275,66 @@ public class Image {
         }
 
         return image;
+    }
+
+    public void applyAditiveGaussNoise(double phi, double mu) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                double noise = Utils.randomGaussNumber(phi, mu);
+                addAllBandsPixel(x, y, noise);
+            }
+        }
+    }
+
+    public void applyMultiplicativeRayleighNoise(double epsilon) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                double noise = Utils.randomRayeighNumber(epsilon);
+                multiplyAllBandsPixel(x, y, noise);
+            }
+        }
+    }
+
+    public void applyMultiplicativeExponentialNoise(double lambda) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                double noise = Utils.randomExponentialNumber(lambda);
+                multiplyAllBandsPixel(x, y, noise);
+            }
+        }
+    }
+
+    private void addAllBandsPixel(int x, int y, double noise) {
+        redChannel.addToPixel(x, y, noise);
+        greenChannel.addToPixel(x, y, noise);
+        blueChannel.addToPixel(x, y, noise);
+    }
+
+    private void multiplyAllBandsPixel(int x, int y, double noise) {
+        redChannel.multiplyToPixel(x, y, noise);
+        greenChannel.multiplyToPixel(x, y, noise);
+        blueChannel.multiplyToPixel(x, y, noise);
+    }
+
+    public void applySaltAndPepperNoise(double deviation) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                double rand = Math.random();
+
+                if(rand < 0.5 - deviation) {
+                    setAllBandsPixel(x, y, 0);
+                }
+                if(rand > 0.5 + deviation) {
+                    setAllBandsPixel(x, y, 255);
+                }
+            }
+        }
+    }
+
+    private void setAllBandsPixel(int x, int y, int color) {
+        redChannel.setPixel(x, y, color);
+        greenChannel.setPixel(x, y, color);
+        blueChannel.setPixel(x, y, color);
     }
 
 
