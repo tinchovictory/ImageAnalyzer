@@ -51,6 +51,7 @@ public interface Controller {
 
     void getNegative();
 
+    double[] getHisotgram();
 
 
 }
