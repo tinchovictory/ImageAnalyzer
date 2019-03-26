@@ -200,4 +200,9 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     public MainWindow getMainWindow() {
         return this.mainWindow;
     }
+
+    @Override
+    public void equalizeImage() {
+        image.equalizeFrequencies();
+    }
 }

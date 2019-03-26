@@ -60,4 +60,6 @@ public interface Controller {
 
     MainWindow getMainWindow();
 
+    void equalizeImage();
+
 }
