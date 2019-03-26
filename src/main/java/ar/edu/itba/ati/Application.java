@@ -16,6 +16,7 @@ public class Application extends javafx.application.Application {
 
         Controller controller = new Controller();
         MainWindow mainWindow = new MainWindow(stage,controller);
+        controller.setMainWindow(mainWindow);
         stage.show();
     }
 

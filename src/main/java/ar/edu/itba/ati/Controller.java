@@ -1,5 +1,6 @@
 package ar.edu.itba.ati;
 
+import ar.edu.itba.ati.GUI.MainWindow;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import org.apache.sanselan.ImageReadException;
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 public class Controller implements ar.edu.itba.ati.Interface.Controller {
     Image image;
+
+    MainWindow mainWindow;
 
     @Override
     public Color getPixelValue(int x, int y) {
@@ -183,5 +186,12 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
         return image.getGreyFrequency();
     }
 
+    public void setMainWindow(MainWindow mainWindow){
+        this.mainWindow = mainWindow;
+    }
 
+    @Override
+    public MainWindow getMainWindow() {
+        return this.mainWindow;
+    }
 }

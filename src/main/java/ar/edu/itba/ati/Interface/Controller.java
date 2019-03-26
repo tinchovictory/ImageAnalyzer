@@ -1,5 +1,7 @@
 package ar.edu.itba.ati.Interface;
 
+import ar.edu.itba.ati.GUI.MainWindow;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -53,5 +55,8 @@ public interface Controller {
 
     double[] getHisotgram();
 
+    void setMainWindow(MainWindow mainWindow);
+
+    MainWindow getMainWindow();
 
 }

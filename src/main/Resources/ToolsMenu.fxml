@@ -6,9 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ToolsMenu"
-            prefHeight="400.0" prefWidth="600.0">
+<fx:root text="Tools"
+         xmlns="http://javafx.com/javafx"
+         type="javafx.scene.control.Menu"
+         xmlns:fx="http://javafx.com/fxml"
+>
+    <MenuItem text="Get Pixel value" onAction="#showGetPixelModal"/>
+    <MenuItem text="Modify pixel value" onAction="#showEditPixelModal"/>
+    <MenuItem text="Get mean" onAction="#showMeanModal"/>
+    <MenuItem text="Show channel bands" onAction="#showChannelBands"/>
+    <MenuItem text="Show histogram" onAction="#showHistogram"/>
 
-</AnchorPane>
+
+</fx:root>

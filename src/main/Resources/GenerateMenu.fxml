@@ -6,13 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root xmlns="http://javafx.com/javafx"
+<fx:root text="Generate"
+         xmlns="http://javafx.com/javafx"
          type="javafx.scene.control.Menu"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ar.edu.itba.ati.GUI.MenuBar.GenerateMenu"
+         xmlns:fx="http://javafx.com/fxml"
             >
-    <MenuItem text="Open Image" onAction="#loadImage"/>
-    <MenuItem text="Open RAW Image" onAction="#openRawImage"/>
-    <MenuItem text="Save Image" onAction="#saveFile"/>
+    <MenuItem text="Circle" onAction="#createCircle"/>
+    <MenuItem text="Square" onAction="#crateSquare"/>
+    <MenuItem text="Color Gradient" onAction="#createColorGradient"/>
+    <MenuItem text="Grey gradient" onAction="#createGreyGradient"/>
+
 
 </fx:root>
