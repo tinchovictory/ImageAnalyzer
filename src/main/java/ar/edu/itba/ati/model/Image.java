@@ -316,6 +316,27 @@ public class Image {
         blueChannel.multiplyToPixel(x, y, noise);
     }
 
+    public void applySaltAndPepperNoise(double deviation) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                double rand = Math.random();
+
+                if(rand < 0.5 - deviation) {
+                    setAllBandsPixel(x, y, 0);
+                }
+                if(rand > 0.5 + deviation) {
+                    setAllBandsPixel(x, y, 255);
+                }
+            }
+        }
+    }
+
+    private void setAllBandsPixel(int x, int y, int color) {
+        redChannel.setPixel(x, y, color);
+        greenChannel.setPixel(x, y, color);
+        blueChannel.setPixel(x, y, color);
+    }
+
 
 
     @Override
