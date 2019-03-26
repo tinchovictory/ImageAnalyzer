@@ -201,6 +201,18 @@ public class ToolsMenu extends Menu {
 
     }
 
+    @FXML
+    private void compressDynamicRange(){
+        controller.compressDynamicRange();
+        controller.getMainWindow().refreshImage();
+    }
+
+    @FXML
+    private void turnNegative(){
+        controller.getNegative();
+        controller.getMainWindow().refreshImage();
+    }
+
 
 
     private class CoordenateBox{

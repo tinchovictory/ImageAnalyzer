@@ -5,7 +5,6 @@ import ar.edu.itba.ati.GUI.MainWindow;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.Buffer;
 
 public interface Controller {
 
