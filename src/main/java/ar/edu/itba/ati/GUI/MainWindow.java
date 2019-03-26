@@ -168,6 +168,7 @@ public class MainWindow {
         iv.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
         return iv;
     }
+    
 
 
     public void refreshImage() {
