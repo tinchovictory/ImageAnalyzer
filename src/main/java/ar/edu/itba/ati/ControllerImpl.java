@@ -1,6 +1,7 @@
 package ar.edu.itba.ati;
 
 import ar.edu.itba.ati.GUI.MainWindow;
+import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
+public class ControllerImpl implements Controller {
     Image image;
 
     MainWindow mainWindow;
@@ -231,12 +232,13 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
-    public BufferedImage applyGaussMask(int size) {
+    public BufferedImage applyGaussMask(int size, double deviation) {
         Image copy = image.cloneImage();
-        Mask mask = new Mask(size, Mask.Type.GAUSS);
+        Mask mask = new Mask(size, Mask.Type.GAUSS, deviation);
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
+
 
     @Override
     public BufferedImage applyBorderMask(int size) {
@@ -260,8 +262,8 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
-    public void setGaussMask(int size) {
-        Mask mask = new Mask(size, Mask.Type.GAUSS);
+    public void setGaussMask(int size, double deviation) {
+        Mask mask = new Mask(size, Mask.Type.GAUSS, deviation);
         image.applyMask(mask);
     }
 

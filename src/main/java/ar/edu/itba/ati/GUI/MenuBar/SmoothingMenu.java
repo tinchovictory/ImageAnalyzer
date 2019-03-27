@@ -2,6 +2,8 @@ package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.GUI.Windows.SliderWithImageWindow;
 import ar.edu.itba.ati.Interface.Controller;
+import ar.edu.itba.ati.Interface.DConsumer;
+import ar.edu.itba.ati.Interface.DFunction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
@@ -45,9 +47,9 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void gaussFilter(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyGaussMask(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setGaussMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyGaussMask(value.intValue(),value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setGaussMask(value.intValue(),value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
     }
 
 

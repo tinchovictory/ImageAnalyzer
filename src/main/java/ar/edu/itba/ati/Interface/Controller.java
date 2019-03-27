@@ -90,7 +90,7 @@ public interface Controller {
 
     BufferedImage applyMedianMask(int size);
 
-    BufferedImage applyGaussMask(int size);
+    BufferedImage applyGaussMask(int size, double deviation);
 
     BufferedImage applyBorderMask(int size);
 
@@ -98,9 +98,10 @@ public interface Controller {
 
     void setMedianMask(int size);
 
-    void setGaussMask(int size);
+    void setGaussMask(int size, double deviation);
 
     void setBorderMask(int size);
+
 
 
 
