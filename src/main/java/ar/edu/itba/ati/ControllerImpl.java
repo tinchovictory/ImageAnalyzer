@@ -215,25 +215,58 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
-    public void applyMeanMask(int size) {
+    public BufferedImage applyMeanMask(int size) {
+        Image copy = image.cloneImage();
         Mask mask = new Mask(size, Mask.Type.MEAN);
-        image.applyMask(mask);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
     }
 
     @Override
-    public void applyMedianMask(int size) {
+    public BufferedImage applyMedianMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.MEDIAN);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyGaussMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.GAUSS);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyBorderMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.BORDERS);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setMeanMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.MEAN);
+        image.applyMask(mask);
+
+    }
+
+    @Override
+    public void setMedianMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEDIAN);
         image.applyMask(mask);
     }
 
     @Override
-    public void applyGaussMask(int size) {
+    public void setGaussMask(int size) {
         Mask mask = new Mask(size, Mask.Type.GAUSS);
         image.applyMask(mask);
     }
 
     @Override
-    public void applyBorderMask(int size) {
+    public void setBorderMask(int size) {
         Mask mask = new Mask(size, Mask.Type.BORDERS);
         image.applyMask(mask);
     }

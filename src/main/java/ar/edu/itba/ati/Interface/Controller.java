@@ -86,13 +86,23 @@ public interface Controller {
 
     void setSaltAndPepperNoise(double deviation);
 
-    void applyMeanMask(int size);
+    BufferedImage applyMeanMask(int size);
 
-    void applyMedianMask(int size);
+    BufferedImage applyMedianMask(int size);
 
-    void applyGaussMask(int size);
+    BufferedImage applyGaussMask(int size);
 
-    void applyBorderMask(int size);
+    BufferedImage applyBorderMask(int size);
+
+    void setMeanMask(int size);
+
+    void setMedianMask(int size);
+
+    void setGaussMask(int size);
+
+    void setBorderMask(int size);
+
+
 
 }
 

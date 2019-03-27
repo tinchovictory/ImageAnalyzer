@@ -45,6 +45,12 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     private Stage stage;
 
+    private double min;
+
+    private double increment;
+
+    private double previousValue;
+
     public SliderWithImageWindow(Controller controller,Function<Double,BufferedImage> sliderDragged , Consumer<Double> setClicked,double min, double max, double increment) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Contrast.fxml"));
@@ -60,10 +66,20 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         slider.setBlockIncrement(increment);
         slider.setMax(max);
         slider.setMin(min);
+        slider.setValue(min);
         slider.setShowTickMarks(true);
-        slider.setShowTickLabels(true);
+        slider.setShowTickLabels(false);
+        slider.setSnapToTicks(true);
+        slider.setMajorTickUnit(increment);
+        slider.setMinorTickCount(0);
+        slider.setValue(min);
+        this.previousValue = 0;
+
         this.sliderDragged =sliderDragged;
         this.setClicked = setClicked;
+        this.min= min;
+        this.increment = increment;
+
 
 
     }
@@ -85,15 +101,26 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        slider.setOnMouseDragged(e->{
-            BufferedImage tempimage = sliderDragged.apply(slider.getValue());
-            valueLabel.setText("Value: "+slider.getValue());
-            image.setImage(SwingFXUtils.toFXImage(tempimage, null));
+//        slider.valueProperty().addListener((obs, oldval, newVal) ->{
+//                    double newValue = (Math.round( newVal.doubleValue()/increment )*increment);
+//                    slider.setValue(newValue);s
+//                    System.out.println("New Value"+newVal);
+//                }
+//                );
+        slider.setOnMouseDragged((e)->{
+
+            double value =(Math.round( slider.getValue()/increment )*increment)+min;
+            if(value!=previousValue) {
+                BufferedImage tempimage = sliderDragged.apply(value);
+                valueLabel.setText("Value: " + value);
+                image.setImage(SwingFXUtils.toFXImage(tempimage, null));
+            }
         });
 
         setButton.setOnAction(e-> {
-            setClicked.accept(slider.getValue());
-            valueLabel.setText("Value: "+slider.getValue());
+            double value =(Math.round( slider.getValue()/increment )*increment)+min;
+            setClicked.accept(value);
+            valueLabel.setText("Value: "+value);
             controller.getMainWindow().refreshImage();
             Stage stage = (Stage) setButton.getScene().getWindow();
             stage.close();

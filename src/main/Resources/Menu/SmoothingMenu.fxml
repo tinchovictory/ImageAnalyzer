@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+
+
+<fx:root text="Smoothing" id="SmoothingMenu" type="javafx.scene.control.Menu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" >
+    <MenuItem text="Mean filter" onAction="#meanFilter"/>
+    <MenuItem text="Median filter" onAction="#medianFilter"/>
+    <MenuItem text="Gauss Filter" onAction="#gaussFilter"/>
+</fx:root>
