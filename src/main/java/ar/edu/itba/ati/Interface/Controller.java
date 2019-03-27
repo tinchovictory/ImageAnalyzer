@@ -52,6 +52,8 @@ public interface Controller {
 
     void compressDynamicRange();
 
+    void powerFunction(double gamma);
+
     void getNegative();
 
     BufferedImage applyContrast(int minContrast, int maxContrast);

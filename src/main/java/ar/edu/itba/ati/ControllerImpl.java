@@ -184,6 +184,11 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
+    public void powerFunction(double gamma) {
+        image.powerFunction(gamma);
+    }
+
+    @Override
     public void getNegative() {
          image.setNegative();
     }

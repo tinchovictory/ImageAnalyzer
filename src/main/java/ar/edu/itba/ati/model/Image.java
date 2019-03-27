@@ -209,6 +209,12 @@ public class Image {
         this.blueChannel.compressDynamicRange();
     }
 
+    public void powerFunction(double gamma) {
+        this.redChannel.powerFunction(gamma);
+        this.greenChannel.powerFunction(gamma);
+        this.blueChannel.powerFunction(gamma);
+    }
+
     public void setNegative(){
         this.redChannel.setNegative();
         this.greenChannel.setNegative();

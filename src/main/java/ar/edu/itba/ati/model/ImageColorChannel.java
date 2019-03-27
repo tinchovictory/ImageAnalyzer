@@ -92,6 +92,16 @@ public class ImageColorChannel {
         }
     }
 
+    public void powerFunction(double gamma) {
+        double c = Math.pow(255, 1 - gamma);
+
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                this.pixels[i][j] = (int) ( c * Math.pow(pixels[i][j], gamma) );
+            }
+        }
+    }
+
     public void setNegative(){
         this.pixels=this.getNegative().pixels;
     }
