@@ -227,8 +227,8 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
-    public void applyGaussMask(int size) {
-        Mask mask = new Mask(size, Mask.Type.GAUSS);
+    public void applyGaussMask(int size, double deviation) {
+        Mask mask = new Mask(size, Mask.Type.GAUSS, deviation);
         image.applyMask(mask);
     }
 

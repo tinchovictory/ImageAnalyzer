@@ -90,7 +90,7 @@ public interface Controller {
 
     void applyMedianMask(int size);
 
-    void applyGaussMask(int size);
+    void applyGaussMask(int size, double deviation);
 
     void applyBorderMask(int size);
 

@@ -11,11 +11,17 @@ public class Mask {
     private int size;
     private Type type;
     private int borderLength;
+    private double deviation;
 
     public Mask(int size, Type type) {
+        this(size, type, 0);
+    }
+
+    public Mask(int size, Type type, double deviation) {
         this.size = size;
         this.type = type;
         this.borderLength = (size - 1) / 2;
+        this.deviation = deviation;
     }
 
     public ImageColorChannel applyTo(ImageColorChannel originalChannel) {
@@ -72,7 +78,7 @@ public class Mask {
             case MEDIAN:
                 return null;
             case GAUSS:
-                return generateGaussPoundedMask();
+                return generateGaussPoundedMask(deviation);
             case BORDERS:
                 return generateBordersPoundedMask();
         }
@@ -108,9 +114,22 @@ public class Mask {
         return pounds;
     }
 
-    private double[][] generateGaussPoundedMask() {
+    private double[][] generateGaussPoundedMask(double deviation) {
         double[][] pounds = new double[size][size];
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                pounds[i][j] = getGaussianWights(i - 1, j - 1, deviation);
+            }
+        }
 
         return pounds;
     }
+
+    private double getGaussianWights(int x, int y, double deviation) {
+        double a = 1.0 / ( 2 * Math.PI * Math.pow(deviation, 2));
+        double b = ( Math.pow(x, 2) + Math.pow(y, 2) ) / Math.pow(deviation, 2);
+        return a * Math.exp( - b );
+    }
+
 }
