@@ -11,7 +11,7 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     public MenuBar(Controller controller){
         this.controller = controller;
 
-        this.getMenus().addAll(new FileMenu(controller),new GenerateMenu(controller)/*,new SelectionMenu()*/, new ToolsMenu(controller));
+        this.getMenus().addAll(new FileMenu(controller),new GenerateMenu(controller)/*,new SelectionMenu()*/, new ToolsMenu(controller), new OperationsMenu(controller));
 
     }
 

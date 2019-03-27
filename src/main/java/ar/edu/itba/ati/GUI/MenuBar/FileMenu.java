@@ -29,21 +29,6 @@ public class FileMenu extends Menu {
 
     }
 
-//    public javafx.scene.control.MenuBar getMenuBar() {
-//
-//        Menu file = new Menu("File");
-//
-//        MenuItem openImage = new MenuItem("Open Image");
-//        openImage.setOnAction(e -> );
-//
-//        MenuItem openImageRAW = new MenuItem("Open RAW Image");
-//        openImageRAW.setOnAction(e -> openRawImage());
-//        MenuItem saveImage = new MenuItem("Save Image");
-//        saveImage.setOnAction(e -> );
-//
-//        file.getItems().addAll(openImage, openImageRAW, saveImage);
-//
-//    }
 
     @FXML
     private void loadImage() {

@@ -156,6 +156,9 @@ public class MainWindow {
         }
     }
 
+    public Stage getStage(){
+        return stage;
+    }
     public void saveFile() {
         FileChooser chooser = new FileChooser();
         File file = chooser.showSaveDialog(stage);
