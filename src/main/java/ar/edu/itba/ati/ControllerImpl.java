@@ -179,6 +179,11 @@ public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     }
 
     @Override
+    public void multiplyBy(int value) {
+        image.multiplyBy(value);
+    }
+
+    @Override
     public void compressDynamicRange() {
         image.compressDynamicRange();
     }

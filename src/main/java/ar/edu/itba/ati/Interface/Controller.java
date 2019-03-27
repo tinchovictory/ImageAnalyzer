@@ -50,6 +50,8 @@ public interface Controller {
 
     void substractImage(File image);
 
+    void multiplyBy(int value);
+
     void compressDynamicRange();
 
     void powerFunction(double gamma);
