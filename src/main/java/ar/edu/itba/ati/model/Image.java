@@ -295,8 +295,11 @@ public class Image {
     public void applyAditiveGaussNoise(double phi, double mu) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                double noise = Utils.randomGaussNumber(phi, mu);
-                addAllBandsPixel(x, y, noise);
+                if(Math.random() < 0.5) {
+                    double noise = Utils.randomGaussNumber(phi * 255, mu);
+                    System.out.println(noise);
+                    addAllBandsPixel(x, y, noise);
+                }
             }
         }
     }
@@ -304,8 +307,10 @@ public class Image {
     public void applyMultiplicativeRayleighNoise(double epsilon) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                double noise = Utils.randomRayeighNumber(epsilon);
-                multiplyAllBandsPixel(x, y, noise);
+                if(Math.random() < 0.5) {
+                    double noise = Utils.randomRayeighNumber(epsilon);
+                    multiplyAllBandsPixel(x, y, noise);
+                }
             }
         }
     }
@@ -313,8 +318,10 @@ public class Image {
     public void applyMultiplicativeExponentialNoise(double lambda) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                double noise = Utils.randomExponentialNumber(lambda);
-                multiplyAllBandsPixel(x, y, noise);
+                if(Math.random() < 0.5) {
+                    double noise = Utils.randomExponentialNumber(lambda);
+                    multiplyAllBandsPixel(x, y, noise);
+                }
             }
         }
     }
@@ -336,10 +343,10 @@ public class Image {
             for(int x = 0; x < width; x++) {
                 double rand = Math.random();
 
-                if(rand < 0.5 - deviation) {
+                if(rand < 0.5 - deviation/2) {
                     setAllBandsPixel(x, y, 0);
                 }
-                if(rand > 0.5 + deviation) {
+                if(rand > 0.5 + deviation/2) {
                     setAllBandsPixel(x, y, 255);
                 }
             }

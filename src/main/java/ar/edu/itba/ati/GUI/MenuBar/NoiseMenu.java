@@ -30,8 +30,8 @@ public class NoiseMenu extends Menu {
 
     @FXML
     private void aditiveGaussNoise(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyAditiveGaussNoise(value,255-value);
-        Consumer<Double> setClicked = (value) -> controller.setAditiveGaussNoise(value,255-value);
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyAditiveGaussNoise(value,0);
+        Consumer<Double> setClicked = (value) -> controller.setAditiveGaussNoise(value,0);
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05);
     }
 
