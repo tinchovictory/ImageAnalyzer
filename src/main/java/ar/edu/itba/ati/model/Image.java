@@ -107,6 +107,19 @@ public class Image {
         return new HSVImage(this);
     }
 
+    public void toGrayScale() {
+        HSVImage hsvImage = this.toHSV();
+        ImageColorChannel valueChannel = hsvImage.getValueChannel();
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                int greyColor = valueChannel.getPixel(x, y);
+                Color color = new Color(greyColor, greyColor, greyColor);
+                setPixelColor(x, y, color);
+            }
+        }
+    }
+
     public BufferedImage getRedImage() {
         BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
 
@@ -215,7 +228,9 @@ public class Image {
     }
 
     public double[] getGreyFrequency() {
-        return this.redChannel.getFrequency();
+        Image copyImage = this.cloneImage();
+        copyImage.toGrayScale();
+        return copyImage.redChannel.getFrequency();
     }
 
     public void equalizeFrequencies() {

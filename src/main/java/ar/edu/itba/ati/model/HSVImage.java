@@ -89,4 +89,8 @@ public class HSVImage {
 
         return bufferedImage;
     }
+
+    public ImageColorChannel getValueChannel() {
+        return this.value;
+    }
 }
