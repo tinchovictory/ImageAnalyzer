@@ -66,6 +66,12 @@ public interface Controller {
 
     void equalizeImage();
 
+    void applyMeanMask(int size);
 
+    void applyMedianMask(int size);
+
+    void applyGaussMask(int size);
+
+    void applyBorderMask(int size);
 
 }

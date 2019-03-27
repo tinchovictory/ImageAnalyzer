@@ -3,6 +3,7 @@ package ar.edu.itba.ati;
 import ar.edu.itba.ati.GUI.MainWindow;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
+import ar.edu.itba.ati.model.Mask;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
 
@@ -211,6 +212,30 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     @Override
     public void equalizeImage() {
         image.equalizeFrequencies();
+    }
+
+    @Override
+    public void applyMeanMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.MEAN);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void applyMedianMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.MEDIAN);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void applyGaussMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.GAUSS);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void applyBorderMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.BORDERS);
+        image.applyMask(mask);
     }
 
     @Override

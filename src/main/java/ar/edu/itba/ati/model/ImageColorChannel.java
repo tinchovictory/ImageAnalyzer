@@ -154,4 +154,16 @@ public class ImageColorChannel {
         }
     }
 
+    public ImageColorChannel cloneChannel() {
+        ImageColorChannel newChannel = new ImageColorChannel(width, height);
+
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                newChannel.setPixel(x, y, getPixel(x, y));
+            }
+        }
+
+        return newChannel;
+    }
+
 }

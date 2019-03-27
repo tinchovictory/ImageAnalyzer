@@ -353,6 +353,12 @@ public class Image {
     }
 
 
+    public void applyMask(Mask mask) {
+        redChannel = mask.applyTo(redChannel);
+        greenChannel = mask.applyTo(greenChannel);
+        blueChannel = mask.applyTo(blueChannel);
+    }
+
 
     @Override
     public String toString() {
