@@ -46,6 +46,8 @@ public interface Controller {
 
     BufferedImage getValueImage();
 
+    BufferedImage getGreyImage();
+
     void addImage(File image);
 
     void substractImage(File image);

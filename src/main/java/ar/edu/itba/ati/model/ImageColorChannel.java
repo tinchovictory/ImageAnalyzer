@@ -27,6 +27,9 @@ public class ImageColorChannel {
         if(pixels[x][y] > 255) {
             pixels[x][y] = 255;
         }
+        if(pixels[x][y] < 0) {
+            pixels[x][y] = 0;
+        }
     }
 
     public void multiplyToPixel(int x, int y, double value) {

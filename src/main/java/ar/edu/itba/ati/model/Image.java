@@ -327,9 +327,8 @@ public class Image {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 if(Math.random() < 0.5) {
-                    double noise = Utils.randomGaussNumber(phi * 255, mu);
-                    System.out.println(noise);
-                    addAllBandsPixel(x, y, noise);
+                    double noise = Utils.randomGaussNumber(phi, mu);
+                    addAllBandsPixel(x, y, noise * 255);
                 }
             }
         }
