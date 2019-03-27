@@ -212,4 +212,9 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     public void equalizeImage() {
         image.equalizeFrequencies();
     }
+
+    @Override
+    public void setContrast(int minContrast, int maxContrast) {
+        image.applyContrast(minContrast,maxContrast);
+    }
 }

@@ -56,6 +56,8 @@ public interface Controller {
 
     BufferedImage applyContrast(int minContrast, int maxContrast);
 
+    void setContrast(int minContrast, int maxContrast);
+
     double[] getHisotgram();
 
     void setMainWindow(MainWindow mainWindow);
@@ -63,5 +65,7 @@ public interface Controller {
     MainWindow getMainWindow();
 
     void equalizeImage();
+
+
 
 }

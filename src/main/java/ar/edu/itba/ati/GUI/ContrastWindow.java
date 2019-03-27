@@ -4,9 +4,11 @@ import ar.edu.itba.ati.Interface.Controller;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 import java.awt.image.BufferedImage;
@@ -19,6 +21,9 @@ public class ContrastWindow extends VBox {
 
     @FXML
     ImageView image;
+
+    @FXML
+    Button setButton;
 
     Controller controller;
 
@@ -37,11 +42,19 @@ public class ContrastWindow extends VBox {
         slider.setBlockIncrement(5.0);
         slider.setMax(255);
         slider.setMin(0);
-
-        slider.setOnDragDetected(e->{
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setOnMouseDragged(e->{
             BufferedImage tempimage = controller.applyContrast((int)slider.getValue(),255-(int)slider.getValue());
 
             image.setImage(SwingFXUtils.toFXImage(tempimage, null));
+        });
+
+        setButton.setOnAction(e-> {
+            controller.setContrast((int)slider.getValue(),255-(int)slider.getValue());
+            controller.getMainWindow().refreshImage();
+            Stage stage = (Stage) setButton.getScene().getWindow();
+            stage.close();
         });
 
     }
