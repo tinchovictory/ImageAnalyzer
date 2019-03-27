@@ -108,12 +108,16 @@ public class ImageColorChannel {
     }
 
     public void applyContrast(int minContrast, int maxContrast) {
+        double minM = 70.0 / minContrast;
+        double maxM = 76.0 / ( 256 - maxContrast );
+        double maxB = 256 - 256 * maxM;
+
         for(int i = 0; i < pixels.length; i++) {
             for(int j = 0; j < pixels[0].length; j++) {
-                if(this.pixels[i][j] <= minContrast) {
-                    this.pixels[i][j] *= 0.3; // TODO: Check function
-                } else if(this.pixels[i][j] >= maxContrast) {
-                    this.pixels[i][j] *= 0.7; // TODO; Check function
+                if(this.pixels[i][j] < minContrast) {
+                    this.pixels[i][j] *= minM;
+                } else if(this.pixels[i][j] > maxContrast) {
+                    this.pixels[i][j] = (int) (this.pixels[i][j] * maxM + maxB);
                 }
             }
         }
