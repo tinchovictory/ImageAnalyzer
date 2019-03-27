@@ -150,6 +150,12 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage getGreyImage() {
+        image.toGrayScale();
+        return image.getBufferdImage();
+    }
+
+    @Override
     public void addImage(File imageFile) {
         Image image2;
         try{
