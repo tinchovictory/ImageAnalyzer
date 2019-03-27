@@ -14,7 +14,7 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws Exception, IOException, ImageReadException {
 
 
-        Controller controller = new Controller();
+        ControllerImpl controller = new ControllerImpl();
         MainWindow mainWindow = new MainWindow(stage,controller);
         controller.setMainWindow(mainWindow);
         stage.show();

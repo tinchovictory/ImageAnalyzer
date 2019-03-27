@@ -20,6 +20,7 @@
     <MenuItem text="Turn negative" onAction="#turnNegative"/>
     <MenuItem text="Modify Contrast" onAction="#modifyContrast"/>
     <MenuItem text="Equalize Image" onAction="#equalizeImage"/>
+    <MenuItem text="Modify Threshold" onAction="#modifyThreshold"/>
 
 
 </fx:root>

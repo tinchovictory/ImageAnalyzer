@@ -18,6 +18,7 @@
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
          </VBox.margin>
       </Slider>
+      <Label fx:id="valueLabel" text="Value:0" />
       <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <HBox alignment="CENTER" spacing="40.0">
          <children>

@@ -1,7 +1,7 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.Interface.Controller;
-import ar.edu.itba.ati.GUI.OpenRawImage;
+import ar.edu.itba.ati.GUI.Windows.OpenRawImage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

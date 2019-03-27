@@ -1,4 +1,4 @@
-package ar.edu.itba.ati.GUI;
+package ar.edu.itba.ati.GUI.Windows;
 
 import ar.edu.itba.ati.Interface.Controller;
 import javafx.embed.swing.SwingFXUtils;

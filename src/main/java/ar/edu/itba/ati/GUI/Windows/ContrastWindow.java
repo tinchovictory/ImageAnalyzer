@@ -1,4 +1,4 @@
-package ar.edu.itba.ati.GUI;
+package ar.edu.itba.ati.GUI.Windows;
 
 import ar.edu.itba.ati.Interface.Controller;
 import javafx.embed.swing.SwingFXUtils;
@@ -36,7 +36,7 @@ public class ContrastWindow extends VBox {
         try {
             loader.load();
         } catch(IOException e) {
-            System.out.println("Error opening HistogramWindow.fmxl");
+            System.out.println("Error opening Contrast.fmxl");
             e.printStackTrace();
         }
         slider.setBlockIncrement(5.0);

@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Controller implements ar.edu.itba.ati.Interface.Controller {
+public class ControllerImpl implements ar.edu.itba.ati.Interface.Controller {
     Image image;
 
     MainWindow mainWindow;
@@ -216,5 +216,65 @@ public class Controller implements ar.edu.itba.ati.Interface.Controller {
     @Override
     public void setContrast(int minContrast, int maxContrast) {
         image.applyContrast(minContrast,maxContrast);
+    }
+
+    @Override
+    public BufferedImage applyThreshold(int threshold) {
+        Image copy = image.cloneImage();
+        copy.applyThreshold(threshold);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setThreshold(int threshold) {
+        image.applyThreshold(threshold);
+    }
+
+    @Override
+    public BufferedImage applyAditiveGaussNoise(double phi, double mu) {
+        Image copy = image.cloneImage();
+        copy.applyAditiveGaussNoise(phi,mu);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyMultiplicativeRayleighNoise(double epsilon) {
+        Image copy = image.cloneImage();
+        copy.applyMultiplicativeRayleighNoise(epsilon);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyMultiplicativeExponentialNoise(double lambda) {
+        Image copy = image.cloneImage();
+        copy.applyMultiplicativeExponentialNoise(lambda);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applySaltAndPepperNoise(double deviation) {
+        Image copy = image.cloneImage();
+        copy.applySaltAndPepperNoise(deviation);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setAditiveGaussNoise(double phi, double mu) {
+        image.applyAditiveGaussNoise(phi,mu);
+    }
+
+    @Override
+    public void setMultiplicativeRayleighNoise(double epsilon) {
+        image.applyMultiplicativeRayleighNoise(epsilon);
+    }
+
+    @Override
+    public void setMultiplicativeExponentialNoise(double lambda) {
+        image.applyMultiplicativeExponentialNoise(lambda);
+    }
+
+    @Override
+    public void setSaltAndPepperNoise(double deviation) {
+        image.applySaltAndPepperNoise(deviation);
     }
 }
