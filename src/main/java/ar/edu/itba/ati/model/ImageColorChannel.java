@@ -92,6 +92,16 @@ public class ImageColorChannel {
         }
     }
 
+    public void powerFunction(double gamma) {
+        double c = Math.pow(255, 1 - gamma);
+
+        for(int i = 0; i < pixels.length; i++) {
+            for(int j = 0; j < pixels[0].length; j++) {
+                this.pixels[i][j] = (int) ( c * Math.pow(pixels[i][j], gamma) );
+            }
+        }
+    }
+
     public void setNegative(){
         this.pixels=this.getNegative().pixels;
     }
@@ -174,4 +184,31 @@ public class ImageColorChannel {
         return newChannel;
     }
 
+    public int getHighestPixel() {
+        int highest = 0;
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                if(getPixel(x, y) > highest) {
+                    highest = getPixel(x, y);
+                }
+            }
+        }
+        return highest;
+    }
+
+    public void multiplyBy(int value) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                pixels[x][y] *= value;
+            }
+        }
+    }
+
+    public void transformPixelsWithMax(int max) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                pixels[x][y] = (int) ( (double) pixels[x][y] / max * 256);
+            }
+        }
+    }
 }

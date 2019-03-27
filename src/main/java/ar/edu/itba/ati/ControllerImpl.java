@@ -180,8 +180,18 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public void multiplyBy(int value) {
+        image.multiplyBy(value);
+    }
+
+    @Override
     public void compressDynamicRange() {
         image.compressDynamicRange();
+    }
+
+    @Override
+    public void powerFunction(double gamma) {
+        image.powerFunction(gamma);
     }
 
     @Override

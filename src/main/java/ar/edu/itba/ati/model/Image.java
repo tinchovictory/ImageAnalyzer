@@ -203,10 +203,41 @@ public class Image {
         this.blueChannel.substract(other.blueChannel);
     }
 
+    public void multiplyBy(int value) {
+        this.redChannel.multiplyBy(value);
+        this.greenChannel.multiplyBy(value);
+        this.blueChannel.multiplyBy(value);
+
+        int highestPixel = getHighestPixel();
+
+        this.redChannel.transformPixelsWithMax(highestPixel);
+        this.greenChannel.transformPixelsWithMax(highestPixel);
+        this.blueChannel.transformPixelsWithMax(highestPixel);
+    }
+
+    private int getHighestPixel() {
+        int highest = redChannel.getHighestPixel();
+        int greenHighest = greenChannel.getHighestPixel();
+        int blueHighest = blueChannel.getHighestPixel();
+        if(greenHighest > highest) {
+            highest = greenHighest;
+        }
+        if(blueHighest > highest) {
+            highest = blueHighest;
+        }
+        return highest;
+    }
+
     public void compressDynamicRange(){
         this.redChannel.compressDynamicRange();
         this.greenChannel.compressDynamicRange();
         this.blueChannel.compressDynamicRange();
+    }
+
+    public void powerFunction(double gamma) {
+        this.redChannel.powerFunction(gamma);
+        this.greenChannel.powerFunction(gamma);
+        this.blueChannel.powerFunction(gamma);
     }
 
     public void setNegative(){
