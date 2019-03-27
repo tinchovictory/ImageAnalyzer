@@ -1,9 +1,6 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
-import ar.edu.itba.ati.GUI.ChannelBandsWindow;
-import ar.edu.itba.ati.GUI.ContrastWindow;
-import ar.edu.itba.ati.GUI.HistogramWindow;
-import ar.edu.itba.ati.GUI.MainWindow;
+import ar.edu.itba.ati.GUI.Windows.*;
 import ar.edu.itba.ati.Interface.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +18,10 @@ import javafx.stage.Stage;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class ToolsMenu extends Menu {
 
@@ -226,6 +226,14 @@ public class ToolsMenu extends Menu {
     private void equalizeImage(){
         controller.equalizeImage();
         controller.getMainWindow().refreshImage();
+    }
+
+    @FXML
+    private void modifyThreshold(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyThreshold(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setThreshold(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0);
+
     }
 
 

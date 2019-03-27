@@ -1,5 +1,6 @@
-package ar.edu.itba.ati.GUI;
+package ar.edu.itba.ati.GUI.Windows;
 
+import ar.edu.itba.ati.GUI.Histogram;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

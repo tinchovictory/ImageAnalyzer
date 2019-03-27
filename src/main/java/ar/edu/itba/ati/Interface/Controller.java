@@ -66,6 +66,26 @@ public interface Controller {
 
     void equalizeImage();
 
+    BufferedImage applyThreshold(int threshold);
+
+    void setThreshold(int threshold);
+
+    BufferedImage applyAditiveGaussNoise(double phi, double mu);
+
+    BufferedImage applyMultiplicativeRayleighNoise(double epsilon);
+
+    BufferedImage applyMultiplicativeExponentialNoise(double lambda);
+
+    BufferedImage applySaltAndPepperNoise(double deviation);
+
+    void setAditiveGaussNoise(double phi, double mu);
+
+    void setMultiplicativeRayleighNoise(double epsilon);
+
+    void setMultiplicativeExponentialNoise(double lambda);
+
+    void setSaltAndPepperNoise(double deviation);
+
     void applyMeanMask(int size);
 
     void applyMedianMask(int size);
@@ -75,3 +95,4 @@ public interface Controller {
     void applyBorderMask(int size);
 
 }
+

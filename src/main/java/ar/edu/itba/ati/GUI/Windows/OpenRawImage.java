@@ -1,5 +1,6 @@
-package ar.edu.itba.ati.GUI;
+package ar.edu.itba.ati.GUI.Windows;
 
+import ar.edu.itba.ati.GUI.MainWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
