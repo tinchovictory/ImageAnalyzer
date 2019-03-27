@@ -6,12 +6,9 @@ import java.awt.image.BufferedImage;
 public class HSVImage {
     private ImageType imageType;
     private ImageExtension imageExtension;
-    //private ImageColorChannel hue;
-    //private ImageColorChannel saturation;
-    //private ImageColorChannel value;
-    private float[][] hue;
-    private float[][] saturation;
-    private float[][] value;
+    private ImageColorChannel hue;
+    private ImageColorChannel saturation;
+    private ImageColorChannel value;
     private int width;
     private int height;
 
@@ -21,12 +18,9 @@ public class HSVImage {
         this.imageExtension = image.getImageExtension();
         this.width = image.getWidth();
         this.height = image.getHeight();
-//        this.hue = new ImageColorChannel(width, height);
-//        this.saturation = new ImageColorChannel(width, height);
-//        this.value = new ImageColorChannel(width, height);
-        this.hue = new float[width][height];
-        this.saturation = new float[width][height];
-        this.value = new float[width][height];
+        this.hue = new ImageColorChannel(width, height);
+        this.saturation = new ImageColorChannel(width, height);
+        this.value = new ImageColorChannel(width, height);
 
         fillColorChannelsFrom(image);
     }
@@ -38,9 +32,9 @@ public class HSVImage {
                 float[] hsv = new float[3];
                 hsv = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), hsv);
 
-                hue[x][y] = hsv[0];
-                saturation[x][y] = hsv[1];
-                value[x][y] = hsv[2];
+                hue.setPixel(x, y, (int) (hsv[0] * 255));
+                saturation.setPixel(x, y, (int) (hsv[1] * 255));
+                value.setPixel(x, y, (int) (hsv[2] * 255));
             }
         }
 
@@ -58,7 +52,7 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                int hueColor = (int) (hue[x][y] * 255);
+                int hueColor = hue.getPixel(x, y);
                 Color color = new Color(hueColor, hueColor, hueColor);
                 bufferedImage.setRGB(x, y, color.getRGB());
             }
@@ -72,7 +66,7 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                int saturationColor = (int) (saturation[x][y] * 255);
+                int saturationColor = saturation.getPixel(x, y);
                 Color color = new Color(saturationColor, saturationColor, saturationColor);
                 bufferedImage.setRGB(x, y, color.getRGB());
             }
@@ -87,7 +81,7 @@ public class HSVImage {
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                int valueColor = (int) (value[x][y] * 255);
+                int valueColor = value.getPixel(x, y);
                 Color color = new Color(valueColor, valueColor, valueColor);
                 bufferedImage.setRGB(x, y, color.getRGB());
             }
