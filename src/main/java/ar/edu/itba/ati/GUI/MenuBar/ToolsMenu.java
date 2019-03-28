@@ -219,7 +219,7 @@ public class ToolsMenu extends Menu {
     @FXML
     private void modifyContrast(){
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyContrast(value.intValue(),value2.intValue());
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.applyContrast(value.intValue(),value2.intValue());
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setContrast(value.intValue(),value2.intValue());
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,5);
 
     }
@@ -242,7 +242,7 @@ public class ToolsMenu extends Menu {
     private void powerFunction(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.powerFunctionBuffered(value);
         Consumer<Double> setClicked = (value) -> controller.powerFunction(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,1,0.01);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,5,0.01);
     }
 
     @FXML
