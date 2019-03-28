@@ -115,7 +115,6 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         this.min= min;
         this.increment = increment;
         this.doubleSlider = doubleSlider;
-        System.out.println(this.doubleSlider);
 
     }
 
@@ -160,6 +159,7 @@ public class SliderWithImageWindow extends VBox implements Initializable {
             if (value != previousValue) {
                 BufferedImage tempimage = sliderDraggedD.apply(value,value2);
                 valueLabel.setText("Value: " + value);
+                secondValueLabel.setText("Value: "+value2);
                 image.setImage(SwingFXUtils.toFXImage(tempimage, null));
             }
         });
@@ -171,6 +171,7 @@ public class SliderWithImageWindow extends VBox implements Initializable {
             if (value != previousValue) {
                 BufferedImage tempimage = sliderDraggedD.apply(value,value2);
                 valueLabel.setText("Value: " + value);
+                secondValueLabel.setText("Value: "+value2);
                 image.setImage(SwingFXUtils.toFXImage(tempimage, null));
             }
         });
@@ -211,8 +212,6 @@ public class SliderWithImageWindow extends VBox implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!doubleSlider) {
-
-            System.out.println("DOUBLE SLIDER FALSE");
 
         }else{
 
