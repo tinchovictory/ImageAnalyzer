@@ -11,8 +11,8 @@
          type="javafx.scene.control.Menu"
          xmlns:fx="http://javafx.com/fxml"
 >
-    <MenuItem text="Aditive Gauss Noise" onAction="#aditiveGaussNoise"/>
-    <MenuItem text="Multiplicative Rayleig hNoise" onAction="#multiplicativeRayleighNoise"/>
+    <MenuItem text="Additive Gauss Noise" onAction="#aditiveGaussNoise"/>
+    <MenuItem text="Multiplicative Rayleigh Noise" onAction="#multiplicativeRayleighNoise"/>
     <MenuItem text="MultiplicativeExponentialNoise" onAction="#multiplicativeExponentialNoise"/>
     <MenuItem text="Salt and Pepper" onAction="#saltAndPepper"/>
 

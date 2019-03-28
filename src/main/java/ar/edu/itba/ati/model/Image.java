@@ -326,10 +326,10 @@ public class Image {
     public void applyAditiveGaussNoise(double phi, double mu) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                if(Math.random() < 0.5) {
+               // if(Math.random() < 0.5) {
                     double noise = Utils.randomGaussNumber(phi, mu);
                     addAllBandsPixel(x, y, noise * 255);
-                }
+               // }
             }
         }
     }

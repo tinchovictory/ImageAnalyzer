@@ -3,15 +3,11 @@ package ar.edu.itba.ati.GUI.MenuBar;
 import ar.edu.itba.ati.GUI.Windows.SliderWithImageWindow;
 import ar.edu.itba.ati.Interface.Controller;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
