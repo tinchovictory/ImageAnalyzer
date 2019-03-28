@@ -221,9 +221,6 @@ public class ToolsMenu extends Menu {
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyContrast(value.intValue(),value2.intValue());
         DConsumer<Double,Double> setClicked = (value, value2) -> controller.applyContrast(value.intValue(),value2.intValue());
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,5);
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene( new ContrastWindow(controller)));
-        newStage.show();
 
     }
 
