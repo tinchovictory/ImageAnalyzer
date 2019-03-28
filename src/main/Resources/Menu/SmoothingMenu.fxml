@@ -8,4 +8,5 @@
     <MenuItem text="Mean filter" onAction="#meanFilter"/>
     <MenuItem text="Median filter" onAction="#medianFilter"/>
     <MenuItem text="Gauss Filter" onAction="#gaussFilter"/>
+    <MenuItem text="Border Filter" onAction="#borderFIlter"/>
 </fx:root>

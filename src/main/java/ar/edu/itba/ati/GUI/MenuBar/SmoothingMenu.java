@@ -52,5 +52,11 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
     }
 
+    @FXML
+    private void borderFIlter(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyBorderMask(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setBorderMask(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+    }
 
 }
