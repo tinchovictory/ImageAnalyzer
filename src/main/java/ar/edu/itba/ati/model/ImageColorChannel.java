@@ -210,7 +210,7 @@ public class ImageColorChannel {
     public void transformPixelsWithMax(int max) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                pixels[x][y] = (int) ( (double) pixels[x][y] / max * 256);
+                pixels[x][y] = (int) ( (double) pixels[x][y] / max * 255);
             }
         }
     }
