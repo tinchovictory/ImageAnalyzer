@@ -32,4 +32,11 @@ public class Utils {
 
         return NormalRandomVariable.nextRandomVariable(mu, phi, rng);
     }
+
+    public static int toRange(int value, int minValue, int maxValue) {
+        double m = 255.0 / (maxValue - minValue);
+        double b = - m * minValue;
+
+        return (int) (m * value + b);
+    }
 }
