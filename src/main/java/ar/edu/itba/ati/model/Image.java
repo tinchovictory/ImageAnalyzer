@@ -326,10 +326,11 @@ public class Image {
     public void applyAditiveGaussNoise(double phi, double mu) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-               // if(Math.random() < 0.5) {
-                    double noise = Utils.randomGaussNumber(phi, mu);
-                    addAllBandsPixel(x, y, noise * 255);
-               // }
+
+                //if(Math.random() < 0.5) {
+                    double noise = Utils.randomGaussNumber(phi * 100, 0);
+                    addAllBandsPixel(x, y, noise);
+                //}
             }
         }
     }
@@ -337,10 +338,10 @@ public class Image {
     public void applyMultiplicativeRayleighNoise(double epsilon) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                if(Math.random() < 0.5) {
+                //if(Math.random() < 0.5) {
                     double noise = Utils.randomRayeighNumber(epsilon);
                     multiplyAllBandsPixel(x, y, noise);
-                }
+                //}
             }
         }
     }
@@ -348,10 +349,10 @@ public class Image {
     public void applyMultiplicativeExponentialNoise(double lambda) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                if(Math.random() < 0.5) {
+                //if(Math.random() < 0.5) {
                     double noise = Utils.randomExponentialNumber(lambda);
                     multiplyAllBandsPixel(x, y, noise);
-                }
+                //}
             }
         }
     }
@@ -360,12 +361,26 @@ public class Image {
         redChannel.addToPixel(x, y, noise);
         greenChannel.addToPixel(x, y, noise);
         blueChannel.addToPixel(x, y, noise);
+
+        int minPixel = minPixel();
+        int maxPixel = maxPixel();
+
+        redChannel.normalizePixels(minPixel, maxPixel);
+        greenChannel.normalizePixels(minPixel, maxPixel);
+        blueChannel.normalizePixels(minPixel, maxPixel);
     }
 
     private void multiplyAllBandsPixel(int x, int y, double noise) {
         redChannel.multiplyToPixel(x, y, noise);
         greenChannel.multiplyToPixel(x, y, noise);
         blueChannel.multiplyToPixel(x, y, noise);
+
+        int minPixel = minPixel();
+        int maxPixel = maxPixel();
+
+        redChannel.normalizePixels(minPixel, maxPixel);
+        greenChannel.normalizePixels(minPixel, maxPixel);
+        blueChannel.normalizePixels(minPixel, maxPixel);
     }
 
     public void applySaltAndPepperNoise(double deviation) {
@@ -394,6 +409,36 @@ public class Image {
         redChannel = mask.applyTo(redChannel);
         greenChannel = mask.applyTo(greenChannel);
         blueChannel = mask.applyTo(blueChannel);
+    }
+
+    private int minPixel() {
+        int minPixel = redChannel.minPixel();
+        int blueMinPixel = blueChannel.minPixel();
+        int greenMinPixel = greenChannel.minPixel();
+
+        if(minPixel > blueMinPixel) {
+            minPixel = blueMinPixel;
+        }
+
+        if(minPixel > greenMinPixel) {
+            minPixel = greenMinPixel;
+        }
+        return minPixel;
+    }
+
+    private int maxPixel() {
+        int maxPixel = redChannel.maxPixel();
+        int blueMaxPixel = blueChannel.maxPixel();
+        int greenMaxPixel = greenChannel.maxPixel();
+
+        if(maxPixel < blueMaxPixel) {
+            maxPixel = blueMaxPixel;
+        }
+
+        if(maxPixel < greenMaxPixel) {
+            maxPixel = greenMaxPixel;
+        }
+        return maxPixel;
     }
 
 

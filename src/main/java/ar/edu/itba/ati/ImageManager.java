@@ -5,6 +5,7 @@ import ar.edu.itba.ati.model.ImageType;
 import ar.edu.itba.ati.model.Image;
 import org.apache.sanselan.*;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
@@ -46,20 +47,22 @@ public class ImageManager {
         Sanselan.writeImage(bufferedImage, imagePath, imageFormat, null);
     }
 
-    public static Image loadRawImage(File image, int width, int height) throws IOException {
-        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
-        WritableRaster raster = bufferedImage.getRaster();
+    public static Image loadRawImage(File imagePath, int width, int height) throws IOException {
+        Image image = new Image(width, height, ImageType.GRAY_SCALE, ImageExtension.RAW);
 
-        byte[] imageData = loadBytesFromFile(image);
+        byte[] imageData = loadBytesFromFile(imagePath);
 
         int i = 0;
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                raster.setSample(x, y, 0, imageData[i++]);
+                int dataValue = imageData[i] < 0 ? imageData[i] + 256 : imageData[i];
+                Color color = new Color(dataValue, dataValue, dataValue);
+                image.setPixelColor(x, y, color);
+                i++;
+
             }
         }
-
-        return new Image(bufferedImage, ImageType.GRAY_SCALE, ImageExtension.RAW);
+        return image;
     }
 
     private static ImageFormat getImageFormat(Image image) {

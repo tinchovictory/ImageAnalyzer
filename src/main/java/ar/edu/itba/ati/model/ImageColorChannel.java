@@ -1,5 +1,7 @@
 package ar.edu.itba.ati.model;
 
+import ar.edu.itba.ati.Utils;
+
 import java.util.Arrays;
 
 public class ImageColorChannel {
@@ -23,21 +25,10 @@ public class ImageColorChannel {
 
     public void addToPixel(int x, int y, double value) {
         pixels[x][y] += value;
-
-        if(pixels[x][y] > 255) {
-            pixels[x][y] = 255;
-        }
-        if(pixels[x][y] < 0) {
-            pixels[x][y] = 0;
-        }
     }
 
     public void multiplyToPixel(int x, int y, double value) {
         pixels[x][y] *= value;
-
-        if(pixels[x][y] > 255) {
-            pixels[x][y] = 255;
-        }
     }
 
     public int getWidth() {
@@ -211,6 +202,38 @@ public class ImageColorChannel {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 pixels[x][y] = (int) ( (double) pixels[x][y] / max * 255);
+            }
+        }
+    }
+
+    public int minPixel() {
+        int min = 255;
+        for(int  y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                if(min > pixels[x][y]) {
+                    min = pixels[x][y];
+                }
+            }
+        }
+        return min;
+    }
+
+    public int maxPixel() {
+        int max = 0;
+        for(int  y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                if(max < pixels[x][y]) {
+                    max = pixels[x][y];
+                }
+            }
+        }
+        return max;
+    }
+
+    public void normalizePixels(int minPixel, int maxPixel) {
+        for(int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++) {
+                pixels[x][y] = Utils.toRange(pixels[x][y], minPixel, maxPixel);
             }
         }
     }
