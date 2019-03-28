@@ -49,4 +49,9 @@ public class GenerateMenu extends Menu {
         controller.getMainWindow().refreshImage();
     }
 
+    @FXML void createSyntethicImage(){
+        controller.createSolidImage(225,32,101);
+        controller.getMainWindow().refreshImage();
+    }
+
 }

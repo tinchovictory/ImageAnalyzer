@@ -21,6 +21,7 @@
     <MenuItem text="Modify Contrast" onAction="#modifyContrast"/>
     <MenuItem text="Equalize Image" onAction="#equalizeImage"/>
     <MenuItem text="Modify Threshold" onAction="#modifyThreshold"/>
-
+    <MenuItem text="To grey scale" onAction="#toGreyScale"/>
+    <MenuItem text="Power function" onAction="#powerFunction"/>
 
 </fx:root>

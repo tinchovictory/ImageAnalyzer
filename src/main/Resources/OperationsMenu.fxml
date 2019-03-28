@@ -7,4 +7,5 @@
 <fx:root text="Operations" id="operationsMenu" type="javafx.scene.control.Menu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" >
     <MenuItem text="Add Image" onAction="#addImage"/>
     <MenuItem text="Substract Image" onAction="#substractImage"/>
+    <MenuItem text="Multiply by saclar Image" onAction="#multiplyByScalar"/>
 </fx:root>

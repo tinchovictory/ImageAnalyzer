@@ -241,6 +241,19 @@ public class ToolsMenu extends Menu {
 
     }
 
+    @FXML
+    private void powerFunction(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.powerFunctionBuffered(value);
+        Consumer<Double> setClicked = (value) -> controller.powerFunction(value);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,1,0.01);
+    }
+
+    @FXML
+    private void toGreyScale(){
+        controller.getGreyImage();
+        controller.getMainWindow().refreshImage();
+    }
+
 
     private class CoordenateBox{
         Label yLabel;

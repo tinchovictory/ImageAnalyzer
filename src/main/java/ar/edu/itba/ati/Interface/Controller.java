@@ -54,9 +54,13 @@ public interface Controller {
 
     void multiplyBy(int value);
 
+    BufferedImage multiplyByBuffered(int value);
+
     void compressDynamicRange();
 
     void powerFunction(double gamma);
+
+    BufferedImage powerFunctionBuffered(double gamma);
 
     void getNegative();
 

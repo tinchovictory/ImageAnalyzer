@@ -191,6 +191,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage multiplyByBuffered(int value) {
+        Image copy = image.cloneImage();
+        copy.multiplyBy(value);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public void compressDynamicRange() {
         image.compressDynamicRange();
     }
@@ -198,6 +205,13 @@ public class ControllerImpl implements Controller {
     @Override
     public void powerFunction(double gamma) {
         image.powerFunction(gamma);
+    }
+
+    @Override
+    public BufferedImage powerFunctionBuffered(double gamma) {
+        Image copy = image.cloneImage();
+        copy.powerFunction(gamma);
+        return copy.getBufferdImage();
     }
 
     @Override
