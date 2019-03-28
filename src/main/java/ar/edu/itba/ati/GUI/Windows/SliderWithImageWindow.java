@@ -98,6 +98,19 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         slider.setMajorTickUnit(increment);
         slider.setMinorTickCount(0);
         slider.setValue(min);
+
+
+        secondSlider.setBlockIncrement(increment);
+        secondSlider.setMax(max);
+        secondSlider.setMin(min);
+        secondSlider.setValue(min);
+        secondSlider.setShowTickMarks(true);
+        secondSlider.setShowTickLabels(false);
+        secondSlider.setSnapToTicks(true);
+        secondSlider.setMajorTickUnit(increment);
+        secondSlider.setMinorTickCount(0);
+        secondSlider.setValue(min);
+
         this.previousValue = 0;
         this.min= min;
         this.increment = increment;
@@ -141,6 +154,17 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     private void initDoubleSlider(){
         slider.setOnMouseDragged((e) -> {
+
+            double value = (Math.round(slider.getValue() / increment) * increment) + min;
+            double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
+            if (value != previousValue) {
+                BufferedImage tempimage = sliderDraggedD.apply(value,value2);
+                valueLabel.setText("Value: " + value);
+                image.setImage(SwingFXUtils.toFXImage(tempimage, null));
+            }
+        });
+
+        secondSlider.setOnMouseDragged((e) -> {
 
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;

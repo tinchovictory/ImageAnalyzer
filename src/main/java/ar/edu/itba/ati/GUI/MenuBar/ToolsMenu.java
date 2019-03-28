@@ -2,6 +2,8 @@ package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.GUI.Windows.*;
 import ar.edu.itba.ati.Interface.Controller;
+import ar.edu.itba.ati.Interface.DConsumer;
+import ar.edu.itba.ati.Interface.DFunction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -216,6 +218,9 @@ public class ToolsMenu extends Menu {
 
     @FXML
     private void modifyContrast(){
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyContrast(value.intValue(),value2.intValue());
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.applyContrast(value.intValue(),value2.intValue());
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,5);
         Stage newStage = new Stage();
         newStage.setScene(new Scene( new ContrastWindow(controller)));
         newStage.show();
