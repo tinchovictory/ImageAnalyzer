@@ -53,6 +53,10 @@ public class Mask {
             }
         }
 
+        if(newColor < 0) {
+            newColor = 0;
+        }
+
         newChannel.setPixel(xCenter, yCenter, (int) newColor);
     }
 
