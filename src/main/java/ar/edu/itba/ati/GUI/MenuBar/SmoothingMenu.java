@@ -45,6 +45,14 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
+
+    @FXML
+    private void weightedMedianFilter(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyWeightedMedianMask(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setWeightedMedianMask(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked,1,15.0,2,"Mask size");
+    }
+
     @FXML
     private void gaussFilter(){
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyGaussMask(value.intValue(),value2);

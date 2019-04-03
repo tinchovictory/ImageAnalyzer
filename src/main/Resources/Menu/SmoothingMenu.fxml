@@ -7,6 +7,7 @@
 <fx:root text="Smoothing" id="SmoothingMenu" type="javafx.scene.control.Menu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" >
     <MenuItem text="Mean filter" onAction="#meanFilter"/>
     <MenuItem text="Median filter" onAction="#medianFilter"/>
+    <MenuItem text="Weighted Median filter" onAction="#weightedMedianFilter"/>
     <MenuItem text="Gauss Filter" onAction="#gaussFilter"/>
     <MenuItem text="Border Filter" onAction="#borderFIlter"/>
 </fx:root>

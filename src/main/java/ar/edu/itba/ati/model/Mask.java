@@ -98,6 +98,8 @@ public class Mask {
                 return generateMeanPoundedMask();
             case MEDIAN:
                 return null;
+            case WEIGHTED_MEDIAN:
+                return null;
             case GAUSS:
                 return generateGaussPoundedMask(deviation);
             case BORDERS:
