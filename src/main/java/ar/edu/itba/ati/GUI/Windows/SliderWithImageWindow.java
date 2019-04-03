@@ -12,12 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -58,19 +60,30 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     private double increment;
 
+    private double min2;
+
+    private double max2;
+
+    private double increment2;
+
     private double previousValue;
 
     private double previousValue2;
 
     private boolean doubleSlider;
 
+    private String labelName;
+
+    private String labelName2;
+
     private DFunction<Double,Double,BufferedImage> sliderDraggedD;
 
     private DConsumer<Double,Double> setClickedD;
 
-    public SliderWithImageWindow(Controller controller,Function<Double,BufferedImage> sliderDragged , Consumer<Double> setClicked,double min, double max, double increment) {
-        this(controller,min,max,increment,false);
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
+    public SliderWithImageWindow(Controller controller,Function<Double,BufferedImage> sliderDragged , Consumer<Double> setClicked,double min, double max, double increment,String valueLabel) {
+        this(controller,min,max,increment,false,valueLabel,min,max,increment,valueLabel);
         this.sliderDragged =sliderDragged;
         this.setClicked = setClicked;
         this.secondSlider.setVisible(false);
@@ -79,11 +92,16 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     }
 
-    private SliderWithImageWindow(Controller controller, double min, double max, double increment,boolean doubleSlider) {
+    private SliderWithImageWindow(Controller controller, double min, double max, double increment,boolean doubleSlider,String valueLabel,double min2,double max2,double increment2,String labelName2) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DoubleSliderImageWindow.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         this.controller = controller;
+        this.labelName = valueLabel;
+        this.labelName2 = labelName2;
+        this.min2 = min2;
+        this.max2 = max2;
+        this.increment2 = increment2;
         try {
             loader.load();
         } catch(IOException e) {
@@ -99,30 +117,32 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         slider.setSnapToTicks(true);
         slider.setMajorTickUnit(increment);
         slider.setMinorTickCount(0);
-        slider.setValue(min);
+        this.valueLabel.setText(valueLabel);
 
 
-        secondSlider.setBlockIncrement(increment);
-        secondSlider.setMax(max);
-        secondSlider.setMin(min);
-        secondSlider.setValue(min);
+        secondSlider.setBlockIncrement(increment2);
+        secondSlider.setMax(max2);
+        secondSlider.setMin(min2);
+        secondSlider.setValue(min2);
         secondSlider.setShowTickMarks(true);
         secondSlider.setShowTickLabels(false);
         secondSlider.setSnapToTicks(true);
-        secondSlider.setMajorTickUnit(increment);
+        secondSlider.setMajorTickUnit(increment2);
         secondSlider.setMinorTickCount(0);
-        secondSlider.setValue(min);
+        this.secondValueLabel.setText(labelName2);
+
+
 
         this.previousValue  = 0;
         this.previousValue2 = 0;
-        this.min= min;
+        this.min = min;
         this.increment = increment;
         this.doubleSlider = doubleSlider;
 
     }
 
-    public SliderWithImageWindow(Controller controller, DFunction<Double,Double,BufferedImage> sliderDragged , DConsumer<Double,Double> setClicked, double min, double max, double increment){
-        this(controller,min,max,increment,true);
+    public SliderWithImageWindow(Controller controller, DFunction<Double,Double,BufferedImage> sliderDragged , DConsumer<Double,Double> setClicked, double min, double max, double increment,String labelName,double min2,double max2,double increment2, String label2Name){
+        this(controller,min,max,increment,true,labelName,min2,max2,increment2,label2Name);
         this.sliderDraggedD=sliderDragged;
         this.setClickedD=setClicked;
     }
@@ -131,9 +151,9 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         this.stage = stage;
     }
 
-    public static SliderWithImageWindow openInNewWindow(Controller controller, Function<Double,BufferedImage> sliderDragged , Consumer<Double> setClicked,double min, double max, double increment){
+    public static SliderWithImageWindow openInNewWindow(Controller controller, Function<Double,BufferedImage> sliderDragged , Consumer<Double> setClicked,double min, double max, double increment,String valueLabel){
         Stage newStage = new Stage();
-        SliderWithImageWindow window =  new SliderWithImageWindow(controller,sliderDragged,setClicked,min,max,increment);
+        SliderWithImageWindow window =  new SliderWithImageWindow(controller,sliderDragged,setClicked,min,max,increment,valueLabel);
         window.setStage(newStage);
         newStage.setScene(new Scene(window ));
         window.initSimpleSlider();
@@ -142,9 +162,9 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     }
 
-    public static SliderWithImageWindow openDoubleInNewWindow(Controller controller, DFunction<Double,Double,BufferedImage> sliderDragged , DConsumer<Double,Double> setClicked, double min, double max, double increment){
+    public static SliderWithImageWindow openDoubleInNewWindow(Controller controller, DFunction<Double,Double,BufferedImage> sliderDragged , DConsumer<Double,Double> setClicked, double min, double max, double increment,double min2,double max2,double increment2,String labelName, String label2Name){
         Stage newStage = new Stage();
-        SliderWithImageWindow window =  new SliderWithImageWindow(controller,sliderDragged,setClicked,min,max,increment);
+        SliderWithImageWindow window =  new SliderWithImageWindow(controller,sliderDragged,setClicked,min,max,increment,labelName,min2,max2,increment2,label2Name);
         window.setStage(newStage);
         newStage.setScene(new Scene(window ));
         window.initDoubleSlider();
@@ -155,41 +175,17 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
 
     private void initDoubleSlider(){
-        slider.setOnMouseDragged((e) -> {
+        slider.setOnMouseDragged(this::handle);
 
-            double value = (Math.round(slider.getValue() / increment) * increment) + min;
-            double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
-            if (value != previousValue || value2!= previousValue2) {
-                BufferedImage tempimage = sliderDraggedD.apply(value,value2);
-                valueLabel.setText("Value: " + value);
-                secondValueLabel.setText("Value: "+value2);
-                image.setImage(SwingFXUtils.toFXImage(tempimage, null));
-            }
-            previousValue = value;
-            previousValue2=value2;
-
-        });
-
-        secondSlider.setOnMouseDragged((e) -> {
-
-            double value = (Math.round(slider.getValue() / increment) * increment) + min;
-            double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
-            if (value != previousValue || value2!= previousValue2) {
-                BufferedImage tempimage = sliderDraggedD.apply(value,value2);
-                valueLabel.setText("Value: " + value);
-                secondValueLabel.setText("Value: "+value2);
-                image.setImage(SwingFXUtils.toFXImage(tempimage, null));
-            }
-            previousValue = value;
-            previousValue2=value2;
-        });
+        secondSlider.setOnMouseDragged(this::handle);
 
         setButton.setOnAction(e -> {
-
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
-            double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
+            double value2 = (Math.round(secondSlider.getValue() / increment2) * increment2) + min2;
+            System.out.println(value2);
             setClickedD.accept(value,value2);
-            valueLabel.setText("Value: " + value);
+            valueLabel.setText(labelName+": "+ df2.format(value));
+            secondValueLabel.setText(labelName2+": "+df2.format(value2));
             controller.getMainWindow().refreshImage();
             Stage stage = (Stage) setButton.getScene().getWindow();
             stage.close();
@@ -202,7 +198,7 @@ public class SliderWithImageWindow extends VBox implements Initializable {
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             if (value != previousValue) {
                 BufferedImage tempimage = sliderDragged.apply(value);
-                valueLabel.setText("Value: " + value);
+                valueLabel.setText(labelName+": " + df2.format(value));
                 image.setImage(SwingFXUtils.toFXImage(tempimage, null));
                 previousValue=value;
             }
@@ -211,7 +207,7 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         setButton.setOnAction(e -> {
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             setClicked.accept(value);
-            valueLabel.setText("Value: " + value);
+            valueLabel.setText(labelName+": " + df2.format(value));
             controller.getMainWindow().refreshImage();
             Stage stage = (Stage) setButton.getScene().getWindow();
             stage.close();
@@ -229,4 +225,17 @@ public class SliderWithImageWindow extends VBox implements Initializable {
     }
 
 
+    private void handle(MouseEvent e) {
+        double value = (Math.round(slider.getValue() / increment) * increment) + min;
+        double value2 = (Math.round(secondSlider.getValue() / increment2) * increment2) + min2;
+        if (value != previousValue || value2 != previousValue2) {
+            BufferedImage tempimage = sliderDraggedD.apply(value, value2);
+            valueLabel.setText(labelName + ": " + df2.format(value));
+            secondValueLabel.setText(labelName2 + ": " + df2.format(value2));
+            image.setImage(SwingFXUtils.toFXImage(tempimage, null));
+
+        }
+        previousValue = value;
+        previousValue2 = value2;
+    }
 }

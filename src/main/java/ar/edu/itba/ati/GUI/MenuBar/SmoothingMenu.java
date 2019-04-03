@@ -34,7 +34,7 @@ public class SmoothingMenu extends Menu {
     private void meanFilter(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMeanMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setMeanMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask Size");
 
     }
 
@@ -42,21 +42,21 @@ public class SmoothingMenu extends Menu {
     private void medianFilter(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMedianMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setMedianMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
     @FXML
     private void gaussFilter(){
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyGaussMask(value.intValue(),value2);
         DConsumer<Double,Double> setClicked = (value, value2) -> controller.setGaussMask(value.intValue(),value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,0,1,0.01,"Mask size","Standard deviation");
     }
 
     @FXML
     private void borderFIlter(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyBorderMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setBorderMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
 }

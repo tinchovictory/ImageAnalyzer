@@ -67,7 +67,7 @@ public class OperationsMenu extends Menu implements Initializable {
     private void multiplyByScalar(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.multiplyByBuffered(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.multiplyBy(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,15.0,1);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,15.0,1,"factor of multiplication");
     }
 
 

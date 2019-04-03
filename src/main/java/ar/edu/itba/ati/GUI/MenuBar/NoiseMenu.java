@@ -32,21 +32,21 @@ public class NoiseMenu extends Menu {
     private void aditiveGaussNoise(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyAditiveGaussNoise(value,0);
         Consumer<Double> setClicked = (value) -> controller.setAditiveGaussNoise(value,0);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Standard deviation");
     }
 
     @FXML
     private void multiplicativeRayleighNoise(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMultiplicativeRayleighNoise(value);
         Consumer<Double> setClicked = (value) -> controller.setMultiplicativeRayleighNoise(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Epsilon");
     }
 
     @FXML
     private void multiplicativeExponentialNoise(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMultiplicativeExponentialNoise(value);
         Consumer<Double> setClicked = (value) -> controller.setMultiplicativeExponentialNoise(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Lambda");
     }
 
     @FXML
@@ -54,6 +54,6 @@ public class NoiseMenu extends Menu {
         System.out.println("Salt And pepper");
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applySaltAndPepperNoise(value);
         Consumer<Double> setClicked = (value) -> controller.setSaltAndPepperNoise(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Percentage of contamination");
     }
 }
