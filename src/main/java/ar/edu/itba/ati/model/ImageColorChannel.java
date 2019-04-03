@@ -206,10 +206,10 @@ public class ImageColorChannel {
         }
     }
 
-    public int minPixel() {
+    public int minPixel(int startX, int startY, int endX, int endY) {
         int min = 255;
-        for(int  y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int  y = startY; y < endY; y++) {
+            for(int x = startX; x < endX; x++) {
                 if(min > pixels[x][y]) {
                     min = pixels[x][y];
                 }
@@ -218,10 +218,10 @@ public class ImageColorChannel {
         return min;
     }
 
-    public int maxPixel() {
+    public int maxPixel(int startX, int startY, int endX, int endY) {
         int max = 0;
-        for(int  y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int  y = startY; y < endY; y++) {
+            for(int x = startX; x < endX; x++) {
                 if(max < pixels[x][y]) {
                     max = pixels[x][y];
                 }
@@ -230,9 +230,9 @@ public class ImageColorChannel {
         return max;
     }
 
-    public void normalizePixels(int minPixel, int maxPixel) {
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+    public void normalizePixels(int minPixel, int maxPixel, int border) {
+        for(int y = border; y < height - border; y++) {
+            for(int x = border; x < width - border; x++) {
                 pixels[x][y] = Utils.toRange(pixels[x][y], minPixel, maxPixel);
             }
         }

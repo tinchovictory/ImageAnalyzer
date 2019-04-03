@@ -132,4 +132,8 @@ public class Mask {
         return a * Math.exp( - b );
     }
 
+
+    public int getBorderLength() {
+        return borderLength;
+    }
 }

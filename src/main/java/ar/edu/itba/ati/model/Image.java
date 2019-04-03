@@ -4,6 +4,7 @@ import ar.edu.itba.ati.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 public class Image {
     private ImageType imageType;
@@ -36,14 +37,23 @@ public class Image {
     }
 
     public BufferedImage getBufferdImage() {
-        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        WritableRaster writableRaster = bufferedImage.getRaster();
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getRGB());
+                int redValue = color.getRed() <= 128 ? color.getRed() : color.getRed() - 256;
+                int greenValue = color.getGreen() <= 128 ? color.getGreen() : color.getGreen() - 256;
+                int blueValue = color.getBlue() <= 128 ? color.getBlue() : color.getBlue() - 256;
+//                bufferedImage.setRGB(x, y, color.getRGB());
+                writableRaster.setSample(x, y, 0, redValue);
+                writableRaster.setSample(x, y, 1, greenValue);
+                writableRaster.setSample(x, y, 2, blueValue);
             }
         }
+
+
 
         return bufferedImage;
     }
@@ -403,13 +413,21 @@ public class Image {
         greenChannel = mask.applyTo(greenChannel);
         blueChannel = mask.applyTo(blueChannel);
 
-        normalizeImage();
+        normalizeImage(mask.getBorderLength());
     }
 
     private int minPixel() {
-        int minPixel = redChannel.minPixel();
-        int blueMinPixel = blueChannel.minPixel();
-        int greenMinPixel = greenChannel.minPixel();
+        return minPixel(0);
+    }
+
+    private int minPixel(int border) {
+        int start = border;
+        int endX = this.width - border;
+        int endY = this.height - border;
+
+        int minPixel = redChannel.minPixel(start, start, endX, endY);
+        int blueMinPixel = blueChannel.minPixel(start, start, endX, endY);
+        int greenMinPixel = greenChannel.minPixel(start, start, endX, endY);
 
         if(minPixel > blueMinPixel) {
             minPixel = blueMinPixel;
@@ -422,9 +440,17 @@ public class Image {
     }
 
     private int maxPixel() {
-        int maxPixel = redChannel.maxPixel();
-        int blueMaxPixel = blueChannel.maxPixel();
-        int greenMaxPixel = greenChannel.maxPixel();
+        return maxPixel(0);
+    }
+
+    private int maxPixel(int border) {
+        int start = border;
+        int endX = this.width - border;
+        int endY = this.height - border;
+
+        int maxPixel = redChannel.maxPixel(start, start, endX, endY);
+        int blueMaxPixel = blueChannel.maxPixel(start, start, endX, endY);
+        int greenMaxPixel = greenChannel.maxPixel(start, start, endX, endY);
 
         if(maxPixel < blueMaxPixel) {
             maxPixel = blueMaxPixel;
@@ -437,12 +463,16 @@ public class Image {
     }
 
     private void normalizeImage() {
-        int minPixel = minPixel();
-        int maxPixel = maxPixel();
+        normalizeImage(0);
+    }
 
-        redChannel.normalizePixels(minPixel, maxPixel);
-        greenChannel.normalizePixels(minPixel, maxPixel);
-        blueChannel.normalizePixels(minPixel, maxPixel);
+    private void normalizeImage(int border) {
+        int minPixel = minPixel(border);
+        int maxPixel = maxPixel(border);
+
+        redChannel.normalizePixels(minPixel, maxPixel, border);
+        greenChannel.normalizePixels(minPixel, maxPixel, border);
+        blueChannel.normalizePixels(minPixel, maxPixel, border);
     }
 
 
