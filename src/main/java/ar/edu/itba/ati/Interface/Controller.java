@@ -80,19 +80,19 @@ public interface Controller {
 
     void setThreshold(int threshold);
 
-    BufferedImage applyAditiveGaussNoise(double phi, double mu);
+    BufferedImage applyAditiveGaussNoise(double phi, double mu, double contamination);
 
-    BufferedImage applyMultiplicativeRayleighNoise(double epsilon);
+    BufferedImage applyMultiplicativeRayleighNoise(double epsilon,double contamination);
 
-    BufferedImage applyMultiplicativeExponentialNoise(double lambda);
+    BufferedImage applyMultiplicativeExponentialNoise(double lambda,double contamination);
 
     BufferedImage applySaltAndPepperNoise(double deviation);
 
-    void setAditiveGaussNoise(double phi, double mu);
+    void setAditiveGaussNoise(double phi, double mu,double contamination);
 
-    void setMultiplicativeRayleighNoise(double epsilon);
+    void setMultiplicativeRayleighNoise(double epsilon,double contamination);
 
-    void setMultiplicativeExponentialNoise(double lambda);
+    void setMultiplicativeExponentialNoise(double lambda,double contamination);
 
     void setSaltAndPepperNoise(double deviation);
 

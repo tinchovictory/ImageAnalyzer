@@ -20,11 +20,11 @@ public class Histogram extends BarChart {
 
         this.getXAxis().setLabel("Color");
         this.getYAxis().setLabel("Amount");
+        this.setLegendVisible(false);
 
         XYChart.Series series = new XYChart.Series();
 
 //        series.setName("Histogram");
-
 
         for(int i=0; i< values.length;i++){
             double accumulated =0;

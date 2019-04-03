@@ -2,6 +2,8 @@ package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.GUI.Windows.SliderWithImageWindow;
 import ar.edu.itba.ati.Interface.Controller;
+import ar.edu.itba.ati.Interface.DConsumer;
+import ar.edu.itba.ati.Interface.DFunction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
@@ -30,23 +32,23 @@ public class NoiseMenu extends Menu {
 
     @FXML
     private void aditiveGaussNoise(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyAditiveGaussNoise(value,0);
-        Consumer<Double> setClicked = (value) -> controller.setAditiveGaussNoise(value,0);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Standard deviation");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value,value2)->controller.applyAditiveGaussNoise(value,0,value2);
+        DConsumer<Double,Double> setClicked = (value,value2) -> controller.setAditiveGaussNoise(value,0,value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0.0,5.0,0.05,0,1,0.05,"Standard deviation","Contamination");
     }
 
     @FXML
     private void multiplicativeRayleighNoise(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMultiplicativeRayleighNoise(value);
-        Consumer<Double> setClicked = (value) -> controller.setMultiplicativeRayleighNoise(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Epsilon");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value,value2)->controller.applyMultiplicativeRayleighNoise(value,value2);
+        DConsumer<Double,Double> setClicked = (value,value2) -> controller.setMultiplicativeRayleighNoise(value,value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,0,1,0.05,"Epsilon","Contamination");
     }
 
     @FXML
     private void multiplicativeExponentialNoise(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMultiplicativeExponentialNoise(value);
-        Consumer<Double> setClicked = (value) -> controller.setMultiplicativeExponentialNoise(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Lambda");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value,value2)->controller.applyMultiplicativeExponentialNoise(value,value2);
+        DConsumer<Double,Double> setClicked = (value,value2) -> controller.setMultiplicativeExponentialNoise(value,value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,0,1,0.05,"Lambda","Contamination");
     }
 
     @FXML
