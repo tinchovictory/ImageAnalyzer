@@ -333,6 +333,7 @@ public class Image {
                 //}
             }
         }
+        normalizeImage();
     }
 
     public void applyMultiplicativeRayleighNoise(double epsilon) {
@@ -344,6 +345,7 @@ public class Image {
                 //}
             }
         }
+        normalizeImage();
     }
 
     public void applyMultiplicativeExponentialNoise(double lambda) {
@@ -355,6 +357,7 @@ public class Image {
                 //}
             }
         }
+        normalizeImage();
     }
 
     private void addAllBandsPixel(int x, int y, double noise) {
@@ -362,7 +365,7 @@ public class Image {
         greenChannel.addToPixel(x, y, noise);
         blueChannel.addToPixel(x, y, noise);
 
-        normalizeImage();
+        //normalizeImage();
     }
 
     private void multiplyAllBandsPixel(int x, int y, double noise) {
@@ -370,7 +373,7 @@ public class Image {
         greenChannel.multiplyToPixel(x, y, noise);
         blueChannel.multiplyToPixel(x, y, noise);
 
-        normalizeImage();
+        //normalizeImage();
     }
 
     public void applySaltAndPepperNoise(double deviation) {
