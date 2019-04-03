@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Mask {
     public enum Type {
-        MEAN, GAUSS, MEDIAN, BORDERS;
+        MEAN, GAUSS, MEDIAN, BORDERS, WEIGHTED_MEDIAN;
     }
 
     private int size;
@@ -33,6 +33,8 @@ public class Mask {
             for(int x = borderLength; x < originalChannel.getWidth() - borderLength; x++) {
                 if(this.type == Type.MEDIAN) {
                     applyMedianToPixel(x, y, newChannel, originalChannel);
+                } else if(this.type == Type.WEIGHTED_MEDIAN) {
+                    applyWeightedMedianToPixel(x, y, newChannel, originalChannel);
                 } else {
                     applyMaskToPixel(x, y, newChannel, originalChannel, poundedMask);
                 }
@@ -70,6 +72,25 @@ public class Mask {
         int medianPosition = (list.size() - 1) / 2;
         newChannel.setPixel(xCenter, yCenter, list.get(medianPosition));
     }
+
+    private void applyWeightedMedianToPixel(int xCenter, int yCenter, ImageColorChannel newChanel, ImageColorChannel originalChannel) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int [][] weightedMask = getMedianWightedMask();
+
+        for(int y = yCenter - borderLength, i = 0; y <= yCenter + borderLength; y++, i++) {
+            for(int x = xCenter - borderLength, j = 0; x <= xCenter + borderLength; x++, j++) {
+                for(int counter = 0; counter < weightedMask[i][j]; counter++) {
+                    list.add(originalChannel.getPixel(x, y));
+                }
+            }
+        }
+
+        Collections.sort(list);
+
+        int medianPosition = (list.size() - 1) / 2;
+        newChanel.setPixel(xCenter, yCenter, list.get(medianPosition));
+    }
+
 
     private double[][] getPoundedMask() {
         switch (this.type) {
@@ -130,6 +151,32 @@ public class Mask {
         double a = 1.0 / ( 2 * Math.PI * Math.pow(deviation, 2));
         double b = ( Math.pow(x, 2) + Math.pow(y, 2) ) / Math.pow(deviation, 2);
         return a * Math.exp( - b );
+    }
+
+    private int[][] getMedianWightedMask() {
+        int[][] mask = new int[size][size];
+        int halfSize = size / 2;
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                int exp1 = i;
+                int exp2 = j;
+
+                if(i > halfSize) {
+                    exp1 = size - i - 1;
+                }
+
+                if(j < halfSize) {
+                    exp2 = size - j - 1;
+                }
+
+                int exp = exp1 + exp2;
+
+                mask[i][j] = (int) Math.pow(2, exp);
+            }
+        }
+
+        return mask;
     }
 
 

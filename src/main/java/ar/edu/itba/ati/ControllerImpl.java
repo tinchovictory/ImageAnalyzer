@@ -262,6 +262,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyWeightedMedianMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.WEIGHTED_MEDIAN);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public BufferedImage applyGaussMask(int size, double deviation) {
         Image copy = image.cloneImage();
         Mask mask = new Mask(size, Mask.Type.GAUSS, deviation);
@@ -288,6 +296,12 @@ public class ControllerImpl implements Controller {
     @Override
     public void setMedianMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEDIAN);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setWeightedMedianMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.WEIGHTED_MEDIAN);
         image.applyMask(mask);
     }
 
