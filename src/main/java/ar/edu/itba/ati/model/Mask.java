@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Mask {
     public enum Type {
-        MEAN, GAUSS, MEDIAN, BORDERS, WEIGHTED_MEDIAN;
+        MEAN, GAUSS, MEDIAN, BORDERS, WEIGHTED_MEDIAN, PREWITT_X, PREWITT_Y;
     }
 
     private int size;
@@ -104,6 +104,10 @@ public class Mask {
                 return generateGaussPoundedMask(deviation);
             case BORDERS:
                 return generateBordersPoundedMask();
+            case PREWITT_X:
+                return generatePrewittXMask();
+            case PREWITT_Y:
+                return generatePrewittYMask();
         }
 
         throw new IllegalStateException();
@@ -153,6 +157,32 @@ public class Mask {
         double a = 1.0 / ( 2 * Math.PI * Math.pow(deviation, 2));
         double b = ( Math.pow(x, 2) + Math.pow(y, 2) ) / Math.pow(deviation, 2);
         return a * Math.exp( - b );
+    }
+
+    private double[][] generatePrewittXMask() {
+        double [][] pounds = new double[size][size];
+        int halfSize = size / 2;
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                pounds[i][j] = i - halfSize;
+            }
+        }
+
+        return pounds;
+    }
+
+    private double[][] generatePrewittYMask() {
+        double [][] pounds = new double[size][size];
+        int halfSize = size / 2;
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                pounds[i][j] = j - halfSize;
+            }
+        }
+
+        return pounds;
     }
 
     private int[][] getMedianWightedMask() {

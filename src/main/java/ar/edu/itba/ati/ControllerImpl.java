@@ -287,6 +287,22 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyPrewittXMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyPrewittYMask(int size) {
+        Image copy = image.cloneImage();
+        Mask mask = new Mask(size, Mask.Type.PREWITT_Y);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
@@ -314,6 +330,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void setBorderMask(int size) {
         Mask mask = new Mask(size, Mask.Type.BORDERS);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setPrewittXMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setPrewittYMask(int size) {
+        Mask mask = new Mask(size, Mask.Type.PREWITT_Y);
         image.applyMask(mask);
     }
 
