@@ -4,6 +4,7 @@ import ar.edu.itba.ati.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 public class Image {
     private ImageType imageType;
@@ -36,14 +37,23 @@ public class Image {
     }
 
     public BufferedImage getBufferdImage() {
-        BufferedImage bufferedImage = new BufferedImage(width, height, getBufferedImageType());
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        WritableRaster writableRaster = bufferedImage.getRaster();
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 Color color = getPixelColor(x, y);
-                bufferedImage.setRGB(x, y, color.getRGB());
+                int redValue = color.getRed() <= 128 ? color.getRed() : color.getRed() - 256;
+                int greenValue = color.getGreen() <= 128 ? color.getGreen() : color.getGreen() - 256;
+                int blueValue = color.getBlue() <= 128 ? color.getBlue() : color.getBlue() - 256;
+//                bufferedImage.setRGB(x, y, color.getRGB());
+                writableRaster.setSample(x, y, 0, redValue);
+                writableRaster.setSample(x, y, 1, greenValue);
+                writableRaster.setSample(x, y, 2, blueValue);
             }
         }
+
+
 
         return bufferedImage;
     }
