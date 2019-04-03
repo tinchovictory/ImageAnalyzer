@@ -362,12 +362,7 @@ public class Image {
         greenChannel.addToPixel(x, y, noise);
         blueChannel.addToPixel(x, y, noise);
 
-        int minPixel = minPixel();
-        int maxPixel = maxPixel();
-
-        redChannel.normalizePixels(minPixel, maxPixel);
-        greenChannel.normalizePixels(minPixel, maxPixel);
-        blueChannel.normalizePixels(minPixel, maxPixel);
+        normalizeImage();
     }
 
     private void multiplyAllBandsPixel(int x, int y, double noise) {
@@ -375,12 +370,7 @@ public class Image {
         greenChannel.multiplyToPixel(x, y, noise);
         blueChannel.multiplyToPixel(x, y, noise);
 
-        int minPixel = minPixel();
-        int maxPixel = maxPixel();
-
-        redChannel.normalizePixels(minPixel, maxPixel);
-        greenChannel.normalizePixels(minPixel, maxPixel);
-        blueChannel.normalizePixels(minPixel, maxPixel);
+        normalizeImage();
     }
 
     public void applySaltAndPepperNoise(double deviation) {
@@ -409,6 +399,8 @@ public class Image {
         redChannel = mask.applyTo(redChannel);
         greenChannel = mask.applyTo(greenChannel);
         blueChannel = mask.applyTo(blueChannel);
+
+        normalizeImage();
     }
 
     private int minPixel() {
@@ -439,6 +431,15 @@ public class Image {
             maxPixel = greenMaxPixel;
         }
         return maxPixel;
+    }
+
+    private void normalizeImage() {
+        int minPixel = minPixel();
+        int maxPixel = maxPixel();
+
+        redChannel.normalizePixels(minPixel, maxPixel);
+        greenChannel.normalizePixels(minPixel, maxPixel);
+        blueChannel.normalizePixels(minPixel, maxPixel);
     }
 
 
