@@ -60,6 +60,8 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
     private double previousValue;
 
+    private double previousValue2;
+
     private boolean doubleSlider;
 
     private DFunction<Double,Double,BufferedImage> sliderDraggedD;
@@ -111,7 +113,8 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         secondSlider.setMinorTickCount(0);
         secondSlider.setValue(min);
 
-        this.previousValue = 0;
+        this.previousValue  = 0;
+        this.previousValue2 = 0;
         this.min= min;
         this.increment = increment;
         this.doubleSlider = doubleSlider;
@@ -156,24 +159,29 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
-            if (value != previousValue) {
+            if (value != previousValue || value2!= previousValue2) {
                 BufferedImage tempimage = sliderDraggedD.apply(value,value2);
                 valueLabel.setText("Value: " + value);
                 secondValueLabel.setText("Value: "+value2);
                 image.setImage(SwingFXUtils.toFXImage(tempimage, null));
             }
+            previousValue = value;
+            previousValue2=value2;
+
         });
 
         secondSlider.setOnMouseDragged((e) -> {
 
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             double value2 = (Math.round(secondSlider.getValue() / increment) * increment) + min;
-            if (value != previousValue) {
+            if (value != previousValue || value2!= previousValue2) {
                 BufferedImage tempimage = sliderDraggedD.apply(value,value2);
                 valueLabel.setText("Value: " + value);
                 secondValueLabel.setText("Value: "+value2);
                 image.setImage(SwingFXUtils.toFXImage(tempimage, null));
             }
+            previousValue = value;
+            previousValue2=value2;
         });
 
         setButton.setOnAction(e -> {
