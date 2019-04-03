@@ -337,21 +337,21 @@ public class ControllerImpl implements Controller {
     @Override
     public BufferedImage applyAditiveGaussNoise(double phi, double mu,double contamination) {
         Image copy = image.cloneImage();
-        copy.applyAditiveGaussNoise(phi,mu);
+        copy.applyAditiveGaussNoise(phi, mu, contamination);
         return copy.getBufferdImage();
     }
 
     @Override
     public BufferedImage applyMultiplicativeRayleighNoise(double epsilon,double contamination) {
         Image copy = image.cloneImage();
-        copy.applyMultiplicativeRayleighNoise(epsilon);
+        copy.applyMultiplicativeRayleighNoise(epsilon, contamination);
         return copy.getBufferdImage();
     }
 
     @Override
     public BufferedImage applyMultiplicativeExponentialNoise(double lambda,double contamination) {
         Image copy = image.cloneImage();
-        copy.applyMultiplicativeExponentialNoise(lambda);
+        copy.applyMultiplicativeExponentialNoise(lambda, contamination);
         return copy.getBufferdImage();
     }
 
@@ -364,17 +364,17 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void setAditiveGaussNoise(double phi, double mu,double contamination) {
-        image.applyAditiveGaussNoise(phi,mu);
+        image.applyAditiveGaussNoise(phi, mu, contamination);
     }
 
     @Override
     public void setMultiplicativeRayleighNoise(double epsilon,double contamination) {
-        image.applyMultiplicativeRayleighNoise(epsilon);
+        image.applyMultiplicativeRayleighNoise(epsilon, contamination);
     }
 
     @Override
     public void setMultiplicativeExponentialNoise(double lambda,double contamination) {
-        image.applyMultiplicativeExponentialNoise(lambda);
+        image.applyMultiplicativeExponentialNoise(lambda, contamination);
     }
 
     @Override

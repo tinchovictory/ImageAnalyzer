@@ -333,38 +333,37 @@ public class Image {
         return image;
     }
 
-    public void applyAditiveGaussNoise(double phi, double mu) {
+    public void applyAditiveGaussNoise(double phi, double mu, double contamination) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-
-                //if(Math.random() < 0.5) {
-                    double noise = Utils.randomGaussNumber(phi * 100, 0);
+                if(Math.random() < contamination) {
+                    double noise = Utils.randomGaussNumber(phi * 100, mu);
                     addAllBandsPixel(x, y, noise);
-                //}
+                }
             }
         }
         normalizeImage();
     }
 
-    public void applyMultiplicativeRayleighNoise(double epsilon) {
+    public void applyMultiplicativeRayleighNoise(double epsilon, double contamination) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                //if(Math.random() < 0.5) {
+                if(Math.random() < contamination) {
                     double noise = Utils.randomRayeighNumber(epsilon);
                     multiplyAllBandsPixel(x, y, noise);
-                //}
+                }
             }
         }
         normalizeImage();
     }
 
-    public void applyMultiplicativeExponentialNoise(double lambda) {
+    public void applyMultiplicativeExponentialNoise(double lambda, double contamination) {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                //if(Math.random() < 0.5) {
+                if(Math.random() < contamination) {
                     double noise = Utils.randomExponentialNumber(lambda);
                     multiplyAllBandsPixel(x, y, noise);
-                //}
+                }
             }
         }
         normalizeImage();
@@ -374,16 +373,12 @@ public class Image {
         redChannel.addToPixel(x, y, noise);
         greenChannel.addToPixel(x, y, noise);
         blueChannel.addToPixel(x, y, noise);
-
-        //normalizeImage();
     }
 
     private void multiplyAllBandsPixel(int x, int y, double noise) {
         redChannel.multiplyToPixel(x, y, noise);
         greenChannel.multiplyToPixel(x, y, noise);
         blueChannel.multiplyToPixel(x, y, noise);
-
-        //normalizeImage();
     }
 
     public void applySaltAndPepperNoise(double deviation) {
