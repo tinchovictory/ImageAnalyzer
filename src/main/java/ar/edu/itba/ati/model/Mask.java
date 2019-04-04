@@ -34,7 +34,7 @@ public class Mask {
                 if(this.type == Type.MEDIAN) {
                     applyMedianToPixel(x, y, newChannel, originalChannel);
                 } else if(this.type == Type.WEIGHTED_MEDIAN) {
-                    applyWeightedMedianToPixel(x, y, newChannel, originalChannel);
+                    applyWeightedMedianToPixel(x, y, newChannel, originalChannel, poundedMask);
                 } else {
                     applyMaskToPixel(x, y, newChannel, originalChannel, poundedMask);
                 }
@@ -73,13 +73,12 @@ public class Mask {
         newChannel.setPixel(xCenter, yCenter, list.get(medianPosition));
     }
 
-    private void applyWeightedMedianToPixel(int xCenter, int yCenter, ImageColorChannel newChanel, ImageColorChannel originalChannel) {
+    private void applyWeightedMedianToPixel(int xCenter, int yCenter, ImageColorChannel newChanel, ImageColorChannel originalChannel, double[][] poundedMask) {
         ArrayList<Integer> list = new ArrayList<>();
-        int [][] weightedMask = getMedianWightedMask();
 
         for(int y = yCenter - borderLength, i = 0; y <= yCenter + borderLength; y++, i++) {
             for(int x = xCenter - borderLength, j = 0; x <= xCenter + borderLength; x++, j++) {
-                for(int counter = 0; counter < weightedMask[i][j]; counter++) {
+                for(int counter = 0; counter < poundedMask[i][j]; counter++) {
                     list.add(originalChannel.getPixel(x, y));
                 }
             }
@@ -99,7 +98,7 @@ public class Mask {
             case MEDIAN:
                 return null;
             case WEIGHTED_MEDIAN:
-                return null;
+                return getMedianWightedMask();
             case GAUSS:
                 return generateGaussPoundedMask(deviation);
             case BORDERS:
@@ -185,8 +184,8 @@ public class Mask {
         return pounds;
     }
 
-    private int[][] getMedianWightedMask() {
-        int[][] mask = new int[size][size];
+    private double[][] getMedianWightedMask() {
+        double[][] mask = new double[size][size];
         int halfSize = size / 2;
 
         for(int i = 0; i < size; i++) {
