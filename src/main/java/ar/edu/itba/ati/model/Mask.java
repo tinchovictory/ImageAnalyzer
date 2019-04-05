@@ -76,8 +76,8 @@ public class Mask {
     private void applyWeightedMedianToPixel(int xCenter, int yCenter, ImageColorChannel newChanel, ImageColorChannel originalChannel, double[][] poundedMask) {
         ArrayList<Integer> list = new ArrayList<>();
 
-        for(int y = yCenter - borderLength, i = 0; y <= yCenter + borderLength; y++, i++) {
-            for(int x = xCenter - borderLength, j = 0; x <= xCenter + borderLength; x++, j++) {
+        for(int y = yCenter - 1, i = 0; y <= yCenter + 1; y++, i++) {
+            for(int x = xCenter - 1, j = 0; x <= xCenter + 1; x++, j++) {
                 for(int counter = 0; counter < poundedMask[i][j]; counter++) {
                     list.add(originalChannel.getPixel(x, y));
                 }
@@ -185,30 +185,32 @@ public class Mask {
     }
 
     private double[][] getMedianWightedMask() {
-        double[][] mask = new double[size][size];
-        int halfSize = size / 2;
-
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                int exp1 = i;
-                int exp2 = j;
-
-                if(i > halfSize) {
-                    exp1 = size - i - 1;
-                }
-
-                if(j < halfSize) {
-                    exp2 = size - j - 1;
-                }
-
-                int exp = exp1 + exp2;
-
-                mask[i][j] = (int) Math.pow(2, exp);
-            }
+        //double[][] mask = new double[size][size];
+//        int halfSize = size / 2;
+//
+//        for(int i = 0; i < size; i++) {
+//            for(int j = 0; j < size; j++) {
+//                int exp1 = i;
+//                int exp2 = j;
+//
+//                if(i > halfSize) {
+//                    exp1 = size - i - 1;
+//                }
+//
+//                if(j < halfSize) {
+//                    exp2 = size - j - 1;
+//                }
+//
+//                int exp = exp1 + exp2;
+//
+//                mask[i][j] = (int) Math.pow(2, exp);
+//            }
+        double[][] mask = { {1,2,1},
+                            {2,4,2},
+                            {1,2,1}};
+        return mask;
         }
 
-        return mask;
-    }
 
 
     public int getBorderLength() {

@@ -53,7 +53,6 @@ public class NoiseMenu extends Menu {
 
     @FXML
     private void saltAndPepper(){
-        System.out.println("Salt And pepper");
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applySaltAndPepperNoise(value);
         Consumer<Double> setClicked = (value) -> controller.setSaltAndPepperNoise(value);
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.0,1.0,0.05,"Percentage of contamination");

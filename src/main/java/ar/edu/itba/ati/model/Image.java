@@ -386,10 +386,10 @@ public class Image {
             for(int x = 0; x < width; x++) {
                 double rand = Math.random();
 
-                if(rand < 0.5 - deviation/2) {
+                if(rand < deviation/2) {
                     setAllBandsPixel(x, y, 0);
                 }
-                if(rand > 0.5 + deviation/2) {
+                if(rand > 1- deviation/2) {
                     setAllBandsPixel(x, y, 255);
                 }
             }
