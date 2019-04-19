@@ -5,6 +5,7 @@ import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
+import ar.edu.itba.ati.model.Masks.PrewittMask;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
 
@@ -289,7 +290,7 @@ public class ControllerImpl implements Controller {
     @Override
     public BufferedImage applyPrewittXMask(int size) {
         Image copy = image.cloneImage();
-        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+        Mask mask = new PrewittMask();
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
@@ -335,7 +336,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void setPrewittXMask(int size) {
-        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+        Mask mask = new PrewittMask();
         image.applyMask(mask);
     }
 

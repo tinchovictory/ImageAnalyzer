@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Mask {
     public enum Type {
-        MEAN, GAUSS, MEDIAN, BORDERS, WEIGHTED_MEDIAN, PREWITT_X, PREWITT_Y;
+        MEAN, GAUSS, MEDIAN, BORDERS, WEIGHTED_MEDIAN, PREWITT_X, PREWITT_Y, OTHER;
     }
 
     private int size;
@@ -44,7 +44,7 @@ public class Mask {
         return newChannel;
     }
 
-    private void applyMaskToPixel(int xCenter, int yCenter, ImageColorChannel newChannel, ImageColorChannel originalChannel, double[][] poundedMask) {
+    public void applyMaskToPixel(int xCenter, int yCenter, ImageColorChannel newChannel, ImageColorChannel originalChannel, double[][] poundedMask) {
         double newColor = 0;
         for(int y = 0; y < size; y++) {
             for(int x = 0; x < size; x++) {
@@ -185,31 +185,11 @@ public class Mask {
     }
 
     private double[][] getMedianWightedMask() {
-        //double[][] mask = new double[size][size];
-//        int halfSize = size / 2;
-//
-//        for(int i = 0; i < size; i++) {
-//            for(int j = 0; j < size; j++) {
-//                int exp1 = i;
-//                int exp2 = j;
-//
-//                if(i > halfSize) {
-//                    exp1 = size - i - 1;
-//                }
-//
-//                if(j < halfSize) {
-//                    exp2 = size - j - 1;
-//                }
-//
-//                int exp = exp1 + exp2;
-//
-//                mask[i][j] = (int) Math.pow(2, exp);
-//            }
         double[][] mask = { {1,2,1},
                             {2,4,2},
                             {1,2,1}};
         return mask;
-        }
+    }
 
 
 
