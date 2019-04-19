@@ -68,16 +68,9 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void prewittXMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittXMask(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setPrewittXMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
-    }
-
-    @FXML
-    private void prewittYMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittYMask(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setPrewittYMask(value.intValue());
+    private void prewittMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
+        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 

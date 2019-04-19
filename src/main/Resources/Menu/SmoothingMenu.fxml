@@ -10,6 +10,5 @@
     <MenuItem text="Weighted Median filter" onAction="#weightedMedianFilter"/>
     <MenuItem text="Gauss Filter" onAction="#gaussFilter"/>
     <MenuItem text="Border Filter" onAction="#borderFIlter"/>
-    <MenuItem text="Prewitt X Filter" onAction="#prewittXMask"/>
-    <MenuItem text="Prewitt Y Filter" onAction="#prewittYMask"/>
+    <MenuItem text="Prewitt Filter" onAction="#prewittMask"/>
 </fx:root>

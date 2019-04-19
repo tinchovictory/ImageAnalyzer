@@ -106,9 +106,7 @@ public interface Controller {
 
     BufferedImage applyBorderMask(int size);
 
-    BufferedImage applyPrewittXMask(int size);
-
-    BufferedImage applyPrewittYMask(int size);
+    BufferedImage applyPrewittMask();
 
     void setMeanMask(int size);
 
@@ -120,11 +118,7 @@ public interface Controller {
 
     void setBorderMask(int size);
 
-    void setPrewittXMask(int size);
-
-    void setPrewittYMask(int size);
-
-
+    void setPrewittMask();
 
 
 }

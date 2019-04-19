@@ -196,4 +196,8 @@ public class Mask {
     public int getBorderLength() {
         return borderLength;
     }
+
+    public int getMaskSize() {
+        return size;
+    }
 }
