@@ -5,9 +5,7 @@ import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
-import ar.edu.itba.ati.model.Masks.PrewittMask;
-import ar.edu.itba.ati.model.Masks.SobelMask;
-import ar.edu.itba.ati.model.Masks.TwoDirectionsMask;
+import ar.edu.itba.ati.model.Masks.*;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
 
@@ -306,6 +304,22 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage apply5aMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new FiveAMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyKirshMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new KirshMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
@@ -333,6 +347,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void setBorderMask(int size) {
         Mask mask = new Mask(size, Mask.Type.BORDERS);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void set5aMask() {
+        Mask mask = new FiveAMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setKirshMask() {
+        Mask mask = new KirshMask();
         image.applyMask(mask);
     }
 

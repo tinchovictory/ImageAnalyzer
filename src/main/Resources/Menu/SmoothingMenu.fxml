@@ -12,4 +12,6 @@
     <MenuItem text="Border Filter" onAction="#borderFIlter"/>
     <MenuItem text="Prewitt Filter" onAction="#prewittMask"/>
     <MenuItem text="Sobel Filter" onAction="#sobelMask"/>
+    <MenuItem text="5A Filter" onAction="#fiveAMask"/>
+    <MenuItem text="Kirsh Filter" onAction="#kirshMask"/>
 </fx:root>

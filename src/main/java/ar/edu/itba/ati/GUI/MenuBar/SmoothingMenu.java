@@ -81,4 +81,18 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
+    @FXML
+    private void fiveAMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
+        Consumer<Double> setClicked = (value) -> controller.set5aMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void kirshMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
+        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
 }

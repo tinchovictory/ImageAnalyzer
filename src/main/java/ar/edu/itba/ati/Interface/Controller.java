@@ -110,6 +110,10 @@ public interface Controller {
 
     BufferedImage applySobelMask();
 
+    BufferedImage apply5aMask();
+
+    BufferedImage applyKirshMask();
+
     void setMeanMask(int size);
 
     void setMedianMask(int size);
@@ -123,6 +127,10 @@ public interface Controller {
     void setPrewittMask();
 
     void setSobelMask();
+
+    void set5aMask();
+
+    void setKirshMask();
 
 
 }

@@ -1,13 +1,13 @@
 package ar.edu.itba.ati.model.Masks;
 
-public class SobelMask extends TwoDirectionsMask {
+public class KirshMask extends TwoDirectionsMask {
 
    @Override
    public double[][] generateXMask() {
       double[][] mask = {
-              {-1, -2, -1},
-              {0, 0, 0},
-              {1, 2, 1}
+              {5, 5, 5},
+              {-3, 0 ,-3},
+              {-3, -3, -3}
       };
 
       return mask;
@@ -16,9 +16,9 @@ public class SobelMask extends TwoDirectionsMask {
    @Override
    public double[][] generateYMask() {
       double[][] mask = {
-              {-1, 0, 1},
-              {-2, 0, 2},
-              {-1, 0, 1}
+              {-3, -3, 5},
+              {-3, 0, 5},
+              {-3, -3, 5}
       };
 
       return mask;
