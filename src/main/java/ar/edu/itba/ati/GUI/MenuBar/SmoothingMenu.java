@@ -74,4 +74,11 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
+    @FXML
+    private void sobelMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applySobelMask();
+        Consumer<Double> setClicked = (value) -> controller.setSobelMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
 }

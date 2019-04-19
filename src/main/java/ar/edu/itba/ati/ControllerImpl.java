@@ -6,6 +6,7 @@ import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
 import ar.edu.itba.ati.model.Masks.PrewittMask;
+import ar.edu.itba.ati.model.Masks.SobelMask;
 import ar.edu.itba.ati.model.Masks.TwoDirectionsMask;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
@@ -297,6 +298,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applySobelMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new SobelMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
@@ -330,6 +339,12 @@ public class ControllerImpl implements Controller {
     @Override
     public void setPrewittMask() {
         Mask mask = new PrewittMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setSobelMask() {
+        Mask mask = new SobelMask();
         image.applyMask(mask);
     }
 

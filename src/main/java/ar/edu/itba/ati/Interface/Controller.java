@@ -108,6 +108,8 @@ public interface Controller {
 
     BufferedImage applyPrewittMask();
 
+    BufferedImage applySobelMask();
+
     void setMeanMask(int size);
 
     void setMedianMask(int size);
@@ -119,6 +121,8 @@ public interface Controller {
     void setBorderMask(int size);
 
     void setPrewittMask();
+
+    void setSobelMask();
 
 
 }
