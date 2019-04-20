@@ -1,13 +1,12 @@
 package ar.edu.itba.ati.model.Masks;
 
-import static ar.edu.itba.ati.Utils.getLaplaceGaussValue;
+import ar.edu.itba.ati.Utils;
 
-public class LaplaceGaussCrossingZero extends ZeroCrossingMask {
-
+public class LoGMask extends SimpleMask {
     private double deviation;
 
-    public LaplaceGaussCrossingZero(double deviation) {
-        super(7);
+    public LoGMask(double deviation) {
+        super(3);
         this.deviation = deviation;
     }
 
@@ -17,11 +16,10 @@ public class LaplaceGaussCrossingZero extends ZeroCrossingMask {
 
         for(int x = 0; x < mask.length; x++) {
             for(int y = 0; y < mask[0].length; y++) {
-                mask[x][y] = getLaplaceGaussValue(x, y, deviation);
+                mask[x][y] = Utils.getLaplaceGaussValue(x, y, deviation);
             }
         }
 
         return mask;
     }
-
 }

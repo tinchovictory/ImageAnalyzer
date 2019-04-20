@@ -1,7 +1,7 @@
 package ar.edu.itba.ati.model.Masks;
 
-public class LaplaceCrossingZero extends ZeroCrossingMask {
-    public LaplaceCrossingZero() {
+public class LaplaceMask extends SimpleMask {
+    public LaplaceMask() {
         super(3);
     }
 

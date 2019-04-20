@@ -4,11 +4,9 @@ import ar.edu.itba.ati.model.ImageColorChannel;
 import ar.edu.itba.ati.model.Mask;
 
 public abstract class ZeroCrossingMask extends Mask {
-    private static int MASK_SIZE = 3;
-    private static int MASK_BORDER = (MASK_SIZE - 1) / 2;
 
-    public ZeroCrossingMask() {
-        super(MASK_SIZE, Type.OTHER);
+    public ZeroCrossingMask(int size) {
+        super(size, Type.OTHER);
     }
 
     @Override
@@ -21,8 +19,8 @@ public abstract class ZeroCrossingMask extends Mask {
     private ImageColorChannel applySingleMaskTo(ImageColorChannel originalChannel, double[][] poundedMask) {
         ImageColorChannel newChannel = originalChannel.cloneChannel();
 
-        for(int y = MASK_BORDER; y < originalChannel.getHeight() - MASK_BORDER; y++) {
-            for(int x = MASK_BORDER; x < originalChannel.getWidth() - MASK_BORDER; x++) {
+        for(int y = getBorderLength(); y < originalChannel.getHeight() - getBorderLength(); y++) {
+            for(int x = getBorderLength(); x < originalChannel.getWidth() - getBorderLength(); x++) {
                 applyMaskToPixel(x, y, newChannel, originalChannel, poundedMask);
             }
         }
@@ -33,11 +31,11 @@ public abstract class ZeroCrossingMask extends Mask {
     private ImageColorChannel crossingZeros(ImageColorChannel originalChannel) {
         ImageColorChannel newChannel = originalChannel.cloneChannel();
 
-        for(int y = MASK_BORDER; y < originalChannel.getHeight() - MASK_BORDER; y++) {
-            for(int x = MASK_BORDER + 1; x < originalChannel.getWidth() - MASK_BORDER; x++) {
+        for(int y = getBorderLength(); y < originalChannel.getHeight() - getBorderLength(); y++) {
+            for(int x = getBorderLength() + 1; x < originalChannel.getWidth() - getBorderLength(); x++) {
                 int currentPixel = originalChannel.getPixel(x, y);
                 int prevPixel = originalChannel.getPixel(x - 1, y);
-                Integer nextPixel = x + 1 < originalChannel.getWidth() - MASK_BORDER ? originalChannel.getPixel(x + 1, y) : null;
+                Integer nextPixel = x + 1 < originalChannel.getWidth() - getBorderLength() ? originalChannel.getPixel(x + 1, y) : null;
 
                 if(originalChannel.getPixel(x, y) == 0) {
                     /* Check + 0 - or - 0 + */
@@ -59,6 +57,7 @@ public abstract class ZeroCrossingMask extends Mask {
                     }
                 }
             }
+            newChannel.setPixel(originalChannel.getWidth() - getBorderLength() - 1, y, 0);
         }
 
         return newChannel;

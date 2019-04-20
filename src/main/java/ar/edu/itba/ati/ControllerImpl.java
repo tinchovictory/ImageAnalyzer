@@ -320,6 +320,22 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyLaplaceMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new LaplaceMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyLoGMask(double deviation) {
+        Image copy = image.cloneImage();
+        Mask mask = new LoGMask(deviation);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public BufferedImage applyLaplaceCrossingZeroMask() {
         Image copy = image.cloneImage();
         Mask mask = new LaplaceCrossingZero();
@@ -374,6 +390,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void setKirshMask() {
         Mask mask = new KirshMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLaplaceMask() {
+        Mask mask = new LaplaceMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLoGMask(double deviation) {
+        Mask mask = new LoGMask(deviation);
         image.applyMask(mask);
     }
 

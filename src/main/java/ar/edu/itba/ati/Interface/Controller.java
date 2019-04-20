@@ -114,6 +114,10 @@ public interface Controller {
 
     BufferedImage applyKirshMask();
 
+    BufferedImage applyLaplaceMask();
+
+    BufferedImage applyLoGMask(double deviation);
+
     BufferedImage applyLaplaceCrossingZeroMask();
 
     BufferedImage applyLoGCrossingZeroMask(double deviation);
@@ -135,6 +139,10 @@ public interface Controller {
     void set5aMask();
 
     void setKirshMask();
+
+    void setLaplaceMask();
+
+    void setLoGMask(double deviation);
 
     void setLaplaceCrossingZeroMask();
 
