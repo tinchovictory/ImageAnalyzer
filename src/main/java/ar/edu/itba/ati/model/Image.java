@@ -268,6 +268,12 @@ public class Image {
         this.blueChannel.applyThreshold(threshold);
     }
 
+    public void applyGlobalThreshold() {
+        this.redChannel.applyGlobalThreshold();
+        this.greenChannel.applyGlobalThreshold();
+        this.redChannel.applyGlobalThreshold();
+    }
+
     public double[] getGreyFrequency() {
         Image copyImage = this.cloneImage();
         copyImage.toGrayScale();

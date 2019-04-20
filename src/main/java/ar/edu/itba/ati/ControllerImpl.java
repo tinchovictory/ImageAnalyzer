@@ -447,6 +447,18 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyGlobalThreshold() {
+        Image copy = image.cloneImage();
+        copy.applyGlobalThreshold();
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setGlobalThreshold() {
+        image.applyGlobalThreshold();
+    }
+
+    @Override
     public BufferedImage applyAditiveGaussNoise(double phi, double mu,double contamination) {
         Image copy = image.cloneImage();
         copy.applyAditiveGaussNoise(phi, mu, contamination);

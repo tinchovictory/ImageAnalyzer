@@ -235,7 +235,13 @@ public class ToolsMenu extends Menu {
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyThreshold(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setThreshold(value.intValue());
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0,"Threshold");
+    }
 
+    @FXML
+    private void globalThreshold(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyGlobalThreshold();
+        Consumer<Double> setClicked = (value) -> controller.setGlobalThreshold();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0,"Threshold");
     }
 
     @FXML

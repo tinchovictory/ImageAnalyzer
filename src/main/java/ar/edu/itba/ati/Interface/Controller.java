@@ -80,6 +80,10 @@ public interface Controller {
 
     void setThreshold(int threshold);
 
+    BufferedImage applyGlobalThreshold();
+
+    void setGlobalThreshold();
+
     BufferedImage applyAditiveGaussNoise(double phi, double mu, double contamination);
 
     BufferedImage applyMultiplicativeRayleighNoise(double epsilon,double contamination);

@@ -139,6 +139,41 @@ public class ImageColorChannel {
         }
     }
 
+    public void applyGlobalThreshold() {
+        int prevThreshold = 0;
+        int threshold = 128;
+
+        int dT = 1;
+        int counter = 0;
+
+        while(Math.abs(prevThreshold - threshold) > dT) {
+            counter++;
+            int m1 = 0, n1 = 0;
+            int m2 = 0, n2 = 0;
+
+            for(int i = 0; i < pixels.length; i++) {
+                for(int j = 0; j < pixels[0].length; j++) {
+                    if(this.pixels[i][j] <= threshold) {
+                        m1 += this.pixels[i][j];
+                        n1++;
+                    } else {
+                        m2 += this.pixels[i][j];
+                        n2++;
+                    }
+                }
+            }
+
+            m1 /= n1;
+            m2 /= n2;
+
+            prevThreshold = threshold;
+            threshold = (m1 + m2) / 2;
+        }
+
+        applyThreshold(threshold);
+        System.out.println(threshold);
+    }
+
     public double[] getFrequency() {
         double[] frequency = new double[256];
 
