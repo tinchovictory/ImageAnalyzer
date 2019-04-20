@@ -114,6 +114,10 @@ public interface Controller {
 
     BufferedImage applyKirshMask();
 
+    BufferedImage applyLaplaceCrossingZeroMask();
+
+    BufferedImage applyLoGCrossingZeroMask(double deviation);
+
     void setMeanMask(int size);
 
     void setMedianMask(int size);
@@ -131,6 +135,10 @@ public interface Controller {
     void set5aMask();
 
     void setKirshMask();
+
+    void setLaplaceCrossingZeroMask();
+
+    void setLoGCrossingZeroMask(double deviation);
 
 
 }

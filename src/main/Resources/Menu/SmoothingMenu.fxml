@@ -14,4 +14,6 @@
     <MenuItem text="Sobel Filter" onAction="#sobelMask"/>
     <MenuItem text="5A Filter" onAction="#fiveAMask"/>
     <MenuItem text="Kirsh Filter" onAction="#kirshMask"/>
+    <MenuItem text="Laplace Crossing Zero Filter" onAction="#laplaceCrossingZeroMask"/>
+    <MenuItem text="LoG Crossing Zero Filter" onAction="#loGCrossingZeroMask"/>
 </fx:root>

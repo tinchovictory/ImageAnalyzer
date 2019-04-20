@@ -95,4 +95,18 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
+
+    @FXML
+    private void laplaceCrossingZeroMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask();
+        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void loGCrossingZeroMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGCrossingZeroMask(value);
+        Consumer<Double> setClicked = (value) -> controller.setLoGCrossingZeroMask(value);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Deviation");
+    }
 }
