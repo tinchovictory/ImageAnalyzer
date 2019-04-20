@@ -3,6 +3,8 @@ package ar.edu.itba.ati.model;
 import ar.edu.itba.ati.Utils;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ImageColorChannel {
     private int width;
@@ -144,10 +146,8 @@ public class ImageColorChannel {
         int threshold = 128;
 
         int dT = 1;
-        int counter = 0;
 
         while(Math.abs(prevThreshold - threshold) > dT) {
-            counter++;
             int m1 = 0, n1 = 0;
             int m2 = 0, n2 = 0;
 
@@ -171,7 +171,66 @@ public class ImageColorChannel {
         }
 
         applyThreshold(threshold);
-        System.out.println(threshold);
+    }
+
+    public void applyOtsuThreshold() {
+        double[] freq = getFrequency();
+
+        double[] accumFreq = new double[256];
+        double[] accumMean = new double[256];
+
+        double accum = 0;
+        double accumM = 0;
+
+        for(int i = 0; i < freq.length; i++) {
+            accum += freq[i];
+            accumM += (freq[i] * i);
+
+            accumFreq[i] = accum;
+            accumMean[i] = accumM;
+        }
+
+        double mg = accumMean[255];
+
+        double[] variance = getOtsuVariance(accumFreq, accumMean, mg);
+
+        int max = getAllOtsuVarianceMax(variance);
+
+        applyThreshold(max);
+    }
+
+    private double[] getOtsuVariance(double[] accumFreq, double[] accumMean, double mg) {
+        double[] variance = new double[256];
+
+        for(int i = 0; i < variance.length; i++) {
+            variance[i] = Math.pow(mg * accumFreq[i] - accumMean[i], 2) / ( accumFreq[i] * ( 1 -  accumFreq[i]) );
+        }
+
+        return variance;
+    }
+
+    private int getAllOtsuVarianceMax(double[] variance) {
+        double max = 0;
+        Set<Integer> maxIdxs = new HashSet<>();
+
+        for(int i = 0; i < variance.length; i++) {
+            if(variance[i] > max) {
+                max = variance[i];
+                maxIdxs.clear();
+                maxIdxs.add(i);
+            } else if(variance[i] == max) {
+                maxIdxs.add(i);
+            }
+        }
+
+        int sum = 0;
+        int ammount = 0;
+        for(Integer i : maxIdxs) {
+            sum += i;
+            ammount++;
+        }
+
+        return sum / ammount;
     }
 
     public double[] getFrequency() {

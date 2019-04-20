@@ -459,6 +459,18 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyOtsuThreshold() {
+        Image copy = image.cloneImage();
+        copy.applyOtsuThreshold();
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setOtsuThreshold() {
+        image.applyOtsuThreshold();
+    }
+
+    @Override
     public BufferedImage applyAditiveGaussNoise(double phi, double mu,double contamination) {
         Image copy = image.cloneImage();
         copy.applyAditiveGaussNoise(phi, mu, contamination);

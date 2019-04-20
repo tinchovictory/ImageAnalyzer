@@ -245,6 +245,13 @@ public class ToolsMenu extends Menu {
     }
 
     @FXML
+    private void otsuThreshold(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyOtsuThreshold();
+        Consumer<Double> setClicked = (value) -> controller.setOtsuThreshold();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0,"Threshold");
+    }
+
+    @FXML
     private void powerFunction(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.powerFunctionBuffered(value);
         Consumer<Double> setClicked = (value) -> controller.powerFunction(value);

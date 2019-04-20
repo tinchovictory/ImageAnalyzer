@@ -271,7 +271,13 @@ public class Image {
     public void applyGlobalThreshold() {
         this.redChannel.applyGlobalThreshold();
         this.greenChannel.applyGlobalThreshold();
-        this.redChannel.applyGlobalThreshold();
+        this.blueChannel.applyGlobalThreshold();
+    }
+
+    public void applyOtsuThreshold() {
+        this.redChannel.applyOtsuThreshold();
+        this.greenChannel.applyOtsuThreshold();
+        this.blueChannel.applyOtsuThreshold();
     }
 
     public double[] getGreyFrequency() {

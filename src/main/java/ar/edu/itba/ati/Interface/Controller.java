@@ -84,6 +84,10 @@ public interface Controller {
 
     void setGlobalThreshold();
 
+    BufferedImage applyOtsuThreshold();
+
+    void setOtsuThreshold();
+
     BufferedImage applyAditiveGaussNoise(double phi, double mu, double contamination);
 
     BufferedImage applyMultiplicativeRayleighNoise(double epsilon,double contamination);
