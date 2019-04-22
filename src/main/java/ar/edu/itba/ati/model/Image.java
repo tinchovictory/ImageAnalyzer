@@ -423,6 +423,14 @@ public class Image {
         normalizeImage(mask.getBorderLength());
     }
 
+    public void applyIsotropicDiffusion(int iterations) {
+        redChannel.applyIsotropicDiffusion(iterations);
+        greenChannel.applyIsotropicDiffusion(iterations);
+        blueChannel.applyIsotropicDiffusion(iterations);
+
+        normalizeImage();
+    }
+
     private int minPixel() {
         return minPixel(0);
     }

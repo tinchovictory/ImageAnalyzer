@@ -233,6 +233,41 @@ public class ImageColorChannel {
         return sum / ammount;
     }
 
+    public void applyIsotropicDiffusion(int iterations) {
+        for(int i = 0; i < iterations; i++) {
+            ImageColorChannel originalChannel = this.cloneChannel();
+            applyIsotropicDiffusion(originalChannel);
+        }
+    }
+
+    private void applyIsotropicDiffusion(ImageColorChannel originalChannel) {
+        for(int y = 0; y < getHeight(); y++) {
+            for(int x = 0; x < getWidth(); x++) {
+                int DnIij = 0, DsIij = 0, DeIij = 0, DwIij = 0;
+                int centerPixel = originalChannel.getPixel(x, y);
+
+                if(x > 0) {
+                    DwIij = originalChannel.getPixel(x - 1, y) - centerPixel;
+                }
+                if(x < getWidth() - 1) {
+                    DeIij = originalChannel.getPixel(x + 1, y) - centerPixel;
+                }
+                if(y > 0) {
+                    DnIij = originalChannel.getPixel(x, y - 1) - centerPixel;
+                }
+                if(y < getWidth() - 1) {
+                    DsIij = originalChannel.getPixel(x, y + 1) - centerPixel;
+                }
+
+                double Cnij = 1, Csij = 1, Ceij = 1, Cwij = 1;
+
+                double newColor = centerPixel + 0.25 * ( DnIij * Cnij + DsIij * Csij + DeIij * Ceij + DwIij * Cwij);
+
+                setPixel(x, y, (int) newColor);
+            }
+        }
+    }
+
     public double[] getFrequency() {
         double[] frequency = new double[256];
 

@@ -39,14 +39,12 @@ public abstract class ZeroCrossingMask extends Mask {
 
                 if(originalChannel.getPixel(x, y) == 0) {
                     /* Check + 0 - or - 0 + */
-                    if(nextPixel != null) {
-                        if(prevPixel > 0 && nextPixel < 0 || prevPixel < 0 && nextPixel > 0) {
-                            newChannel.setPixel(x, y, Math.abs(prevPixel) + Math.abs(nextPixel));
-                        } else {
-                            newChannel.setPixel(x, y, 0);
-                        }
-                        newChannel.setPixel(x - 1, y, 0);
+                    if(nextPixel != null && (prevPixel > 0 && nextPixel < 0 || prevPixel < 0 && nextPixel > 0)) {
+                        newChannel.setPixel(x, y, Math.abs(prevPixel) + Math.abs(nextPixel));
+                    } else {
+                        newChannel.setPixel(x, y, 0);
                     }
+                    newChannel.setPixel(x - 1, y, 0);
 
                 } else {
                     /* Check + - or - + */

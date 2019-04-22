@@ -352,6 +352,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyIsotropicDiffusion(int iterations) {
+        Image copy = image.cloneImage();
+        copy.applyIsotropicDiffusion(iterations);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
@@ -415,6 +422,11 @@ public class ControllerImpl implements Controller {
     public void setLoGCrossingZeroMask(double deviation) {
         Mask mask = new LaplaceGaussCrossingZero(deviation);
         image.applyMask(mask);
+    }
+
+    @Override
+    public void setIsotropicDiffusion(int iterations) {
+        image.applyIsotropicDiffusion(iterations);
     }
 
     @Override

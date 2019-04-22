@@ -122,4 +122,11 @@ public class SmoothingMenu extends Menu {
         Consumer<Double> setClicked = (value) -> controller.setLoGCrossingZeroMask(value);
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,"Deviation");
     }
+
+    @FXML
+    private void isotropicDiffusion(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyIsotropicDiffusion(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setIsotropicDiffusion(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,50,2,"Iterations");
+    }
 }

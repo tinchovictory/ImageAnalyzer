@@ -48,4 +48,9 @@ public class Utils {
 
         return - a * b * c;
     }
+
+    public static double getGaussianKernel(int x, int y, double t) {
+        double exp = - ( x * x + y * y ) / (4 * t);
+        return 1 / ( 4 * Math.PI * t ) * Math.exp(exp);
+    }
 }

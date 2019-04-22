@@ -130,6 +130,8 @@ public interface Controller {
 
     BufferedImage applyLoGCrossingZeroMask(double deviation);
 
+    BufferedImage applyIsotropicDiffusion(int iterations);
+
     void setMeanMask(int size);
 
     void setMedianMask(int size);
@@ -156,6 +158,7 @@ public interface Controller {
 
     void setLoGCrossingZeroMask(double deviation);
 
+    void setIsotropicDiffusion(int iterations);
 
 }
 
