@@ -115,7 +115,7 @@ public class SmoothingMenu extends Menu {
     private void loGMask(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGMask(value);
         Consumer<Double> setClicked = (value) -> controller.setLoGMask(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Deviation");
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,"Deviation");
     }
 
     @FXML
@@ -129,6 +129,6 @@ public class SmoothingMenu extends Menu {
     private void loGCrossingZeroMask(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGCrossingZeroMask(value);
         Consumer<Double> setClicked = (value) -> controller.setLoGCrossingZeroMask(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Deviation");
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,"Deviation");
     }
 }
