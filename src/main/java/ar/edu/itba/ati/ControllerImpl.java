@@ -359,6 +359,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyAnisotropicDiffusion(int iterations) {
+        Image copy = image.cloneImage();
+        copy.applyAnisotropicDiffusion(iterations);
+        return copy.getBufferdImage();
+    }
+
+    @Override
     public BufferedImage applyBilateralFilter(int size, double spaceSigma, double colorSigma) {
         Image copy = image.cloneImage();
         Mask mask = new BilateralFilter(size,spaceSigma,colorSigma);
@@ -441,6 +448,11 @@ public class ControllerImpl implements Controller {
     @Override
     public void setIsotropicDiffusion(int iterations) {
         image.applyIsotropicDiffusion(iterations);
+    }
+
+    @Override
+    public void setAnisotropicDiffusion(int iterations) {
+        image.applyAnisotropicDiffusion(iterations);
     }
 
     @Override

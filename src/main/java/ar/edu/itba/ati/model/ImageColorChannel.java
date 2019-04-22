@@ -5,6 +5,7 @@ import ar.edu.itba.ati.Utils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 public class ImageColorChannel {
     private int width;
@@ -236,11 +237,18 @@ public class ImageColorChannel {
     public void applyIsotropicDiffusion(int iterations) {
         for(int i = 0; i < iterations; i++) {
             ImageColorChannel originalChannel = this.cloneChannel();
-            applyIsotropicDiffusion(originalChannel);
+            applyDiffusion(originalChannel, 0.25, x -> 1.0);
         }
     }
 
-    private void applyIsotropicDiffusion(ImageColorChannel originalChannel) {
+    public void applyAnisotropicDiffusion(int iterations, double lambda) {
+        for(int i = 0; i < iterations; i++) {
+            ImageColorChannel originalChannel = this.cloneChannel();
+            applyDiffusion(originalChannel, lambda, x -> Utils.leclercBorders(x, 1));
+        }
+    }
+
+    private void applyDiffusion(ImageColorChannel originalChannel, double lambda, Function<Integer, Double> g) {
         for(int y = 0; y < getHeight(); y++) {
             for(int x = 0; x < getWidth(); x++) {
                 int DnIij = 0, DsIij = 0, DeIij = 0, DwIij = 0;
@@ -259,9 +267,12 @@ public class ImageColorChannel {
                     DsIij = originalChannel.getPixel(x, y + 1) - centerPixel;
                 }
 
-                double Cnij = 1, Csij = 1, Ceij = 1, Cwij = 1;
+                double Cnij = g.apply(DnIij);
+                double Csij = g.apply(DsIij);
+                double Ceij = g.apply(DeIij);
+                double Cwij = g.apply(DwIij);
 
-                double newColor = centerPixel + 0.25 * ( DnIij * Cnij + DsIij * Csij + DeIij * Ceij + DwIij * Cwij);
+                double newColor = centerPixel + lambda * ( DnIij * Cnij + DsIij * Csij + DeIij * Ceij + DwIij * Cwij);
 
                 setPixel(x, y, (int) newColor);
             }

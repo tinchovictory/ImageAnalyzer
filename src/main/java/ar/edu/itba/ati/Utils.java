@@ -53,4 +53,8 @@ public class Utils {
         double exp = - ( x * x + y * y ) / (4 * t);
         return 1 / ( 4 * Math.PI * t ) * Math.exp(exp);
     }
+
+    public static double leclercBorders(int x, double deviation) {
+        return Math.exp(- x * x / (deviation * deviation));
+    }
 }

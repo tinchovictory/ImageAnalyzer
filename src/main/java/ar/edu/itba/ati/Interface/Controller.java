@@ -132,6 +132,8 @@ public interface Controller {
 
     BufferedImage applyIsotropicDiffusion(int iterations);
 
+    BufferedImage applyAnisotropicDiffusion(int iterations);
+
     BufferedImage applyBilateralFilter(int size, double spaceSigma, double colorSigma);
 
     void setMeanMask(int size);
@@ -161,6 +163,8 @@ public interface Controller {
     void setLoGCrossingZeroMask(double deviation);
 
     void setIsotropicDiffusion(int iterations);
+
+    void setAnisotropicDiffusion(int iterations);
 
     void setBilateralFilter(int size, double spaceSigma, double colorSigma);
 

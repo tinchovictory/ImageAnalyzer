@@ -431,6 +431,14 @@ public class Image {
         normalizeImage();
     }
 
+    public void applyAnisotropicDiffusion(int iterations) {
+        redChannel.applyAnisotropicDiffusion(iterations, 1);
+        greenChannel.applyAnisotropicDiffusion(iterations, 1);
+        blueChannel.applyAnisotropicDiffusion(iterations, 1);
+
+        normalizeImage();
+    }
+
     private int minPixel() {
         return minPixel(0);
     }
