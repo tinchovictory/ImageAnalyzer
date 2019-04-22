@@ -6,7 +6,7 @@ public class LoGMask extends SimpleMask {
     private double deviation;
 
     public LoGMask(double deviation) {
-        super(3);
+        super(7);
         this.deviation = deviation;
     }
 
@@ -14,9 +14,11 @@ public class LoGMask extends SimpleMask {
     public double[][] getPoundedMask() {
         double[][] mask = new double[getMaskSize()][getMaskSize()];
 
-        for(int x = 0; x < mask.length; x++) {
-            for(int y = 0; y < mask[0].length; y++) {
-                mask[x][y] = Utils.getLaplaceGaussValue(x, y, deviation);
+        int borderLength = mask.length / 2;
+
+        for(int x = -borderLength, i = 0; x <= borderLength; x++, i++) {
+            for(int y = -borderLength, j = 0; y <= borderLength; y++, j++) {
+                mask[i][j] = Utils.getLaplaceGaussValue(x, y, deviation);
             }
         }
 
