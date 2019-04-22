@@ -32,7 +32,6 @@ public class SliderWithImageWindow extends VBox implements Initializable {
     @FXML
     private Slider slider;
 
-
     @FXML
     private Label secondValueLabel;
 
@@ -105,7 +104,7 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         try {
             loader.load();
         } catch(IOException e) {
-            System.out.println("Error opening Contrast.fmxl");
+            System.out.println("Error opening DoubleSliderImageWindow.fmxl");
             e.printStackTrace();
         }
         slider.setBlockIncrement(increment);
@@ -220,6 +219,10 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         }else{
 
         }
+
+        image.setPreserveRatio(true);
+        image.setFitHeight(300);
+        image.setFitWidth(400);
 
         cancelButton.setOnAction(e-> stage.close());
     }

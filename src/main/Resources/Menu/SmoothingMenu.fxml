@@ -19,4 +19,5 @@
     <MenuItem text="Laplace Crossing Zero Filter" onAction="#laplaceCrossingZeroMask"/>
     <MenuItem text="LoG Crossing Zero Filter" onAction="#loGCrossingZeroMask"/>
     <MenuItem text="Isotropic Diffusion" onAction="#isotropicDiffusion"/>
+    <MenuItem text="Bilateral Filter" onAction="#bilateralFilter"/>
 </fx:root>

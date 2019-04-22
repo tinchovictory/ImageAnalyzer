@@ -359,6 +359,20 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public BufferedImage applyBilateralFilter(int size, double spaceSigma, double colorSigma) {
+        Image copy = image.cloneImage();
+        Mask mask = new BilateralFilter(size,spaceSigma,colorSigma);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setBilateralFilter(int size, double spaceSigma, double colorSigma) {
+        Mask mask = new BilateralFilter(size,spaceSigma,colorSigma);
+        image.applyMask(mask);
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
