@@ -39,4 +39,13 @@ public class Utils {
 
         return (int) (m * value + b);
     }
+
+
+    public static double getLaplaceGaussValue(int x, int y, double deviation) {
+        double a = 1 / ( Math.sqrt(2 * Math.PI) * Math.pow(deviation, 3) );
+        double b = 2 - ( x * x + y * y) / ( deviation * deviation );
+        double c = Math.exp( - ( x * x + y * y) / ( 2 * deviation * deviation) );
+
+        return - a * b * c;
+    }
 }

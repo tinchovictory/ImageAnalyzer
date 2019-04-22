@@ -80,6 +80,14 @@ public interface Controller {
 
     void setThreshold(int threshold);
 
+    BufferedImage applyGlobalThreshold();
+
+    void setGlobalThreshold();
+
+    BufferedImage applyOtsuThreshold();
+
+    void setOtsuThreshold();
+
     BufferedImage applyAditiveGaussNoise(double phi, double mu, double contamination);
 
     BufferedImage applyMultiplicativeRayleighNoise(double epsilon,double contamination);
@@ -106,9 +114,21 @@ public interface Controller {
 
     BufferedImage applyBorderMask(int size);
 
-    BufferedImage applyPrewittXMask(int size);
+    BufferedImage applyPrewittMask();
 
-    BufferedImage applyPrewittYMask(int size);
+    BufferedImage applySobelMask();
+
+    BufferedImage apply5aMask();
+
+    BufferedImage applyKirshMask();
+
+    BufferedImage applyLaplaceMask();
+
+    BufferedImage applyLoGMask(double deviation);
+
+    BufferedImage applyLaplaceCrossingZeroMask();
+
+    BufferedImage applyLoGCrossingZeroMask(double deviation);
 
     void setMeanMask(int size);
 
@@ -120,11 +140,21 @@ public interface Controller {
 
     void setBorderMask(int size);
 
-    void setPrewittXMask(int size);
+    void setPrewittMask();
 
-    void setPrewittYMask(int size);
+    void setSobelMask();
 
+    void set5aMask();
 
+    void setKirshMask();
+
+    void setLaplaceMask();
+
+    void setLoGMask(double deviation);
+
+    void setLaplaceCrossingZeroMask();
+
+    void setLoGCrossingZeroMask(double deviation);
 
 
 }

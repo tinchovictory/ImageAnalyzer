@@ -5,6 +5,7 @@ import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
+import ar.edu.itba.ati.model.Masks.*;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
 
@@ -287,17 +288,65 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public BufferedImage applyPrewittXMask(int size) {
+    public BufferedImage applyPrewittMask() {
         Image copy = image.cloneImage();
-        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+        Mask mask = new PrewittMask();
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
 
     @Override
-    public BufferedImage applyPrewittYMask(int size) {
+    public BufferedImage applySobelMask() {
         Image copy = image.cloneImage();
-        Mask mask = new Mask(size, Mask.Type.PREWITT_Y);
+        Mask mask = new SobelMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage apply5aMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new FiveAMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyKirshMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new KirshMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyLaplaceMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new LaplaceMask();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyLoGMask(double deviation) {
+        Image copy = image.cloneImage();
+        Mask mask = new LoGMask(deviation);
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyLaplaceCrossingZeroMask() {
+        Image copy = image.cloneImage();
+        Mask mask = new LaplaceCrossingZero();
+        copy.applyMask(mask);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyLoGCrossingZeroMask(double deviation) {
+        Image copy = image.cloneImage();
+        Mask mask = new LaplaceGaussCrossingZero(deviation);
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
@@ -306,7 +355,6 @@ public class ControllerImpl implements Controller {
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
-
     }
 
     @Override
@@ -334,14 +382,50 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void setPrewittXMask(int size) {
-        Mask mask = new Mask(size, Mask.Type.PREWITT_X);
+    public void set5aMask() {
+        Mask mask = new FiveAMask();
         image.applyMask(mask);
     }
 
     @Override
-    public void setPrewittYMask(int size) {
-        Mask mask = new Mask(size, Mask.Type.PREWITT_Y);
+    public void setKirshMask() {
+        Mask mask = new KirshMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLaplaceMask() {
+        Mask mask = new LaplaceMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLoGMask(double deviation) {
+        Mask mask = new LoGMask(deviation);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLaplaceCrossingZeroMask() {
+        Mask mask = new LaplaceCrossingZero();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setLoGCrossingZeroMask(double deviation) {
+        Mask mask = new LaplaceGaussCrossingZero(deviation);
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setPrewittMask() {
+        Mask mask = new PrewittMask();
+        image.applyMask(mask);
+    }
+
+    @Override
+    public void setSobelMask() {
+        Mask mask = new SobelMask();
         image.applyMask(mask);
     }
 
@@ -360,6 +444,30 @@ public class ControllerImpl implements Controller {
     @Override
     public void setThreshold(int threshold) {
         image.applyThreshold(threshold);
+    }
+
+    @Override
+    public BufferedImage applyGlobalThreshold() {
+        Image copy = image.cloneImage();
+        copy.applyGlobalThreshold();
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setGlobalThreshold() {
+        image.applyGlobalThreshold();
+    }
+
+    @Override
+    public BufferedImage applyOtsuThreshold() {
+        Image copy = image.cloneImage();
+        copy.applyOtsuThreshold();
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setOtsuThreshold() {
+        image.applyOtsuThreshold();
     }
 
     @Override

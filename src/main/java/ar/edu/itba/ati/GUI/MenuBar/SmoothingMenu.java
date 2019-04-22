@@ -68,17 +68,58 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void prewittXMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittXMask(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setPrewittXMask(value.intValue());
+    private void prewittMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
+        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
     @FXML
-    private void prewittYMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittYMask(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setPrewittYMask(value.intValue());
+    private void sobelMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applySobelMask();
+        Consumer<Double> setClicked = (value) -> controller.setSobelMask();
         SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
     }
 
+    @FXML
+    private void fiveAMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
+        Consumer<Double> setClicked = (value) -> controller.set5aMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void kirshMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
+        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void laplaceMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceMask();
+        Consumer<Double> setClicked = (value) -> controller.setLaplaceMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void loGMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGMask(value);
+        Consumer<Double> setClicked = (value) -> controller.setLoGMask(value);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Deviation");
+    }
+
+    @FXML
+    private void laplaceCrossingZeroMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask();
+        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask();
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+    }
+
+    @FXML
+    private void loGCrossingZeroMask(){
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGCrossingZeroMask(value);
+        Consumer<Double> setClicked = (value) -> controller.setLoGCrossingZeroMask(value);
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Deviation");
+    }
 }

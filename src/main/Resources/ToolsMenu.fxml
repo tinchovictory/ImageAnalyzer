@@ -21,6 +21,8 @@
     <MenuItem text="Modify Contrast" onAction="#modifyContrast"/>
     <MenuItem text="Equalize Image" onAction="#equalizeImage"/>
     <MenuItem text="Modify Threshold" onAction="#modifyThreshold"/>
+    <MenuItem text="Global Threshold" onAction="#globalThreshold"/>
+    <MenuItem text="Otsu Threshold" onAction="#otsuThreshold"/>
     <MenuItem text="To grey scale" onAction="#toGreyScale"/>
     <MenuItem text="Power function" onAction="#powerFunction"/>
 
