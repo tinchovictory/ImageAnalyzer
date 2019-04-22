@@ -130,6 +130,8 @@ public interface Controller {
 
     BufferedImage applyLoGCrossingZeroMask(double deviation);
 
+    BufferedImage applyBilateralFilter(int size, double spaceSigma, double colorSigma);
+
     void setMeanMask(int size);
 
     void setMedianMask(int size);
@@ -155,6 +157,8 @@ public interface Controller {
     void setLaplaceCrossingZeroMask();
 
     void setLoGCrossingZeroMask(double deviation);
+
+    void setBilateralFilter(int size, double spaceSigma, double colorSigma);
 
 
 }

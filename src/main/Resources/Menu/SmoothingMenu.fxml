@@ -18,4 +18,5 @@
     <MenuItem text="LoG Filter" onAction="#loGMask"/>
     <MenuItem text="Laplace Crossing Zero Filter" onAction="#laplaceCrossingZeroMask"/>
     <MenuItem text="LoG Crossing Zero Filter" onAction="#loGCrossingZeroMask"/>
+    <MenuItem text="Bilateral Filter" onAction="#bilateralFilter"/>
 </fx:root>

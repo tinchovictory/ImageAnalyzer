@@ -68,6 +68,15 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
+    private void bilateralFilter(){
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyBilateralFilter(7,value.intValue(),value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setBilateralFilter(7,value.intValue(),value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,0.5,0,50,2,"Space","Color");
+    }
+
+
+
+    @FXML
     private void prewittMask(){
         Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
         Consumer<Double> setClicked = (value) -> controller.setPrewittMask();

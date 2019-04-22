@@ -220,6 +220,10 @@ public class SliderWithImageWindow extends VBox implements Initializable {
 
         }
 
+        image.setPreserveRatio(true);
+        image.setFitHeight(300);
+        image.setFitWidth(400);
+
         cancelButton.setOnAction(e-> stage.close());
     }
 
