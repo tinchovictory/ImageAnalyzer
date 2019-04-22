@@ -16,9 +16,9 @@ public class KirshMask extends TwoDirectionsMask {
    @Override
    public double[][] generateYMask() {
       double[][] mask = {
-              {-3, -3, 5},
-              {-3, 0, 5},
-              {-3, -3, 5}
+              {5, -3, -3},
+              {5, 0, -3},
+              {5, -3, -3}
       };
 
       return mask;
