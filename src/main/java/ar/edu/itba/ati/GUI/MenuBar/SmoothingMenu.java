@@ -140,9 +140,16 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void anisotropicDiffusion(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyAnisotropicDiffusion(value.intValue());
-        Consumer<Double> setClicked = (value) -> controller.setAnisotropicDiffusion(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,50,2,"Iterations");
+    private void anisotropicDiffusionLeclerc(){
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLeclerc(value, value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLeclerc(value, value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,10.0,0.5,0,50,2,"Lambda","Deviation");
+    }
+
+    @FXML
+    private void anisotropicDiffusionLorentziano(){
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLorentziano(value, value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value, value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,10.0,0.5,0,50,2,"Lambda","Deviation");
     }
 }

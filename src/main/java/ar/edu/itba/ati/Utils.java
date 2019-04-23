@@ -57,4 +57,13 @@ public class Utils {
     public static double leclercBorders(int x, double deviation) {
         return Math.exp(- x * x / (deviation * deviation));
     }
+
+    public static double lorentzianoBorders(int x, double deviation) {
+        return 1 / ( (x * x) / (deviation * deviation) + 1);
+    }
+
+
+    public enum AnisotroplicDiffusionType {
+        LECLERC, LORENTZIANO;
+    }
 }

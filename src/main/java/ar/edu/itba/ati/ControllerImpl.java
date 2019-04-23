@@ -359,9 +359,16 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public BufferedImage applyAnisotropicDiffusion(int iterations) {
+    public BufferedImage applyAnisotropicDiffusionLeclerc(double lambda, double deviation) {
         Image copy = image.cloneImage();
-        copy.applyAnisotropicDiffusion(iterations);
+        copy.applyAnisotropicDiffusion(lambda, deviation, Utils.AnisotroplicDiffusionType.LECLERC);
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public BufferedImage applyAnisotropicDiffusionLorentziano(double lambda, double deviation) {
+        Image copy = image.cloneImage();
+        copy.applyAnisotropicDiffusion(lambda, deviation, Utils.AnisotroplicDiffusionType.LORENTZIANO);
         return copy.getBufferdImage();
     }
 
@@ -451,8 +458,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void setAnisotropicDiffusion(int iterations) {
-        image.applyAnisotropicDiffusion(iterations);
+    public void setAnisotropicDiffusionLeclerc(double lambda, double deviation) {
+        image.applyAnisotropicDiffusion(lambda, deviation, Utils.AnisotroplicDiffusionType.LECLERC);
+    }
+
+    @Override
+    public void setAnisotropicDiffusionLorentziano(double lambda, double deviation) {
+        image.applyAnisotropicDiffusion(lambda, deviation, Utils.AnisotroplicDiffusionType.LORENTZIANO);
     }
 
     @Override

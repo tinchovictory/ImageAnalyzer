@@ -241,10 +241,16 @@ public class ImageColorChannel {
         }
     }
 
-    public void applyAnisotropicDiffusion(int iterations, double lambda) {
+    public void applyAnisotropicDiffusion(int iterations, double lambda, double deviation, Utils.AnisotroplicDiffusionType type) {
+        Function<Integer, Double> function = x -> Utils.leclercBorders(x, deviation);
+
+        if(type == Utils.AnisotroplicDiffusionType.LORENTZIANO) {
+            function = x -> Utils.lorentzianoBorders(x, deviation);
+        }
+
         for(int i = 0; i < iterations; i++) {
             ImageColorChannel originalChannel = this.cloneChannel();
-            applyDiffusion(originalChannel, lambda, x -> Utils.leclercBorders(x, 1));
+            applyDiffusion(originalChannel, lambda, function);
         }
     }
 
