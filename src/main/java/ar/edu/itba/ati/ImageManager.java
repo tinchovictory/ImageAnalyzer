@@ -70,6 +70,8 @@ public class ImageManager {
             return ImageFormat.IMAGE_FORMAT_PGM;
         } else if(image.getImageExtension() == ImageExtension.PPM) {
             return ImageFormat.IMAGE_FORMAT_PPM;
+        } else if(image.getImageExtension() == ImageExtension.RAW) {
+            return ImageFormat.IMAGE_FORMAT_PPM;
         }
         throw new IllegalArgumentException();
     }
