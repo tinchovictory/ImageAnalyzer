@@ -145,16 +145,16 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void anisotropicDiffusionLeclerc(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLeclerc(value, value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLeclerc(value, value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,10.0,0.5,0,50,2,"Lambda","Deviation");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLeclerc(value.intValue(), value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLeclerc(value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,80,1,0,50,2,"Iterations","Deviation");
     }
 
     @FXML
     private void anisotropicDiffusionLorentziano(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLorentziano(value, value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value, value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,10.0,0.5,0,50,2,"Lambda","Deviation");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLorentziano(value.intValue(), value2);
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,80,1,0,50,2,"Iterations","Deviation");
     }
 
 
