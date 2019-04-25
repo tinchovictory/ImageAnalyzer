@@ -431,10 +431,10 @@ public class Image {
         normalizeImage();
     }
 
-    public void applyAnisotropicDiffusion(double lambda, double deviation, Utils.AnisotroplicDiffusionType type) {
-        redChannel.applyAnisotropicDiffusion(40, lambda, deviation, type);
-        greenChannel.applyAnisotropicDiffusion(40, lambda, deviation, type);
-        blueChannel.applyAnisotropicDiffusion(40, lambda, deviation, type);
+    public void applyAnisotropicDiffusion(int iterations, double deviation, Utils.AnisotroplicDiffusionType type) {
+        redChannel.applyAnisotropicDiffusion(iterations, 0.25, deviation, type);
+        greenChannel.applyAnisotropicDiffusion(iterations, 0.25, deviation, type);
+        blueChannel.applyAnisotropicDiffusion(iterations, 0.25, deviation, type);
 
         normalizeImage();
     }

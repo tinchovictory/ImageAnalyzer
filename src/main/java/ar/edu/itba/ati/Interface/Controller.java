@@ -132,9 +132,9 @@ public interface Controller {
 
     BufferedImage applyIsotropicDiffusion(int iterations);
 
-    BufferedImage applyAnisotropicDiffusionLeclerc(double lambda, double deviation);
+    BufferedImage applyAnisotropicDiffusionLeclerc(int iterations, double deviation);
 
-    BufferedImage applyAnisotropicDiffusionLorentziano(double lambda, double deviation);
+    BufferedImage applyAnisotropicDiffusionLorentziano(int iterations, double deviation);
 
     BufferedImage applyBilateralFilter(int size, double spaceSigma, double colorSigma);
 
@@ -166,9 +166,9 @@ public interface Controller {
 
     void setIsotropicDiffusion(int iterations);
 
-    void setAnisotropicDiffusionLeclerc(double lambda, double deviation);
+    void setAnisotropicDiffusionLeclerc(int iterations, double deviation);
 
-    void setAnisotropicDiffusionLorentziano(double lambda, double deviation);
+    void setAnisotropicDiffusionLorentziano(int iterations, double deviation);
 
     void setBilateralFilter(int size, double spaceSigma, double colorSigma);
 
