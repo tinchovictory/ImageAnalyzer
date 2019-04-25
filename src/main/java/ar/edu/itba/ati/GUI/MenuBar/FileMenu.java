@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class FileMenu extends Menu {
 
@@ -63,6 +65,14 @@ public class FileMenu extends Menu {
 
         OpenRawImage rawImageController = loader.getController();
         rawImageController.initData(controller.getMainWindow(), rawStage);
+
+
+    }
+
+    @FXML
+    private void openLena() {
+        File lena = Paths.get(getClass().getClassLoader().getResource("LENA.RAW").getFile()).toFile();
+        controller.getMainWindow().openRawImage(256,256,lena);
 
 
     }

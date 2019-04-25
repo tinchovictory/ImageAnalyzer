@@ -4,6 +4,7 @@ import ar.edu.itba.ati.GUI.Windows.SliderWithImageWindow;
 import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.Interface.DConsumer;
 import ar.edu.itba.ati.Interface.DFunction;
+import ar.edu.itba.ati.Interface.Thunk;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
@@ -78,37 +79,39 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void prewittMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
-        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
+//        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
+//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        applyFunction(controller::setPrewittMask);
     }
 
     @FXML
     private void sobelMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applySobelMask();
-        Consumer<Double> setClicked = (value) -> controller.setSobelMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+       applyFunction(controller::setSobelMask);
     }
 
     @FXML
     private void fiveAMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
-        Consumer<Double> setClicked = (value) -> controller.set5aMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+//        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
+//        Consumer<Double> setClicked = (value) -> controller.set5aMask();
+//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        applyFunction(controller::set5aMask);
     }
 
     @FXML
     private void kirshMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
-        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
+//        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
+//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        applyFunction(controller::setKirshMask);
     }
 
     @FXML
     private void laplaceMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceMask();
-        Consumer<Double> setClicked = (value) -> controller.setLaplaceMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceMask();
+//        Consumer<Double> setClicked = (value) -> controller.setLaplaceMask();
+//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        applyFunction(controller::setLaplaceMask);
     }
 
     @FXML
@@ -120,9 +123,10 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void laplaceCrossingZeroMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask();
-        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask();
+//        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask();
+//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        applyFunction(controller::setLaplaceCrossingZeroMask);
     }
 
     @FXML
@@ -151,5 +155,12 @@ public class SmoothingMenu extends Menu {
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLorentziano(value, value2);
         DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value, value2);
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,10.0,0.5,0,50,2,"Lambda","Deviation");
+    }
+
+
+
+    private void applyFunction(Thunk thunk){
+            thunk.apply();
+            controller.getMainWindow().refreshImage();
     }
 }

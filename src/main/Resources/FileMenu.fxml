@@ -6,6 +6,7 @@
 
 <fx:root text="File" id="FileMenu" type="javafx.scene.control.Menu" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" >
     <MenuItem text="Open Image" onAction="#loadImage"/>
+    <MenuItem text="Open Lena" onAction="#openLena"/>
     <MenuItem text="Open RAW Image" onAction="#openRawImage"/>
     <MenuItem text="Save Image" onAction="#saveFile"/>
 </fx:root>

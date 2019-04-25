@@ -4,6 +4,7 @@ import ar.edu.itba.ati.GUI.Windows.*;
 import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.Interface.DConsumer;
 import ar.edu.itba.ati.Interface.DFunction;
+import ar.edu.itba.ati.Interface.Thunk;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -239,16 +240,12 @@ public class ToolsMenu extends Menu {
 
     @FXML
     private void globalThreshold(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyGlobalThreshold();
-        Consumer<Double> setClicked = (value) -> controller.setGlobalThreshold();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0,"Threshold");
+        applyFunction(controller::setGlobalThreshold);
     }
 
     @FXML
     private void otsuThreshold(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyOtsuThreshold();
-        Consumer<Double> setClicked = (value) -> controller.setOtsuThreshold();
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,255.0,5.0,"Threshold");
+        applyFunction(controller::setOtsuThreshold);
     }
 
     @FXML
@@ -261,6 +258,11 @@ public class ToolsMenu extends Menu {
     @FXML
     private void toGreyScale(){
         controller.getGreyImage();
+        controller.getMainWindow().refreshImage();
+    }
+
+    private void applyFunction(Thunk thunk){
+        thunk.apply();
         controller.getMainWindow().refreshImage();
     }
 
