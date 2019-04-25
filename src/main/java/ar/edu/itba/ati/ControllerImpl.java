@@ -336,17 +336,17 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public BufferedImage applyLaplaceCrossingZeroMask() {
+    public BufferedImage applyLaplaceCrossingZeroMask(int threshold) {
         Image copy = image.cloneImage();
-        Mask mask = new LaplaceCrossingZero();
+        Mask mask = new LaplaceCrossingZero(threshold);
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
 
     @Override
-    public BufferedImage applyLoGCrossingZeroMask(double deviation) {
+    public BufferedImage applyLoGCrossingZeroMask(double deviation, int threshold) {
         Image copy = image.cloneImage();
-        Mask mask = new LaplaceGaussCrossingZero(deviation);
+        Mask mask = new LaplaceGaussCrossingZero(deviation, threshold);
         copy.applyMask(mask);
         return copy.getBufferdImage();
     }
@@ -441,14 +441,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void setLaplaceCrossingZeroMask() {
-        Mask mask = new LaplaceCrossingZero();
+    public void setLaplaceCrossingZeroMask(int threshold) {
+        Mask mask = new LaplaceCrossingZero(threshold);
         image.applyMask(mask);
     }
 
     @Override
-    public void setLoGCrossingZeroMask(double deviation) {
-        Mask mask = new LaplaceGaussCrossingZero(deviation);
+    public void setLoGCrossingZeroMask(double deviation, int threshold) {
+        Mask mask = new LaplaceGaussCrossingZero(deviation, threshold);
         image.applyMask(mask);
     }
 

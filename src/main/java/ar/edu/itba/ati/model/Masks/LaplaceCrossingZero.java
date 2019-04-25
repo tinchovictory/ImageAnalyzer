@@ -1,8 +1,8 @@
 package ar.edu.itba.ati.model.Masks;
 
 public class LaplaceCrossingZero extends ZeroCrossingMask {
-    public LaplaceCrossingZero() {
-        super(3);
+    public LaplaceCrossingZero(int threshold) {
+        super(3, threshold);
     }
 
     @Override

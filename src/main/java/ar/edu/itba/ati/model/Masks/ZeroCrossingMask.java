@@ -5,8 +5,11 @@ import ar.edu.itba.ati.model.Mask;
 
 public abstract class ZeroCrossingMask extends Mask {
 
-    public ZeroCrossingMask(int size) {
+    private int threshold;
+
+    public ZeroCrossingMask(int size, int threshold) {
         super(size, Type.OTHER);
+        this.threshold = threshold;
     }
 
     @Override
@@ -40,7 +43,13 @@ public abstract class ZeroCrossingMask extends Mask {
                 if(originalChannel.getPixel(x, y) == 0) {
                     /* Check + 0 - or - 0 + */
                     if(nextPixel != null && (prevPixel > 0 && nextPixel < 0 || prevPixel < 0 && nextPixel > 0)) {
-                        newChannel.setPixel(x, y, Math.abs(prevPixel) + Math.abs(nextPixel));
+                        // Use threshold to detect borders
+                        int newColor = Math.abs(prevPixel) + Math.abs(nextPixel);
+                        if(newColor > threshold) {
+                            newChannel.setPixel(x, y, newColor);
+                        } else {
+                            newChannel.setPixel(x, y, 0);
+                        }
                     } else {
                         newChannel.setPixel(x, y, 0);
                     }
@@ -49,7 +58,12 @@ public abstract class ZeroCrossingMask extends Mask {
                 } else {
                     /* Check + - or - + */
                     if(prevPixel > 0 && currentPixel < 0 || prevPixel < 0 && currentPixel > 0) {
-                        newChannel.setPixel(x - 1, y, Math.abs(prevPixel) + Math.abs(currentPixel));
+                        int newColor = Math.abs(prevPixel) + Math.abs(currentPixel);
+                        if(newColor > threshold) {
+                            newChannel.setPixel(x - 1, y, newColor);
+                        } else {
+                            newChannel.setPixel(x - 1, y, 0);
+                        }
                     } else {
                         newChannel.setPixel(x - 1, y, 0);
                     }

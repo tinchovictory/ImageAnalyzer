@@ -6,8 +6,8 @@ public class LaplaceGaussCrossingZero extends ZeroCrossingMask {
 
     private double deviation;
 
-    public LaplaceGaussCrossingZero(double deviation) {
-        super(7);
+    public LaplaceGaussCrossingZero(double deviation, int threshold) {
+        super(7, threshold);
         this.deviation = deviation;
     }
 

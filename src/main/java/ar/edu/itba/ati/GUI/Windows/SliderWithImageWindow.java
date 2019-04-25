@@ -181,7 +181,6 @@ public class SliderWithImageWindow extends VBox implements Initializable {
         setButton.setOnAction(e -> {
             double value = (Math.round(slider.getValue() / increment) * increment) + min;
             double value2 = (Math.round(secondSlider.getValue() / increment2) * increment2) + min2;
-            System.out.println(value2);
             setClickedD.accept(value,value2);
             valueLabel.setText(labelName+": "+ df2.format(value));
             secondValueLabel.setText(labelName2+": "+df2.format(value2));

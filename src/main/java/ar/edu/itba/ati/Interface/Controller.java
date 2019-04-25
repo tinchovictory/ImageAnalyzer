@@ -126,9 +126,9 @@ public interface Controller {
 
     BufferedImage applyLoGMask(double deviation);
 
-    BufferedImage applyLaplaceCrossingZeroMask();
+    BufferedImage applyLaplaceCrossingZeroMask(int threshold);
 
-    BufferedImage applyLoGCrossingZeroMask(double deviation);
+    BufferedImage applyLoGCrossingZeroMask(double deviation, int threshold);
 
     BufferedImage applyIsotropicDiffusion(int iterations);
 
@@ -160,9 +160,9 @@ public interface Controller {
 
     void setLoGMask(double deviation);
 
-    void setLaplaceCrossingZeroMask();
+    void setLaplaceCrossingZeroMask(int threshold);
 
-    void setLoGCrossingZeroMask(double deviation);
+    void setLoGCrossingZeroMask(double deviation, int threshold);
 
     void setIsotropicDiffusion(int iterations);
 

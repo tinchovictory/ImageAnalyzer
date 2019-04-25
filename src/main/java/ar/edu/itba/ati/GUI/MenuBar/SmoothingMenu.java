@@ -123,17 +123,16 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void laplaceCrossingZeroMask(){
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask();
-//        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask();
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
-        applyFunction(controller::setLaplaceCrossingZeroMask);
+        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,400,1,"Threshold");
     }
 
     @FXML
     private void loGCrossingZeroMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGCrossingZeroMask(value);
-        Consumer<Double> setClicked = (value) -> controller.setLoGCrossingZeroMask(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,"Deviation");
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyLoGCrossingZeroMask(value, value2.intValue());
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setLoGCrossingZeroMask(value, value2.intValue());
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,0,400,1,"Deviation","Threshold");
     }
 
     @FXML
