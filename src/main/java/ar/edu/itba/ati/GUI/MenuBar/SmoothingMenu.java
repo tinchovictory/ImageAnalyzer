@@ -156,6 +156,11 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,80,1,0,50,2,"Iterations","Deviation");
     }
 
+    @FXML
+    private void susanBorderFilter(){
+        applyFunction(controller::setSusanFilter);
+    }
+
 
 
     private void applyFunction(Thunk thunk){

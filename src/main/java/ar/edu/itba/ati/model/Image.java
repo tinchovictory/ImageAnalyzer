@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.model;
 
 import ar.edu.itba.ati.Utils;
+import ar.edu.itba.ati.model.Masks.SusanFilter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -496,6 +497,13 @@ public class Image {
         redChannel.normalizePixels(minPixel, maxPixel, border);
         greenChannel.normalizePixels(minPixel, maxPixel, border);
         blueChannel.normalizePixels(minPixel, maxPixel, border);
+    }
+
+    public void susanFilter(){
+        redChannel   = SusanFilter.apply(redChannel);
+        greenChannel = SusanFilter.apply(greenChannel);
+        blueChannel  = SusanFilter.apply(blueChannel);
+        //normalizeImage();
     }
 
 

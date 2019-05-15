@@ -22,4 +22,6 @@
     <MenuItem text="Anisotropic Diffusion Leclerc" onAction="#anisotropicDiffusionLeclerc"/>
     <MenuItem text="Anisotropic Diffusion Lorentziano" onAction="#anisotropicDiffusionLorentziano"/>
     <MenuItem text="Bilateral Filter" onAction="#bilateralFilter"/>
+    <MenuItem text="Susan Border Filter" onAction="#susanBorderFilter"/>
+
 </fx:root>

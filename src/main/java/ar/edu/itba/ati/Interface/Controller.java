@@ -172,6 +172,8 @@ public interface Controller {
 
     void setBilateralFilter(int size, double spaceSigma, double colorSigma);
 
+    void setSusanFilter();
+
 
 }
 

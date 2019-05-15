@@ -387,6 +387,11 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public void setSusanFilter() {
+        image.susanFilter();
+    }
+
+    @Override
     public void setMeanMask(int size) {
         Mask mask = new Mask(size, Mask.Type.MEAN);
         image.applyMask(mask);
