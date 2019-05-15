@@ -58,7 +58,7 @@ public class SmoothingMenu extends Menu {
     private void gaussFilter(){
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyGaussMask(value.intValue(),value2);
         DConsumer<Double,Double> setClicked = (value, value2) -> controller.setGaussMask(value.intValue(),value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,0,1,0.01,"Mask size","Standard deviation");
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,0,3,0.1,"Mask size","Standard deviation");
     }
 
     @FXML
@@ -161,10 +161,21 @@ public class SmoothingMenu extends Menu {
         applyFunction(controller::setSusanFilter);
     }
 
+    @FXML
+    private void susanCornerFilter(){
+        applyFunction(controller::setSusanCornerFilter);
+    }
+
+    @FXML
+    private void cannyFilter() {
+        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyCannyFilter(value.intValue(), value2.intValue());
+        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setCannyFilter(value.intValue(), value2.intValue());
+        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,2,0,255,2,"Threshold 1","Threshold 2");
+    }
 
 
     private void applyFunction(Thunk thunk){
-            thunk.apply();
-            controller.getMainWindow().refreshImage();
+        thunk.apply();
+        controller.getMainWindow().refreshImage();
     }
 }

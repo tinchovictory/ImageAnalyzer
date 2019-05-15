@@ -40,6 +40,26 @@ public class SusanFilter {
             for(int j = 7; j<channel.getWidth()-7; j++){
                 int n = countLevelGray(image,i,j);
                 double s = 1 - (double)n/MASK_PIXELS;
+                if(s>0.33 && s<0.66){
+                    channel.setPixel(i,j,255);
+                }else{
+                    channel.setPixel(i,j,0);
+                }
+            }
+        }
+
+
+        return channel;
+    }
+
+
+    public static ImageColorChannel applyCorner(ImageColorChannel image){
+        ImageColorChannel channel = image.cloneChannel();
+
+        for(int i = 7; i< channel.getHeight()-7; i++){
+            for(int j = 7; j<channel.getWidth()-7; j++){
+                int n = countLevelGray(image,i,j);
+                double s = 1 - (double)n/MASK_PIXELS;
                 if(s>0.5){
                     channel.setPixel(i,j,255);
                 }else{

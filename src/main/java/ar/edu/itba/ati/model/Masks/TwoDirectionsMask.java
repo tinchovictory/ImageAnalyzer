@@ -20,7 +20,7 @@ public abstract class TwoDirectionsMask extends Mask {
         return joinMasks(xChannel, yChannel);
     }
 
-    private ImageColorChannel applySingleMaskTo(ImageColorChannel originalChannel, double[][] poundedMask) {
+    public ImageColorChannel applySingleMaskTo(ImageColorChannel originalChannel, double[][] poundedMask) {
         ImageColorChannel newChannel = originalChannel.cloneChannel();
 
         for(int y = MASK_BORDER; y < originalChannel.getHeight() - MASK_BORDER; y++) {
@@ -32,7 +32,7 @@ public abstract class TwoDirectionsMask extends Mask {
         return newChannel;
     }
 
-    private ImageColorChannel joinMasks(ImageColorChannel channel1, ImageColorChannel channel2) {
+    public ImageColorChannel joinMasks(ImageColorChannel channel1, ImageColorChannel channel2) {
         ImageColorChannel newChannel = channel1.cloneChannel();
 
         for(int y = MASK_BORDER; y < newChannel.getHeight() - MASK_BORDER; y++) {
