@@ -489,7 +489,7 @@ public class Image {
         normalizeImage(0);
     }
 
-    private void normalizeImage(int border) {
+    public void normalizeImage(int border) {
         int minPixel = minPixel(border);
         int maxPixel = maxPixel(border);
 
@@ -498,6 +498,29 @@ public class Image {
         blueChannel.normalizePixels(minPixel, maxPixel, border);
     }
 
+    public ImageColorChannel getRedChannel() {
+        return this.redChannel;
+    }
+
+    public void setRedChannel(ImageColorChannel redChannel) {
+        this.redChannel = redChannel;
+    }
+
+    public ImageColorChannel getGreenChannel() {
+        return greenChannel;
+    }
+
+    public void setGreenChannel(ImageColorChannel greenChannel) {
+        this.greenChannel = greenChannel;
+    }
+
+    public ImageColorChannel getBlueChannel() {
+        return blueChannel;
+    }
+
+    public void setBlueChannel(ImageColorChannel blueChannel) {
+        this.blueChannel = blueChannel;
+    }
 
     @Override
     public String toString() {

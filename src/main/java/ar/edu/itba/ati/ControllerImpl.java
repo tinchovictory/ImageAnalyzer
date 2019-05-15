@@ -2,6 +2,7 @@ package ar.edu.itba.ati;
 
 import ar.edu.itba.ati.GUI.MainWindow;
 import ar.edu.itba.ati.Interface.Controller;
+import ar.edu.itba.ati.model.CannyFilter;
 import ar.edu.itba.ati.model.HSVImage;
 import ar.edu.itba.ati.model.Image;
 import ar.edu.itba.ati.model.Mask;
@@ -566,5 +567,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void setSaltAndPepperNoise(double deviation) {
         image.applySaltAndPepperNoise(deviation);
+    }
+
+    @Override
+    public BufferedImage applyCannyFilter(int t1, int t2) {
+        Image copy = image.cloneImage();
+        CannyFilter cannyFilter = new CannyFilter(t1, t2);
+        return cannyFilter.applyTo(copy).getBufferdImage();
+    }
+
+    @Override
+    public void setCannyFilter(int t1, int t2) {
+        CannyFilter cannyFilter = new CannyFilter(t1, t2);
+        image = cannyFilter.applyTo(image);
     }
 }
