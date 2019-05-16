@@ -163,6 +163,11 @@ public class SmoothingMenu extends Menu {
         SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,2,0,255,2,"Threshold 1","Threshold 2");
     }
 
+    @FXML
+    private void trackArea() {
+        applyFunction(controller::setTrackArea);
+    }
+
 
     private void applyFunction(Thunk thunk){
         thunk.apply();

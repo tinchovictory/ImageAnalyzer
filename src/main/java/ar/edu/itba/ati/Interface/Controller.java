@@ -175,5 +175,7 @@ public interface Controller {
     BufferedImage applyCannyFilter(int t1, int t2);
 
     void setCannyFilter(int t1, int t2);
+
+    void setTrackArea();
 }
 

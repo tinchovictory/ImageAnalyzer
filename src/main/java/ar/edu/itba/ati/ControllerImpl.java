@@ -2,18 +2,18 @@ package ar.edu.itba.ati;
 
 import ar.edu.itba.ati.GUI.MainWindow;
 import ar.edu.itba.ati.Interface.Controller;
-import ar.edu.itba.ati.model.CannyFilter;
-import ar.edu.itba.ati.model.HSVImage;
+import ar.edu.itba.ati.model.*;
 import ar.edu.itba.ati.model.Image;
-import ar.edu.itba.ati.model.Mask;
 import ar.edu.itba.ati.model.Masks.*;
 import org.apache.sanselan.ImageReadException;
 import org.apache.sanselan.ImageWriteException;
 
+import java.util.List;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControllerImpl implements Controller {
     Image image;
@@ -580,5 +580,12 @@ public class ControllerImpl implements Controller {
     public void setCannyFilter(int t1, int t2) {
         CannyFilter cannyFilter = new CannyFilter(t1, t2);
         image = cannyFilter.applyTo(image);
+    }
+
+    @Override
+    public void setTrackArea() {
+        List<Point> selection = TrackingArea.generateSelection(new Point(140, 50), new Point(160, 90));
+        TrackingArea trackingArea = new TrackingArea(selection, image);
+        image = trackingArea.findBorder();
     }
 }
