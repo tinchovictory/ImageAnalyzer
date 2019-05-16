@@ -157,6 +157,16 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
+    private void susanBorderFilter(){
+        applyFunction(controller::setSusanFilter);
+    }
+
+    @FXML
+    private void susanCornerFilter(){
+        applyFunction(controller::setSusanCornerFilter);
+    }
+
+    @FXML
     private void cannyFilter() {
         DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyCannyFilter(value.intValue(), value2.intValue());
         DConsumer<Double,Double> setClicked = (value, value2) -> controller.setCannyFilter(value.intValue(), value2.intValue());

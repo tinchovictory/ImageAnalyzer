@@ -172,6 +172,10 @@ public interface Controller {
 
     void setBilateralFilter(int size, double spaceSigma, double colorSigma);
 
+    void setSusanFilter();
+
+    void setSusanCornerFilter();
+
     BufferedImage applyCannyFilter(int t1, int t2);
 
     void setCannyFilter(int t1, int t2);
