@@ -184,6 +184,6 @@ public interface Controller {
 
     void setHoughFilter(double epsilon);
 
-
+    void setTrackArea();
 }
 

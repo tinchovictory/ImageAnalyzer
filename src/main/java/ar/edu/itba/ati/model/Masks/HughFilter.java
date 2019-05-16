@@ -36,9 +36,11 @@ public class HughFilter {
 
 
         HashMap<Point, Integer> lines = new HashMap<>();
-        for(int ro = -roBound; ro < roBound; ro++) {
-            for(int theta = -degreeBound; theta < degreeBound; theta++) {
-                lines.put(new Point(ro ,theta), A[ro+roBound][theta+degreeBound]);
+        for(int ro = -roBound, roInd=0; ro < roBound; ro++,roInd++) {
+            for(int theta = -degreeBound, thetaInd  =0 ; theta < degreeBound; theta++,thetaInd++) {
+                if(A[roInd][thetaInd]>0){
+                    lines.put(new Point(ro ,theta), A[roInd][thetaInd]);
+                }
             }
         }
 

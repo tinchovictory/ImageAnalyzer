@@ -32,53 +32,52 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void meanFilter(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMeanMask(value.intValue());
+    private void meanFilter() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyMeanMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setMeanMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask Size");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 2, "Mask Size");
 
     }
 
     @FXML
-    private void medianFilter(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyMedianMask(value.intValue());
+    private void medianFilter() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyMedianMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setMedianMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 2, "Mask size");
     }
 
 
     @FXML
-    private void weightedMedianFilter(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyWeightedMedianMask(value.intValue());
+    private void weightedMedianFilter() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyWeightedMedianMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setWeightedMedianMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked,1,15.0,2,"Mask size");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 2, "Mask size");
     }
 
     @FXML
-    private void gaussFilter(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyGaussMask(value.intValue(),value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setGaussMask(value.intValue(),value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,0,3,0.1,"Mask size","Standard deviation");
+    private void gaussFilter() {
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyGaussMask(value.intValue(), value2);
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setGaussMask(value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 2, 0, 3, 0.1, "Mask size", "Standard deviation");
     }
 
     @FXML
-    private void borderFIlter(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyBorderMask(value.intValue());
+    private void borderFIlter() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyBorderMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setBorderMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 2, "Mask size");
     }
 
     @FXML
-    private void bilateralFilter(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyBilateralFilter(7,value.intValue(),value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setBilateralFilter(7,value.intValue(),value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,15.0,0.5,0,50,2,"Space","Color");
+    private void bilateralFilter() {
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyBilateralFilter(7, value.intValue(), value2);
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setBilateralFilter(7, value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 1, 15.0, 0.5, 0, 50, 2, "Space", "Color");
     }
 
 
-
     @FXML
-    private void prewittMask(){
+    private void prewittMask() {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
 //        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
@@ -86,12 +85,12 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void sobelMask(){
-       applyFunction(controller::setSobelMask);
+    private void sobelMask() {
+        applyFunction(controller::setSobelMask);
     }
 
     @FXML
-    private void fiveAMask(){
+    private void fiveAMask() {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
 //        Consumer<Double> setClicked = (value) -> controller.set5aMask();
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
@@ -99,7 +98,7 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void kirshMask(){
+    private void kirshMask() {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
 //        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
@@ -107,7 +106,7 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void laplaceMask(){
+    private void laplaceMask() {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceMask();
 //        Consumer<Double> setClicked = (value) -> controller.setLaplaceMask();
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
@@ -115,75 +114,81 @@ public class SmoothingMenu extends Menu {
     }
 
     @FXML
-    private void loGMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLoGMask(value);
+    private void loGMask() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyLoGMask(value);
         Consumer<Double> setClicked = (value) -> controller.setLoGMask(value);
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,"Deviation");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 0.2, 2, 0.2, "Deviation");
     }
 
     @FXML
-    private void laplaceCrossingZeroMask(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceCrossingZeroMask(value.intValue());
+    private void laplaceCrossingZeroMask() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyLaplaceCrossingZeroMask(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setLaplaceCrossingZeroMask(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,400,1,"Threshold");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 0, 400, 1, "Threshold");
     }
 
     @FXML
-    private void loGCrossingZeroMask(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyLoGCrossingZeroMask(value, value2.intValue());
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setLoGCrossingZeroMask(value, value2.intValue());
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0.2,2,0.2,0,400,1,"Deviation","Threshold");
+    private void loGCrossingZeroMask() {
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyLoGCrossingZeroMask(value, value2.intValue());
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setLoGCrossingZeroMask(value, value2.intValue());
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 0.2, 2, 0.2, 0, 400, 1, "Deviation", "Threshold");
     }
 
     @FXML
-    private void isotropicDiffusion(){
-        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyIsotropicDiffusion(value.intValue());
+    private void isotropicDiffusion() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyIsotropicDiffusion(value.intValue());
         Consumer<Double> setClicked = (value) -> controller.setIsotropicDiffusion(value.intValue());
-        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,50,2,"Iterations");
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 0, 50, 2, "Iterations");
     }
 
     @FXML
-    private void anisotropicDiffusionLeclerc(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLeclerc(value.intValue(), value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLeclerc(value.intValue(), value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,80,1,0,50,2,"Iterations","Deviation");
+    private void anisotropicDiffusionLeclerc() {
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyAnisotropicDiffusionLeclerc(value.intValue(), value2);
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLeclerc(value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 1, 80, 1, 0, 50, 2, "Iterations", "Deviation");
     }
 
     @FXML
-    private void anisotropicDiffusionLorentziano(){
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyAnisotropicDiffusionLorentziano(value.intValue(), value2);
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value.intValue(), value2);
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,1,80,1,0,50,2,"Iterations","Deviation");
+    private void anisotropicDiffusionLorentziano() {
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyAnisotropicDiffusionLorentziano(value.intValue(), value2);
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setAnisotropicDiffusionLorentziano(value.intValue(), value2);
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 1, 80, 1, 0, 50, 2, "Iterations", "Deviation");
     }
 
     @FXML
-    private void susanBorderFilter(){
+    private void susanBorderFilter() {
         applyFunction(controller::setSusanFilter);
     }
 
     @FXML
-    private void susanCornerFilter(){
+    private void susanCornerFilter() {
         applyFunction(controller::setSusanCornerFilter);
     }
 
     @FXML
     private void cannyFilter() {
-        DFunction<Double,Double, BufferedImage> sliderDragged = (value, value2)->controller.applyCannyFilter(value.intValue(), value2.intValue());
-        DConsumer<Double,Double> setClicked = (value, value2) -> controller.setCannyFilter(value.intValue(), value2.intValue());
-        SliderWithImageWindow.openDoubleInNewWindow(controller,sliderDragged,setClicked,0,255,2,0,255,2,"Threshold 1","Threshold 2");
+        DFunction<Double, Double, BufferedImage> sliderDragged = (value, value2) -> controller.applyCannyFilter(value.intValue(), value2.intValue());
+        DConsumer<Double, Double> setClicked = (value, value2) -> controller.setCannyFilter(value.intValue(), value2.intValue());
+        SliderWithImageWindow.openDoubleInNewWindow(controller, sliderDragged, setClicked, 0, 255, 2, 0, 255, 2, "Threshold 1", "Threshold 2");
     }
 
     @FXML
-    private void houghFilter(){
+    private void houghFilter() {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyHoughFilter(value);
 //        Consumer<Double> setClicked = (value) -> controller.setHoughFilter(value);
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,1,0.05,"Epsilon");
         controller.setHoughFilter(0.000001);
         controller.getMainWindow().refreshImage();
+
+    }
+
+    @FXML
+    private void trackArea() {
+        applyFunction(controller::setTrackArea);
     }
 
 
-    private void applyFunction(Thunk thunk){
+    private void applyFunction(Thunk thunk) {
         thunk.apply();
         controller.getMainWindow().refreshImage();
     }
