@@ -25,4 +25,8 @@
     <MenuItem text="Susan Border Filter" onAction="#susanBorderFilter"/>
     <MenuItem text="Susan Corner Filter" onAction="#susanCornerFilter"/>
     <MenuItem text="Canny Filter" onAction="#cannyFilter"/>
+    <MenuItem text="Hough Filter" onAction="#houghFilter"/>
+
+
+
 </fx:root>

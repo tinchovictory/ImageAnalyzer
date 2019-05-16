@@ -591,4 +591,16 @@ public class ControllerImpl implements Controller {
         CannyFilter cannyFilter = new CannyFilter(t1, t2);
         image = cannyFilter.applyTo(image);
     }
+
+    @Override
+    public BufferedImage applyHoughFilter(double epsilon) {
+        Image copy = image.cloneImage();
+         copy.houghFilter(epsilon);
+         return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setHoughFilter(double epsilon) {
+        image.houghFilter(epsilon);
+    }
 }
