@@ -15,43 +15,52 @@ public class TrackingArea {
     private Image image;
     private Set<Point> lIn;
     private Set<Point> lOut;
-    private int[] objColorAccum;
-    private int objPixelsAmount;
-    private int[] bgColorAccum;
-    private int bgPixelsAmount;
+    private int[] objColorAvg;
+    private int[] bgColorAvg;
 
-    public TrackingArea(List<Point> initialSelection,  Image image) {
+    public TrackingArea(List<Point> objSelection, List<Point> bgSelection, Image image) {
         this.image = image;
         this.phi = new int[image.getWidth()][image.getHeight()];
         this.f = new int[image.getWidth()][image.getHeight()];
-        this.objColorAccum = new int[3];
-        this.bgColorAccum = new int[3];
-        this.objPixelsAmount = 0;
-        this.bgPixelsAmount = 0;
+
+        this.objColorAvg = new int[3];
+        this.bgColorAvg = new int[3];
+
         this.lIn = new HashSet<>();
         this.lOut = new HashSet<>();
 
-        initPhi(initialSelection);
+        initPhi(objSelection, bgSelection);
         lInit();
     }
 
-    private void initPhi(List<Point> initialSelection) {
-        for(Point p : initialSelection) {
+    private void initPhi(List<Point> objSelection, List<Point> bgSelection) {
+        int count = 0;
+        for(Point p : objSelection) {
             phi[p.x][p.y] = -3;
-            objColorAccum[0] += image.getPixelColor(p.x, p.y).getRed();
-            objColorAccum[1] += image.getPixelColor(p.x, p.y).getGreen();
-            objColorAccum[2] += image.getPixelColor(p.x, p.y).getBlue();
-            objPixelsAmount++;
+            objColorAvg[0] += image.getPixelColor(p.x, p.y).getRed();
+            objColorAvg[1] += image.getPixelColor(p.x, p.y).getGreen();
+            objColorAvg[2] += image.getPixelColor(p.x, p.y).getBlue();
+            count++;
         }
+        objColorAvg[0] /= count;
+        objColorAvg[1] /= count;
+        objColorAvg[2] /= count;
+
+        count = 0;
+        for(Point p : bgSelection) {
+            bgColorAvg[0] += image.getPixelColor(p.x, p.y).getRed();
+            bgColorAvg[1] += image.getPixelColor(p.x, p.y).getGreen();
+            bgColorAvg[2] += image.getPixelColor(p.x, p.y).getBlue();
+            count++;
+        }
+        bgColorAvg[0] /= count;
+        bgColorAvg[1] /= count;
+        bgColorAvg[2] /= count;
 
         for(int x = 0; x < image.getWidth(); x++) {
             for(int y = 0; y < image.getHeight(); y++) {
                 if(phi[x][y] != -3) {
                     phi[x][y] = 3;
-                    bgColorAccum[0] += image.getPixelColor(x, y).getRed();
-                    bgColorAccum[1] += image.getPixelColor(x, y).getGreen();
-                    bgColorAccum[2] += image.getPixelColor(x, y).getBlue();
-                    bgPixelsAmount++;
                 }
             }
         }
@@ -104,10 +113,9 @@ public class TrackingArea {
         List<Point> movePoints = new ArrayList<>();
 
         int counter = 0;
-        while(!finishIteration() && counter < 1000000) {
+        while(!finishIteration() && counter < 100) {
             for(Point p : lOut) {
                 if(f(p) > 0) {
-//                    System.out.println("Switch in");
                     movePoints.add(p);
                 }
             }
@@ -121,7 +129,6 @@ public class TrackingArea {
 
             for(Point p : lIn) {
                 if(f(p) < 0) {
-//                    System.out.println("Switch out");
                     movePoints.add(p);
                 }
             }
@@ -133,7 +140,6 @@ public class TrackingArea {
 
             counter++;
         }
-
         // Paint outer border line to show selection
         Image newImage = image.cloneImage();
         for(Point p : lOut) {
@@ -146,17 +152,6 @@ public class TrackingArea {
         lOut.remove(p);
         lIn.add(p);
         phi[p.x][p.y] = -1;
-
-        Color color = image.getPixelColor(p.x, p.y);
-        objColorAccum[0] += color.getRed();
-        objColorAccum[1] += color.getGreen();
-        objColorAccum[2] += color.getBlue();
-        objPixelsAmount++;
-        bgColorAccum[0] -= color.getRed();
-        bgColorAccum[1] -= color.getGreen();
-        bgColorAccum[2] -= color.getBlue();
-        bgPixelsAmount--;
-
 
         for(int[] dir : Directions) {
             int newX = p.x + dir[0];
@@ -198,17 +193,6 @@ public class TrackingArea {
         lOut.add(p);
         phi[p.x][p.y] = 1;
 
-        Color color = image.getPixelColor(p.x, p.y);
-        objColorAccum[0] -= color.getRed();
-        objColorAccum[1] -= color.getGreen();
-        objColorAccum[2] -= color.getBlue();
-        objPixelsAmount--;
-        bgColorAccum[0] += color.getRed();
-        bgColorAccum[1] += color.getGreen();
-        bgColorAccum[2] += color.getBlue();
-        bgPixelsAmount++;
-
-
         for(int[] dir : Directions) {
             int newX = p.x + dir[0];
             int newY = p.y + dir[1];
@@ -246,18 +230,11 @@ public class TrackingArea {
 
     private double f(Point p) {
         Color color = image.getPixelColor(p.x, p.y);
-        double objAvgRed = (double) objColorAccum[0] / objPixelsAmount;
-        double objAvgGreen = (double) objColorAccum[1] / objPixelsAmount;
-        double objAvgBlue = (double) objColorAccum[2] / objPixelsAmount;
 
-        double bgAvgRed = (double) bgColorAccum[0] / bgPixelsAmount;
-        double bgAvgGreen = (double) bgColorAccum[1] / bgPixelsAmount;
-        double bgAvgBlue = (double) bgColorAccum[2] / bgPixelsAmount;
+        double a = Math.sqrt(Math.pow(objColorAvg[0] - color.getRed(), 2) + Math.pow(objColorAvg[1] - color.getGreen(), 2) + Math.pow(objColorAvg[2] - color.getBlue(), 2));
+        double b = Math.sqrt(Math.pow(bgColorAvg[0] - color.getRed(), 2) + Math.pow(bgColorAvg[1] - color.getGreen(), 2) + Math.pow(bgColorAvg[2] - color.getBlue(), 2));
 
-        double a = Math.sqrt(Math.pow(objAvgRed - color.getRed(), 2) + Math.pow(objAvgGreen - color.getGreen(), 2) + Math.pow(objAvgBlue - color.getBlue(), 2));
-        double b = Math.sqrt(Math.pow(bgAvgRed - color.getRed(), 2) + Math.pow(bgAvgGreen - color.getGreen(), 2) + Math.pow(bgAvgBlue - color.getBlue(), 2));
-
-        return Math.log(a / b);
+        return Math.log(b / a);
     }
 
     private boolean finishIteration() {
@@ -283,16 +260,6 @@ public class TrackingArea {
                 list.add(new Point(i, j));
             }
         }
-/*
-        for(int i = p1.y; i < p2.y; i++) {
-            list.add(new Point(p1.x, i));
-            list.add(new Point(p2.x, i));
-        }
-        for(int i = p1.x; i < p2.x; i++) {
-            list.add(new Point(i, p1.y));
-            list.add(new Point(i, p2.y));
-        }
-*/
         return list;
     }
 }
