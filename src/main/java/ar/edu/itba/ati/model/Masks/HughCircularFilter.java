@@ -96,7 +96,7 @@ public class HughCircularFilter {
     }
 
     private boolean isInCircle(Point p,int x, int y){
-        return abs((p.r*p.r) - (x - p.a) * (x - p.a) - (y - p.b) * (y - p.b)) < epsilon;
+        return abs( pow(p.r,2) - pow((x - p.a),2) - pow((y - p.b), 2) ) < epsilon;
     }
 
     private class Point {
