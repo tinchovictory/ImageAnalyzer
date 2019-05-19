@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.model;
 
 import ar.edu.itba.ati.Utils;
+import ar.edu.itba.ati.model.Masks.HughCircularFilter;
 import ar.edu.itba.ati.model.Masks.HughFilter;
 import ar.edu.itba.ati.model.Masks.SusanFilter;
 
@@ -542,9 +543,18 @@ public class Image {
         blueChannel  = SusanFilter.applyCorner(blueChannel);
     }
 
-    public void houghFilter(double epsilon){
+    public void houghFilter(int lines){
         this.toGrayScale();
-        HughFilter filter = new HughFilter(epsilon);
+        HughFilter filter = new HughFilter();
+        ImageColorChannel channel = filter.apply(redChannel,lines);
+        redChannel   = channel;
+        greenChannel = channel;
+        blueChannel  = channel;
+    }
+
+    public void houghCircularFilter(){
+        this.toGrayScale();
+        HughCircularFilter filter = new HughCircularFilter();
         ImageColorChannel channel = filter.apply(redChannel);
         redChannel   = channel;
         greenChannel = channel;

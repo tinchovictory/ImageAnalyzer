@@ -16,17 +16,16 @@ import static java.lang.Math.abs;
 
 public class HughFilter {
 
-    private double epsilon;
+    private double epsilon = 0.001;
     private int roBound;
 
     private final static int degreeBound= 90;
     private int[][] A;
 
-    public HughFilter(double epsilon) {
-        this.epsilon = epsilon;
+    public HughFilter() {
     }
 
-    public ImageColorChannel apply(ImageColorChannel image){
+    public ImageColorChannel apply(ImageColorChannel image, int numberOfLines){
         int D = Math.max(image.getHeight(),image.getWidth());
 
         roBound =(int) (Math.sqrt(2)*D);
@@ -50,7 +49,7 @@ public class HughFilter {
                 .stream()
                 .sorted(Collections.reverseOrder(comparingByValue()))
                 .map(Map.Entry::getKey)
-                .limit(4)
+                .limit(numberOfLines)
                 .collect(toList());
 
         //Drawing lines

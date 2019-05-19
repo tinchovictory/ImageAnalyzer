@@ -1,5 +1,6 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
+import ar.edu.itba.ati.GUI.Windows.OneParameterWindow;
 import ar.edu.itba.ati.GUI.Windows.SliderWithImageWindow;
 import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.Interface.DConsumer;
@@ -177,9 +178,14 @@ public class SmoothingMenu extends Menu {
 //        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyHoughFilter(value);
 //        Consumer<Double> setClicked = (value) -> controller.setHoughFilter(value);
 //        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,1,0.05,"Epsilon");
-        controller.setHoughFilter(0.000001);
-        controller.getMainWindow().refreshImage();
+        OneParameterWindow.openInNewWindow(controller,(value)-> controller.setHoughFilter(value.intValue()),"Inesert number of desired lines");
 
+
+    }
+
+    @FXML
+    private void houghCircularFilter() {
+        applyFunction(controller::setHoughCircularFilter);
     }
 
     @FXML

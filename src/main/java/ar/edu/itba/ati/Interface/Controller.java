@@ -180,9 +180,11 @@ public interface Controller {
 
     void setCannyFilter(int t1, int t2);
 
-    BufferedImage applyHoughFilter(double epsilon);
+    BufferedImage applyHoughFilter(int lines);
 
-    void setHoughFilter(double epsilon);
+    void setHoughFilter(int lines);
+
+    void setHoughCircularFilter();
 
     void setTrackArea();
 }
