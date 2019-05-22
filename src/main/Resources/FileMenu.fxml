@@ -9,4 +9,6 @@
     <MenuItem text="Open Lena" onAction="#openLena"/>
     <MenuItem text="Open RAW Image" onAction="#openRawImage"/>
     <MenuItem text="Save Image" onAction="#saveFile"/>
+    <MenuItem text="Open Image Sequence" onAction="#openImageSequence"/>
+
 </fx:root>

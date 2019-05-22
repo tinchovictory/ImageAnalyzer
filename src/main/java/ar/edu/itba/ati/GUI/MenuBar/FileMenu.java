@@ -1,5 +1,6 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
+import ar.edu.itba.ati.GUI.Windows.OpenSequenceWindow;
 import ar.edu.itba.ati.Interface.Controller;
 import ar.edu.itba.ati.GUI.Windows.OpenRawImage;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -73,6 +75,19 @@ public class FileMenu extends Menu {
     private void openLena() {
         File lena = Paths.get(getClass().getClassLoader().getResource("LENA.RAW").getFile()).toFile();
         controller.getMainWindow().openRawImage(256,256,lena);
+
+
+    }
+
+    @FXML
+    private void openImageSequence(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(controller.getMainWindow().getStage());
+
+        OpenSequenceWindow.openInNewWindow(controller,selectedDirectory);
+
+
+
 
 
     }
