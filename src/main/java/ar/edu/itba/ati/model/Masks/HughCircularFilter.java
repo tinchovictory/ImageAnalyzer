@@ -44,7 +44,7 @@ public class HughCircularFilter {
                         for(int ro=-roBound, i=0; ro<roBound;ro++, i++){
                             double thetaRad = Math.toRadians(a);
                             if(abs( ro - x * cos(thetaRad) - y * sin(thetaRad) ) < epsilon){
-                                A[i][j]++;
+                                //A[i][j]++;
                             }
                         }
                     }
