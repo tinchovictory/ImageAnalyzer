@@ -11,7 +11,6 @@ public class TrackingArea {
     private static int[][] Directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
 
     private int[][] phi;
-    private int[][] f;
     private Image image;
     private Set<Point> lIn;
     private Set<Point> lOut;
@@ -21,7 +20,6 @@ public class TrackingArea {
     public TrackingArea(List<Point> objSelection, List<Point> bgSelection, Image image) {
         this.image = image;
         this.phi = new int[image.getWidth()][image.getHeight()];
-        this.f = new int[image.getWidth()][image.getHeight()];
 
         this.objColorAvg = new int[3];
         this.bgColorAvg = new int[3];
@@ -261,5 +259,9 @@ public class TrackingArea {
             }
         }
         return list;
+    }
+
+    public void setNextFrame(Image image) {
+        this.image = image;
     }
 }

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class ControllerImpl implements Controller {
     Image image;
+    Video video;
 
     MainWindow mainWindow;
 
