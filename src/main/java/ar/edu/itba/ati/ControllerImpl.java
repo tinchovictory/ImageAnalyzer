@@ -593,15 +593,15 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public BufferedImage applyHoughFilter(double epsilon) {
+    public BufferedImage applyHoughFilter(int lines) {
         Image copy = image.cloneImage();
-         copy.houghFilter(epsilon);
+         copy.houghFilter(lines);
          return copy.getBufferdImage();
     }
 
     @Override
-    public void setHoughFilter(double epsilon) {
-        image.houghFilter(epsilon);
+    public void setHoughFilter(int lines) {
+        image.houghFilter(lines);
     }
 
     @Override
@@ -610,5 +610,10 @@ public class ControllerImpl implements Controller {
         List<Point> bgSelection = TrackingArea.generateSelection(new Point(210, 50), new Point(230, 90));
         TrackingArea trackingArea = new TrackingArea(objSelection, bgSelection, image);
         image = trackingArea.findBorder();
+    }
+
+    @Override
+    public void setHoughCircularFilter() {
+        image.houghCircularFilter();
     }
 }
