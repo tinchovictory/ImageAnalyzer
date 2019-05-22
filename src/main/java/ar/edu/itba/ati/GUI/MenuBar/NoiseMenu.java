@@ -27,6 +27,7 @@ public class NoiseMenu extends Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 

@@ -77,15 +77,14 @@ public class HughCircularFilter {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
 
-
                 if (image.getPixel(x, y) == 255) {
                     for (int a = 0; a < A.length; a++) {
                         for (int b = 0; b < A[0].length; b++) {
-                            for (int r = 0; r < A[0][0].length; r++)
-                                if (isInCircle(new Point( a, b, r), x, y)) {
-                                    System.out.println(new Point(a,b,r)+ " X:"+x+" Y:"+y);
+                            for (int r = 0; r < A[0][0].length; r++) {
+                                if (isInCircle(new Point(a, b, r), x, y)) {
                                     A[a][b][r]++;
                                 }
+                            }
                         }
                     }
                 }

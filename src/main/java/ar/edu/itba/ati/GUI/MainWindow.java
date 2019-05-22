@@ -45,6 +45,14 @@ public class MainWindow {
     private final Group selectionGroup;
 
 
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public BorderPane getContainer() {
+        return container;
+    }
+
     public MainWindow(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
@@ -63,7 +71,6 @@ public class MainWindow {
         areaSelection = new AreaSelection();
         selectionGroup = new Group();
 
-
         stackPane = new StackPane();
 
         selectionGroup.getChildren().add(imageView);
@@ -77,6 +84,10 @@ public class MainWindow {
 
         stage.setScene(new Scene(container, 800, 600));
 
+    }
+
+    public void addToStackPane(Group g) {
+        stackPane.getChildren().add(g);
     }
 
     private void clearSelection(Group group) {
