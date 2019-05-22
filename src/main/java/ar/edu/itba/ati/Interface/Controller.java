@@ -189,5 +189,19 @@ public interface Controller {
     void setHoughCircularFilter();
 
     void setTrackArea(List<Point> objectPoints, List<Point> backgroundPoints);
+
+
+
+
+
+    void loadVideo(List<File> frames);
+
+    BufferedImage getCurrentVideoFrame();
+
+    void loadVideoNextFrame();
+
+    void startTrackVideoArea(List<Point> objectPoints, List<Point> backgroundPoints);
+
+    void trackAreaInNextFrame();
 }
 

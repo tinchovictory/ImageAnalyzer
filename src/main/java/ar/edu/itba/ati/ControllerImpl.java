@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class ControllerImpl implements Controller {
     Image image;
+    Video video;
+    TrackingArea trackingArea;
 
     MainWindow mainWindow;
 
@@ -615,5 +617,46 @@ public class ControllerImpl implements Controller {
     @Override
     public void setHoughCircularFilter() {
         image.houghCircularFilter();
+    }
+
+
+
+
+
+    @Override
+    public void loadVideo(List<File> frames) {
+        try {
+            video = VideoManager.loadVideo(frames);
+        } catch (IOException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load video");
+        } catch (ImageReadException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load video");
+        }
+    }
+
+    @Override
+    public BufferedImage getCurrentVideoFrame() {
+        return video.getCurrentFrame().getBufferdImage();
+    }
+
+    @Override
+    public void loadVideoNextFrame() {
+        video.getNextFrame();
+    }
+
+    @Override
+    public void startTrackVideoArea(List<Point> objectPoints, List<Point> backgroundPoints) {
+        List<Point> objSelection = TrackingArea.generateSelection(objectPoints.get(0),objectPoints.get(1));
+        List<Point> bgSelection = TrackingArea.generateSelection(backgroundPoints.get(0), backgroundPoints.get(1));
+        trackingArea = new TrackingArea(objSelection, bgSelection, video.getCurrentFrame());
+        video.replaceCurrentFrame(trackingArea.findBorder());
+    }
+
+    @Override
+    public void trackAreaInNextFrame() {
+        trackingArea.setNextFrame(video.getNextFrame());
+        video.replaceCurrentFrame(trackingArea.findBorder());
     }
 }
