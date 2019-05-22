@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+
+<fx:root text="TrackingMenu"
+         xmlns="http://javafx.com/javafx"
+         type="javafx.scene.control.Menu"
+         xmlns:fx="http://javafx.com/fxml"
+>
+    <MenuItem text="Configure Tracking" onAction="#configureTracking"/>
+
+
+</fx:root>

@@ -2,9 +2,11 @@ package ar.edu.itba.ati.Interface;
 
 import ar.edu.itba.ati.GUI.MainWindow;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 
 public interface Controller {
 
@@ -186,6 +188,6 @@ public interface Controller {
 
     void setHoughCircularFilter();
 
-    void setTrackArea();
+    void setTrackArea(List<Point> objectPoints, List<Point> backgroundPoints);
 }
 

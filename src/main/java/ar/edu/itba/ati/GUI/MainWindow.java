@@ -87,7 +87,7 @@ public class MainWindow {
     }
 
     public void addToStackPane(Group g) {
-        stackPane.getChildren().add(g);
+        selectionGroup.getChildren().add(g);
     }
 
     private void clearSelection(Group group) {
@@ -142,9 +142,7 @@ public class MainWindow {
         clearSelection(selectionGroup);
         refreshImage();
 
-
     }
-
 
     public void openRawImage(int width, int height, File image) {
         controller.loadRawImage(image, width, height);

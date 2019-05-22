@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0"
+         spacing="20.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="label" text="Trackcing configuration"/>
+        <Button fx:id="selectObject" mnemonicParsing="false" text="Select Object"/>
+        <Button fx:id="confirmObject" mnemonicParsing="false" text="Confirm Object"/>
+        <Button fx:id="selectBackground" mnemonicParsing="false" text="Select background"/>
+        <Button fx:id="confirmBackground" mnemonicParsing="false" text="Confirm background"/>
+        <Button fx:id="startTracking" mnemonicParsing="false" text="Start Tracking"/>
+    </children>
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+    </padding>
+</fx:root>
