@@ -605,9 +605,9 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void setTrackArea() {
-        List<Point> objSelection = TrackingArea.generateSelection(new Point(140, 65), new Point(160, 75));
-        List<Point> bgSelection = TrackingArea.generateSelection(new Point(210, 50), new Point(230, 90));
+    public void setTrackArea(List<Point> objectPoints, List<Point> backgroundPoints) {
+        List<Point> objSelection = TrackingArea.generateSelection(objectPoints.get(0),objectPoints.get(1));
+        List<Point> bgSelection = TrackingArea.generateSelection(backgroundPoints.get(0), backgroundPoints.get(1));
         TrackingArea trackingArea = new TrackingArea(objSelection, bgSelection, image);
         image = trackingArea.findBorder();
     }

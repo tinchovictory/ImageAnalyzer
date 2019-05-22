@@ -27,5 +27,4 @@
     <MenuItem text="Canny Filter" onAction="#cannyFilter"/>
     <MenuItem text="Hough Filter" onAction="#houghFilter"/>
     <MenuItem text="Hough Circular Filter" onAction="#houghCircularFilter"/>
-    <MenuItem text="Track Area" onAction="#trackArea"/>
 </fx:root>

@@ -6,13 +6,14 @@ import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import java.awt.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectableAreaFactory {
     private ResizableRectangle resizableRectangle;
-    private Point rectStart;
+    private DoublePoint rectStart;
     private boolean isSelecting;
     private Group selectionGroup;
     private MainWindow mainWindow;
@@ -73,7 +74,7 @@ public class SelectableAreaFactory {
             return;
         }
 
-        rectStart = new Point(event.getX(), event.getY());
+        rectStart = new DoublePoint(event.getX(), event.getY());
 
         selectionGroup.getChildren().clear();
 
@@ -178,10 +179,10 @@ public class SelectableAreaFactory {
     }
 
 
-    private class Point {
+    private class DoublePoint {
         double x, y;
 
-        public Point(double x, double y) {
+        public DoublePoint(double x, double y) {
             this.x = x;
             this.y = y;
         }

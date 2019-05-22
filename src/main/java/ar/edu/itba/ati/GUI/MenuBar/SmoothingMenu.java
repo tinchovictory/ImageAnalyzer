@@ -79,9 +79,6 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void prewittMask() {
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyPrewittMask();
-//        Consumer<Double> setClicked = (value) -> controller.setPrewittMask();
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
         applyFunction(controller::setPrewittMask);
     }
 
@@ -92,25 +89,16 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void fiveAMask() {
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.apply5aMask();
-//        Consumer<Double> setClicked = (value) -> controller.set5aMask();
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
         applyFunction(controller::set5aMask);
     }
 
     @FXML
     private void kirshMask() {
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyKirshMask();
-//        Consumer<Double> setClicked = (value) -> controller.setKirshMask();
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
         applyFunction(controller::setKirshMask);
     }
 
     @FXML
     private void laplaceMask() {
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyLaplaceMask();
-//        Consumer<Double> setClicked = (value) -> controller.setLaplaceMask();
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,1,15.0,2,"Mask size");
         applyFunction(controller::setLaplaceMask);
     }
 
@@ -175,12 +163,7 @@ public class SmoothingMenu extends Menu {
 
     @FXML
     private void houghFilter() {
-//        Function<Double, BufferedImage> sliderDragged = (value)->controller.applyHoughFilter(value);
-//        Consumer<Double> setClicked = (value) -> controller.setHoughFilter(value);
-//        SliderWithImageWindow.openInNewWindow(controller,sliderDragged,setClicked,0,1,0.05,"Epsilon");
         OneParameterWindow.openInNewWindow(controller,(value)-> controller.setHoughFilter(value.intValue()),"Inesert number of desired lines");
-
-
     }
 
     @FXML
@@ -188,10 +171,6 @@ public class SmoothingMenu extends Menu {
         applyFunction(controller::setHoughCircularFilter);
     }
 
-    @FXML
-    private void trackArea() {
-        applyFunction(controller::setTrackArea);
-    }
 
 
     private void applyFunction(Thunk thunk) {
