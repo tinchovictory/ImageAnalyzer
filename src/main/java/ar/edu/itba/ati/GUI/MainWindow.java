@@ -82,7 +82,7 @@ public class MainWindow {
         container.setCenter(stackPane);
 
 
-        stage.setScene(new Scene(container, 800, 600));
+        stage.setScene(new Scene(container, 700, 700));
 
     }
 

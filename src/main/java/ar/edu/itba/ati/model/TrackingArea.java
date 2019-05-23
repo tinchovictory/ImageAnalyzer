@@ -141,7 +141,7 @@ public class TrackingArea {
         // Paint outer border line to show selection
         Image newImage = image.cloneImage();
         for(Point p : lOut) {
-            newImage.setPixelColor(p.x, p.y, Color.GREEN);
+            newImage.setPixelColor(p.x, p.y, Color.MAGENTA);
         }
         return newImage;
     }

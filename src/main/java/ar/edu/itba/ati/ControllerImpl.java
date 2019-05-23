@@ -33,6 +33,11 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public boolean isVideo() {
+        return video != null;
+    }
+
+    @Override
     public BufferedImage loadImage(File imagePath) {
         try {
             image = ImageManager.loadImage(imagePath);
@@ -610,7 +615,7 @@ public class ControllerImpl implements Controller {
     public void setTrackArea(List<Point> objectPoints, List<Point> backgroundPoints) {
         List<Point> objSelection = TrackingArea.generateSelection(objectPoints.get(0),objectPoints.get(1));
         List<Point> bgSelection = TrackingArea.generateSelection(backgroundPoints.get(0), backgroundPoints.get(1));
-        TrackingArea trackingArea = new TrackingArea(objSelection, bgSelection, image);
+        trackingArea = new TrackingArea(objSelection, bgSelection, image);
         image = trackingArea.findBorder();
     }
 
@@ -634,6 +639,7 @@ public class ControllerImpl implements Controller {
             //TODO: Show msg to user
             System.out.println("Unable to load video");
         }
+        image = video.getCurrentFrame();
     }
 
     @Override
@@ -643,7 +649,8 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void loadVideoNextFrame() {
-        video.getNextFrame();
+        image = video.getNextFrame();
+
     }
 
     @Override
@@ -652,11 +659,13 @@ public class ControllerImpl implements Controller {
         List<Point> bgSelection = TrackingArea.generateSelection(backgroundPoints.get(0), backgroundPoints.get(1));
         trackingArea = new TrackingArea(objSelection, bgSelection, video.getCurrentFrame());
         video.replaceCurrentFrame(trackingArea.findBorder());
+        image = video.getCurrentFrame();
     }
 
     @Override
     public void trackAreaInNextFrame() {
         trackingArea.setNextFrame(video.getNextFrame());
         video.replaceCurrentFrame(trackingArea.findBorder());
+        image = video.getCurrentFrame();
     }
 }

@@ -54,7 +54,8 @@ public class OpenSequenceWindow extends VBox {
             int numberOfImages = Integer.parseInt(this.numberOfImages.getCharacters().toString());
             String extension = this.extension.getCharacters().toString();
             String prefix = this.prefix.getCharacters().toString();
-            getFilesList(path, numberOfImages, prefix, extension);
+            controller.loadVideo(getFilesList(path, numberOfImages, prefix, extension));
+            controller.getMainWindow().refreshImage();
 
         });
 

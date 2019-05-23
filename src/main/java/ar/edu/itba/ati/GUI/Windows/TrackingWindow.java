@@ -35,6 +35,9 @@ public class TrackingWindow extends VBox {
     @FXML
     Button startTracking;
 
+    @FXML
+    Button nextFrame;
+
 
     SelectableAreaFactory selectableAreaFactory;
 
@@ -42,13 +45,13 @@ public class TrackingWindow extends VBox {
 
     List<Point> pointsBackgorund;
 
-    private TrackingWindow(Controller controller){
+    private TrackingWindow(Controller controller) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("TrackingWindow.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
             loader.load();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Error opening TrackingWindow.fmxl");
             e.printStackTrace();
         }
@@ -57,45 +60,49 @@ public class TrackingWindow extends VBox {
 
     }
 
-    public void init(){
-        selectObject.setOnAction(e ->selectableAreaFactory.startSelection());
+    public void init() {
+        selectObject.setOnAction(e -> selectableAreaFactory.startSelection());
 
-        confirmObject.setOnAction(e-> {
+        confirmObject.setOnAction(e -> {
             this.pointsObject = selectableAreaFactory.getSelection();
             System.out.println(this.pointsObject);
             selectableAreaFactory.stopSelection();
         });
 
-        selectBackground.setOnAction(e ->selectableAreaFactory.startSelection());
+        selectBackground.setOnAction(e -> selectableAreaFactory.startSelection());
 
-        confirmBackground.setOnAction(e-> {
+        confirmBackground.setOnAction(e -> {
             this.pointsBackgorund = selectableAreaFactory.getSelection();
             System.out.println(this.pointsBackgorund);
             selectableAreaFactory.stopSelection();
         });
 
-        startTracking.setOnAction(e-> {
+        startTracking.setOnAction(e -> {
 
             controller.setTrackArea(pointsObject, pointsBackgorund);
             controller.getMainWindow().refreshImage();
         });
 
+        nextFrame.setOnAction(e -> {
+            controller.trackAreaInNextFrame();
+            controller.getMainWindow().refreshImage();
+        });
+        if(!controller.isVideo()){
+            nextFrame.setVisible(false);
+        }
+
     }
 
 
-
-
-    public static TrackingWindow openInNewWindow(Controller controller){
+    public static TrackingWindow openInNewWindow(Controller controller) {
         Stage newStage = new Stage();
-        TrackingWindow window =  new TrackingWindow(controller);
-        newStage.setScene(new Scene(window ));
+        TrackingWindow window = new TrackingWindow(controller);
+        newStage.setScene(new Scene(window));
         window.init();
         newStage.show();
         return window;
 
     }
-
-
 
 
 }

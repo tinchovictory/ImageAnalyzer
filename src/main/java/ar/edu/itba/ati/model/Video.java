@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Video {
     private List<Image> frames;
-    private Iterator<Image> frameIterator;
     private int currentFrame;
 
     public Video() {
@@ -19,17 +18,13 @@ public class Video {
     }
 
     public Image getNextFrame() {
-        if(frameIterator == null) {
-            frameIterator = frames.iterator();
+
+        if(currentFrame < frames.size()-1){
+            currentFrame++;
         }
 
-        if(!frameIterator.hasNext()) {
-            frameIterator = null;
-            return null;
-        }
 
-        currentFrame++;
-        return frameIterator.next();
+        return frames.get(currentFrame);
     }
 
     public Image getFrame(int idx) {

@@ -192,7 +192,7 @@ public interface Controller {
 
 
 
-
+    boolean isVideo();
 
     void loadVideo(List<File> frames);
 
