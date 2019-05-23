@@ -62,7 +62,7 @@ public class MainWindow {
         this.isAreaSelected = false;
         controller.setMainWindow(this);
 
-        container.setPrefHeight(600);
+        container.setPrefHeight(200);
         container.setPrefWidth(800);
 
         imageView.fitHeightProperty().bind(container.heightProperty());

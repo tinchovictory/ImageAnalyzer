@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class OpenSequenceWindow extends VBox {
 
@@ -56,7 +55,8 @@ public class OpenSequenceWindow extends VBox {
             String prefix = this.prefix.getCharacters().toString();
             controller.loadVideo(getFilesList(path, numberOfImages, prefix, extension));
             controller.getMainWindow().refreshImage();
-
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.close();
         });
 
     }
