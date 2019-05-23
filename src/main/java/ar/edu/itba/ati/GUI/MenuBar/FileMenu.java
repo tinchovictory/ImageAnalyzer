@@ -67,16 +67,12 @@ public class FileMenu extends Menu {
 
         OpenRawImage rawImageController = loader.getController();
         rawImageController.initData(controller.getMainWindow(), rawStage);
-
-
     }
 
     @FXML
     private void openLena() {
         File lena = Paths.get(getClass().getClassLoader().getResource("LENA.RAW").getFile()).toFile();
         controller.getMainWindow().openRawImage(256,256,lena);
-
-
     }
 
     @FXML
@@ -85,11 +81,6 @@ public class FileMenu extends Menu {
         File selectedDirectory = directoryChooser.showDialog(controller.getMainWindow().getStage());
 
         OpenSequenceWindow.openInNewWindow(controller,selectedDirectory);
-
-
-
-
-
     }
 
 

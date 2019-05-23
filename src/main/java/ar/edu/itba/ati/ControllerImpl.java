@@ -668,4 +668,9 @@ public class ControllerImpl implements Controller {
         video.replaceCurrentFrame(trackingArea.findBorder());
         image = video.getCurrentFrame();
     }
+
+    @Override
+    public int getVideoFramesAmount() {
+        return video.getFramesAmount();
+    }
 }

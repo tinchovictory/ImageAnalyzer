@@ -203,5 +203,7 @@ public interface Controller {
     void startTrackVideoArea(List<Point> objectPoints, List<Point> backgroundPoints);
 
     void trackAreaInNextFrame();
+
+    int getVideoFramesAmount();
 }
 

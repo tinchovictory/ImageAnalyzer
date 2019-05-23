@@ -2,6 +2,8 @@ package ar.edu.itba.ati.GUI.Windows;
 
 import ar.edu.itba.ati.GUI.SelectableAreaFactory;
 import ar.edu.itba.ati.Interface.Controller;
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 import java.util.function.Consumer;
 
 public class TrackingWindow extends VBox {
@@ -45,6 +51,9 @@ public class TrackingWindow extends VBox {
 
     List<Point> pointsBackgorund;
 
+    private final BlockingQueue<Runnable> updateQueue;
+    private final AnimationTimer updateTimer;
+
     private TrackingWindow(Controller controller) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("TrackingWindow.fxml"));
         loader.setRoot(this);
@@ -58,6 +67,18 @@ public class TrackingWindow extends VBox {
         this.controller = controller;
         this.selectableAreaFactory = new SelectableAreaFactory(controller.getMainWindow());
 
+
+        this.updateQueue = new ArrayBlockingQueue<>(1);
+        this.updateTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                Runnable runnable = updateQueue.poll();
+                if(runnable != null) {
+                    runnable.run();
+                }
+            }
+        };
+
     }
 
     public void init() {
@@ -65,7 +86,6 @@ public class TrackingWindow extends VBox {
 
         confirmObject.setOnAction(e -> {
             this.pointsObject = selectableAreaFactory.getSelection();
-            System.out.println(this.pointsObject);
             selectableAreaFactory.stopSelection();
         });
 
@@ -73,7 +93,6 @@ public class TrackingWindow extends VBox {
 
         confirmBackground.setOnAction(e -> {
             this.pointsBackgorund = selectableAreaFactory.getSelection();
-            System.out.println(this.pointsBackgorund);
             selectableAreaFactory.stopSelection();
         });
 
@@ -84,9 +103,37 @@ public class TrackingWindow extends VBox {
         });
 
         nextFrame.setOnAction(e -> {
-            controller.trackAreaInNextFrame();
-            controller.getMainWindow().refreshImage();
+
+            new Thread(() -> {
+                updateTimer.start();
+
+                long counter = 0;
+
+                int frame = 1;
+                while(frame < controller.getVideoFramesAmount()) {
+                    long startTime = System.nanoTime();
+
+                    controller.trackAreaInNextFrame();
+
+                    counter += System.nanoTime() - startTime;
+
+                    try {
+                        updateQueue.put(() -> controller.getMainWindow().refreshImage());
+                    } catch (Exception ex) {
+                        System.out.println("execption trying to refresh image");
+                    }
+
+                    frame++;
+                }
+
+                updateTimer.stop();
+
+                counter /= (controller.getVideoFramesAmount() - 1);
+                System.out.println("Tracking took " + counter / 1000000 + " milliseconds");
+            }).start();
+
         });
+
         if(!controller.isVideo()){
             nextFrame.setVisible(false);
         }
