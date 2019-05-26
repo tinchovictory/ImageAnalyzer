@@ -205,5 +205,9 @@ public interface Controller {
     void trackAreaInNextFrame();
 
     int getVideoFramesAmount();
+
+
+    BufferedImage applyHarris(int threshold);
+    void setHarris(int threshold);
 }
 

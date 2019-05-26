@@ -171,7 +171,12 @@ public class SmoothingMenu extends Menu {
         applyFunction(controller::setHoughCircularFilter);
     }
 
-
+    @FXML
+    private void harris() {
+        Function<Double, BufferedImage> sliderDragged = (value) -> controller.applyHarris(value.intValue());
+        Consumer<Double> setClicked = (value) -> controller.setHarris(value.intValue());
+        SliderWithImageWindow.openInNewWindow(controller, sliderDragged, setClicked, 0, 255, 5, "Threshold");
+    }
 
     private void applyFunction(Thunk thunk) {
         thunk.apply();
