@@ -16,7 +16,7 @@ import static java.lang.Math.abs;
 
 public class HoughFilter {
 
-    private double epsilon = 0.001;
+    private double epsilon = 0.4;
     private int roBound;
 
     private final static int degreeBound= 90;
@@ -33,16 +33,21 @@ public class HoughFilter {
 
         accumulate(image);
 
-
+    int counter =0;
         HashMap<Point, Integer> lines = new HashMap<>();
         for(int ro = -roBound, roInd=0; ro < roBound; ro++,roInd++) {
             for(int theta = -degreeBound, thetaInd  =0 ; theta < degreeBound; theta++,thetaInd++) {
                 if(A[roInd][thetaInd]>0){
                     lines.put(new Point(ro ,theta), A[roInd][thetaInd]);
                 }
+                if(A[roInd][thetaInd] !=0){
+                    System.out.println(A[roInd][thetaInd]);
+                    counter ++;
+                }
             }
         }
 
+        System.out.println("Lines "+counter);
 
         List<Point> sortedPoints = lines
                 .entrySet()
@@ -51,9 +56,9 @@ public class HoughFilter {
                 .map(Map.Entry::getKey)
                 .limit(numberOfLines)
                 .collect(toList());
-
+        System.out.println(lines.size());
         //Drawing lines
-        ImageColorChannel newChannel = new ImageColorChannel(image.getWidth(),image.getHeight());
+        ImageColorChannel newChannel = image.cloneChannel();
         for(Point p: sortedPoints){
             double ro = p.x;
             double thetaRad = Math.toRadians(p.y);
@@ -62,7 +67,7 @@ public class HoughFilter {
                 for(int j=0; j<image.getWidth();j++){
 
                     if(abs(ro - i * cos(thetaRad) - j * sin(thetaRad) ) < epsilon){
-                        newChannel.setPixel(i,j,255);
+                        newChannel.setPixel(i,j,120);
                     }
 
                 }
@@ -77,8 +82,8 @@ public class HoughFilter {
 
     private void accumulate(ImageColorChannel image){
 
-        for (int x=0; x< image.getHeight(); x++){
-            for(int y=0; y<image.getWidth(); y++){
+        for (int x=0; x< image.getWidth(); x++){
+            for(int y=0; y<image.getHeight(); y++){
 
 
                 if(image.getPixel(x,y)==255){
