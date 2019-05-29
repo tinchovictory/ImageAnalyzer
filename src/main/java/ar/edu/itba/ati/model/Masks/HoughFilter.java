@@ -14,7 +14,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.abs;
 
-public class HughFilter {
+public class HoughFilter {
 
     private double epsilon = 0.001;
     private int roBound;
@@ -22,7 +22,7 @@ public class HughFilter {
     private final static int degreeBound= 90;
     private int[][] A;
 
-    public HughFilter() {
+    public HoughFilter() {
     }
 
     public ImageColorChannel apply(ImageColorChannel image, int numberOfLines){

@@ -2,7 +2,7 @@ package ar.edu.itba.ati.model;
 
 import ar.edu.itba.ati.Utils;
 import ar.edu.itba.ati.model.Masks.HughCircularFilter;
-import ar.edu.itba.ati.model.Masks.HughFilter;
+import ar.edu.itba.ati.model.Masks.HoughFilter;
 import ar.edu.itba.ati.model.Masks.SusanFilter;
 
 import java.awt.*;
@@ -545,7 +545,7 @@ public class Image {
 
     public void houghFilter(int lines){
         this.toGrayScale();
-        HughFilter filter = new HughFilter();
+        HoughFilter filter = new HoughFilter();
         ImageColorChannel channel = filter.apply(redChannel,lines);
         redChannel   = channel;
         greenChannel = channel;
