@@ -65,7 +65,6 @@ public class OpenSequenceWindow extends VBox {
         List<File> list = new ArrayList<>();
         for (int i = 1; i < numberOfImages+1; i++) {
             String filePath = path.getAbsolutePath() + "/" + prefix + i +"."+ extension;
-            System.out.println(filePath);
             list.add(new File(filePath));
         }
         return list;

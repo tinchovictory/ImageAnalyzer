@@ -203,5 +203,11 @@ public interface Controller {
     void startTrackVideoArea(List<Point> objectPoints, List<Point> backgroundPoints);
 
     void trackAreaInNextFrame();
+
+    int getVideoFramesAmount();
+
+
+    BufferedImage applyHarris(int threshold);
+    void setHarris(int threshold);
 }
 

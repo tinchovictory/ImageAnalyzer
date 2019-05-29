@@ -188,6 +188,10 @@ public class MainWindow {
         imageView.setImage(SwingFXUtils.toFXImage(mainImage, null));
     }
 
+    public void setImage(BufferedImage image) {
+        imageView.setImage(SwingFXUtils.toFXImage(image, null));
+    }
+
 
     private class AreaSelection {
 

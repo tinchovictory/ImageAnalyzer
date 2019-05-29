@@ -27,8 +27,7 @@ public class ImageManager {
         } else if(info.getFormat() == ImageFormat.IMAGE_FORMAT_UNKNOWN){
             throw new IllegalStateException("Unsupported image format");
         } else {
-//            throw new IllegalStateException("Unsupported image format");
-            extension = ImageExtension.PGM;
+            throw new IllegalStateException("Unsupported image format");
         }
 
         if(bufferedImage.getType() == BufferedImage.TYPE_INT_RGB){

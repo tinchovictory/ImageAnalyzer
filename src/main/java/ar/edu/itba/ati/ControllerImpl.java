@@ -650,7 +650,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void loadVideoNextFrame() {
         image = video.getNextFrame();
-
     }
 
     @Override
@@ -667,5 +666,26 @@ public class ControllerImpl implements Controller {
         trackingArea.setNextFrame(video.getNextFrame());
         video.replaceCurrentFrame(trackingArea.findBorder());
         image = video.getCurrentFrame();
+    }
+
+    @Override
+    public int getVideoFramesAmount() {
+        return video.getFramesAmount();
+    }
+
+
+    @Override
+    public BufferedImage applyHarris(int threshold) {
+        HarrisCorner harrisCorner = new HarrisCorner();
+        Image copy = harrisCorner.applyTo(image);
+        copy.applyThreshold(threshold);
+
+        return copy.getBufferdImage();
+    }
+
+    @Override
+    public void setHarris(int threshold) {
+        HarrisCorner harrisCorner = new HarrisCorner();
+        image = harrisCorner.threshold(image, threshold);
     }
 }

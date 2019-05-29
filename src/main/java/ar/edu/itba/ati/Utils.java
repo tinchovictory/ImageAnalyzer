@@ -2,6 +2,9 @@ package ar.edu.itba.ati;
 
 import net.sf.doodleproject.numerics4j.random.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class Utils {
 
     private static RNG rng = new RandomRNG(System.currentTimeMillis());
@@ -34,10 +37,24 @@ public class Utils {
     }
 
     public static int toRange(int value, int minValue, int maxValue) {
-        double m = 255.0 / (maxValue - minValue);
+/*        BigDecimal minValueBig = BigDecimal.valueOf(minValue);
+        BigDecimal maxValueBig = BigDecimal.valueOf(maxValue);
+
+        BigDecimal m = BigDecimal.valueOf(255.0).divide( maxValueBig.subtract(minValueBig) );
+        BigDecimal b = m.multiply(minValueBig);*/
+
+        double m = 255.0 / ((long) maxValue - (long) minValue);
         double b = - m * minValue;
 
+     //   System.out.println("m: " + m + " b: " + b + " value: " + value + " ans: " + (int) (m * value + b));
+
+//        long minMax = (long)maxValue - (long)minValue;
+//        System.out.println("max min " + minMax);
+
+//        return 0;
         return (int) (m * value + b);
+
+       // return m.multiply(BigDecimal.valueOf(value)).subtract(b).intValue();
     }
 
 
