@@ -22,6 +22,10 @@ public class ControllerImpl implements Controller {
 
     MainWindow mainWindow;
 
+    Image image1;
+    Image image2;
+    Image image3;
+
     @Override
     public Color getPixelValue(int x, int y) {
         return image.getPixelColor(x, y);
@@ -687,5 +691,56 @@ public class ControllerImpl implements Controller {
     public void setHarris(int threshold) {
         HarrisCorner harrisCorner = new HarrisCorner();
         image = harrisCorner.threshold(image, threshold);
+    }
+
+    @Override
+    public void loadImage1(File image) {
+        try {
+            this.image1 = ImageManager.loadImage(image);
+        } catch (IOException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load image");
+        } catch (ImageReadException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load image");
+        }
+        this.image = this.image1;
+    }
+
+    @Override
+    public void loadImage2(File image) {
+        try {
+            this.image2 = ImageManager.loadImage(image);
+        } catch (IOException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load image");
+        } catch (ImageReadException e) {
+            //TODO: Show msg to user
+            System.out.println("Unable to load image");
+        }
+        this.image = this.image2;
+    }
+
+    @Override
+    public void showImage1() {
+        this.image = this.image1;
+    }
+
+    @Override
+    public void showImage2() {
+        this.image = this.image2;
+    }
+
+    @Override
+    public void showImage3() {
+        this.image = this.image3;
+    }
+
+    @Override
+    public void applySift() {
+        List<Image> siftImages = Sift.getInstance().apply(image1, image2, 100, 0.8);
+        this.image1 = siftImages.get(0);
+        this.image2 = siftImages.get(1);
+        this.image3 = siftImages.get(2);
     }
 }

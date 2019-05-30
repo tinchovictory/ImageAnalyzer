@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class HarrisCorner {
 
-    private static int GAUSS_MASK_SIZE = 7;
+    private static int GAUSS_MASK_SIZE = 5;
     private static double GAUSS_MASK_DEVIATION = 2;
     private static double HARRIS_K = 0.04;
 
