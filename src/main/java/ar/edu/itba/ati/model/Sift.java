@@ -52,6 +52,10 @@ public class Sift {
         String image1path = "tmp/image1."+myImage1.getImageExtension().name();
         String image2path = "tmp/image2."+myImage2.getImageExtension().name();
 
+        System.out.println(image1path);
+        System.out.println(image2path);
+//        System.out.println(getClass().getClassLoader().getResource("tmp").getPath()+image1path);
+
         try {
             ImageManager.saveImage(new File(image1path), myImage1);
             ImageManager.saveImage(new File(image2path), myImage2);
