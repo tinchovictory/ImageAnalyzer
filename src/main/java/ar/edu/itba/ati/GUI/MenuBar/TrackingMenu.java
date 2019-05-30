@@ -1,6 +1,7 @@
 package ar.edu.itba.ati.GUI.MenuBar;
 
 import ar.edu.itba.ati.GUI.Windows.OpenRawImage;
+import ar.edu.itba.ati.GUI.Windows.SiftWindow;
 import ar.edu.itba.ati.GUI.Windows.TrackingWindow;
 import ar.edu.itba.ati.Interface.Controller;
 import javafx.fxml.FXML;
@@ -37,5 +38,8 @@ public class TrackingMenu extends Menu {
         TrackingWindow.openInNewWindow(controller);
     }
 
-
+    @FXML
+    private void configureSift() {
+        SiftWindow.openInNewWindow(controller);
+    }
 }

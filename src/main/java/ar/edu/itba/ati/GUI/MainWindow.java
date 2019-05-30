@@ -165,6 +165,38 @@ public class MainWindow {
         }
     }
 
+    public void loadImage1() {
+        FileChooser chooser = new FileChooser();
+
+        File image = chooser.showOpenDialog(stage);
+        if (image != null) {
+            try {
+                controller.loadImage1(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Load Image failed");
+                return;
+            }
+            refreshImage();
+        }
+    }
+
+    public void loadImage2() {
+        FileChooser chooser = new FileChooser();
+
+        File image = chooser.showOpenDialog(stage);
+        if (image != null) {
+            try {
+                controller.loadImage2(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Load Image failed");
+                return;
+            }
+            refreshImage();
+        }
+    }
+
     public Stage getStage(){
         return stage;
     }

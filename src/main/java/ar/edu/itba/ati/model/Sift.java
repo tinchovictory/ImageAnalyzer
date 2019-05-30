@@ -49,8 +49,8 @@ public class Sift {
     public List<Image> apply(final Image myImage1, final Image myImage2,
                              final int matchingDistance, final double matchingPercentage) {
 
-        String image1path = "tmp/image1.ppm";
-        String image2path = "tmp/image2.ppm";
+        String image1path = "tmp/image1."+myImage1.getImageExtension().name();
+        String image2path = "tmp/image2."+myImage2.getImageExtension().name();
 
         try {
             ImageManager.saveImage(new File(image1path), myImage1);

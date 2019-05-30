@@ -9,6 +9,7 @@
          xmlns:fx="http://javafx.com/fxml"
 >
     <MenuItem text="Configure Tracking" onAction="#configureTracking"/>
+    <MenuItem text="Configure Sift" onAction="#configureSift"/>
 
 
 </fx:root>
