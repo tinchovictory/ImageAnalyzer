@@ -737,8 +737,8 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void applySift() {
-        List<Image> siftImages = Sift.getInstance().apply(image1, image2, 100, 0.9);
+    public void applySift(int matchingDistance) {
+        List<Image> siftImages = Sift.getInstance().apply(image1, image2, matchingDistance, 0.2);
         this.image1 = siftImages.get(0);
         this.image2 = siftImages.get(1);
         this.image3 = siftImages.get(2);

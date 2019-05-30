@@ -223,6 +223,6 @@ public interface Controller {
 
     void showImage3();
 
-    void applySift();
+    void applySift(int matchingDistance);
 }
 

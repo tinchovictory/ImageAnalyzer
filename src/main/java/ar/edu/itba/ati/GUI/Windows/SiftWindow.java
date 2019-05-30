@@ -1,20 +1,16 @@
 package ar.edu.itba.ati.GUI.Windows;
 
-import ar.edu.itba.ati.GUI.SelectableAreaFactory;
 import ar.edu.itba.ati.Interface.Controller;
-import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+
 
 public class SiftWindow extends VBox {
 
@@ -37,6 +33,9 @@ public class SiftWindow extends VBox {
 
     @FXML
     Button showBoth;
+
+    @FXML
+    TextField matchingDistance;
 
 
 
@@ -66,7 +65,7 @@ public class SiftWindow extends VBox {
             controller.getMainWindow().refreshImage();
         });
         applySift.setOnAction(e-> {
-            controller.applySift();
+            controller.applySift(Integer.parseInt(matchingDistance.getCharacters().toString()));
             controller.getMainWindow().refreshImage();
         });
 
