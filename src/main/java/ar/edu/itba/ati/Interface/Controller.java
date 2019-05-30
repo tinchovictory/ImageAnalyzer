@@ -209,5 +209,20 @@ public interface Controller {
 
     BufferedImage applyHarris(int threshold);
     void setHarris(int threshold);
+
+
+
+
+    void loadImage1(File image);
+
+    void loadImage2(File image);
+
+    void showImage1();
+
+    void showImage2();
+
+    void showImage3();
+
+    void applySift();
 }
 
